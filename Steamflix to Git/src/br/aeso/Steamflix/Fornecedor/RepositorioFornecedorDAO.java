@@ -40,7 +40,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	@Override
 	public void atualizar(Fornecedor fornecedor) {
 		// TODO Auto-generated method stub
-
+		String sql;
 	}
 
 	@Override
