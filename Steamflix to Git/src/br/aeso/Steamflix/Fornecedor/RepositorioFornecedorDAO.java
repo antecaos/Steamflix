@@ -46,7 +46,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	@Override
 	public void remover(String cnpj) {
 		// TODO Auto-generated method stub
-
+		String sql;
 	}
 
 	@Override
