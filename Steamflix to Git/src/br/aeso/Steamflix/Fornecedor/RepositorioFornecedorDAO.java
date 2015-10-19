@@ -62,7 +62,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	@Override
 	public void remover(String cnpj) {
 		// TODO Auto-generated method stub
-		String sql = "delete from Steamflix.Fornceedor where cnpjFornecedor = ?";
+		String sql = "delete from Steamflix.Fornecedor where cnpjFornecedor = ?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 

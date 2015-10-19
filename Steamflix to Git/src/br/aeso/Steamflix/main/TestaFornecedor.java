@@ -35,11 +35,13 @@ public class TestaFornecedor {
 		//fachada.atualizarFornecedor(f1);
 		//System.out.println(fachada.procuraFornecedor("20586463000194"));
 		
-		ArrayList<Fornecedor> lista = fachada.listaFornecedor();
+		/*ArrayList<Fornecedor> lista = fachada.listaFornecedor();
 		
 		for (Fornecedor fornecedor : lista) {
 			System.out.println(fornecedor);			
-		}
+		}*/
+		
+		fachada.removerFornecedor("20586463000194");
 		
 	}
 
