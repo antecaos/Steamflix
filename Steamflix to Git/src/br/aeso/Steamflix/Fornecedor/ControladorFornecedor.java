@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
+import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.Endereco.ControladorEndereco;
 import br.aeso.Steamflix.Endereco.Endereco;
 
@@ -55,7 +56,26 @@ public class ControladorFornecedor {
 	}
 	
 	public ArrayList<Fornecedor> listar(){
-		return this.repositorioFornecedor.listar();
+		ArrayList<Fornecedor> fornecedors = null;
+		Endereco endereco = null;
+		Cadastro cadastro = null;
+
+		fornecedors = this.repositorioFornecedor.listar();
+
+		for (Fornecedor fornecedor : fornecedors) {
+			endereco = this.controladorEndereco.procurarPorFornecedor(fornecedor
+					.getCNPJ());
+			cadastro = this.controladorCadastro.procurarPorFornecedor(fornecedor
+					.getCNPJ());
+
+			endereco.setFornecedor(fornecedor);
+			cadastro.setFornecedor(fornecedor);
+
+			fornecedor.setCadastro(cadastro);
+			fornecedor.setEndereco(endereco);
+		}
+
+		return fornecedors;
 	}
 	
 }

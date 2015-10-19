@@ -237,7 +237,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO: handle exception
-			System.err.println("Erro de SQL");
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -245,7 +245,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 		String sql = "update Steamflix.Cadastro "
 				+ "set loginCadastro=? , senhaCadastro=?, emailCadastro=? , emailSecundarioCadastro = ?,"
 				+ "telefoneFixoCadastro = ?, telefoneCelularCadastro = ?"
-				+ " where idClienteFornecedor = ?";
+				+ " where idFornecedorCadastro = ?";
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -262,7 +262,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO: handle exception
-			System.err.println("Erro de SQL");
+			throw new RuntimeException(e);
 		}
 	}
 

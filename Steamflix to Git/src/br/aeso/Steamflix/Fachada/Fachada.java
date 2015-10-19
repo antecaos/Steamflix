@@ -97,7 +97,7 @@ public class Fachada {
 	}
 	
 	public void atualizarFornecedor(Fornecedor fornecedor){
-		this.controladorFornecedor.cadastrar(fornecedor);
+		this.controladorFornecedor.atualizar(fornecedor);
 	}  
 	
 	public void removerFornecedor(String cnpj) {
