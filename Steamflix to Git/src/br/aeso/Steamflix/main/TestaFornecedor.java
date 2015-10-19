@@ -25,9 +25,10 @@ public class TestaFornecedor {
 		cad2.setTelefoneCelular("(10)9 9988-8877");		
 		f1.setCadastro(cad2);
 		
-		Fachada fachada = Fachada.getInstance();
-		
+		Fachada fachada = Fachada.getInstance();		
+				
 		fachada.cadastrarFornecedor(f1);
+		
 	}
 
 }
