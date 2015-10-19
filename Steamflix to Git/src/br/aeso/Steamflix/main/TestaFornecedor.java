@@ -13,17 +13,19 @@ public class TestaFornecedor {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Endereco e2 = new Endereco(1, "Rua Altamir de Lacerda Nascimento", "710", "",
-				"Hidráulica", "Rio Grande", "RS", "Brasil", "96.211-280");
+				"Hidráulica", "Rio Grande", "RS", "Brasil", "96211280");
 		Fornecedor f1 = new Fornecedor("20586463000194", "Costinha S.A",
 				"Costinha Games");
 		f1.setEndereco(e2);
+		e2.setFornecedor(f1);
 		
 		Cadastro cad2 = new Cadastro(2,"costa","sucesso",f1);
 		cad2.setEmailPrincipal("costa@costa.com");
 		cad2.setEmailSecundario("relacionamentos@costa.com");
-		cad2.setTelefoneFixo("(10)3030-1919");
-		cad2.setTelefoneCelular("(10)9 9988-8877");		
+		cad2.setTelefoneFixo("30301919");
+		cad2.setTelefoneCelular("99888877");		
 		f1.setCadastro(cad2);
+		cad2.setFornecedor(f1);
 		
 		Fachada fachada = Fachada.getInstance();		
 				

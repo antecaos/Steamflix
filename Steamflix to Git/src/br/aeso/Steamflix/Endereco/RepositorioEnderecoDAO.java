@@ -52,7 +52,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO: handle exception
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 	}
 
