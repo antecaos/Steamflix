@@ -100,12 +100,12 @@ public class Fachada {
 		this.controladorFornecedor.cadastrar(fornecedor);
 	}  
 	
-	public void removerFornecedor(String cpf) {
-		this.controladorFornecedor.remover(cpf);
+	public void removerFornecedor(String cnpj) {
+		this.controladorFornecedor.remover(cnpj);
 	}
 
-	public Fornecedor procuraFornecedor(String cpf) {
-		return this.controladorFornecedor.procurar(cpf);
+	public Fornecedor procuraFornecedor(String cnpj) {
+		return this.controladorFornecedor.procurar(cnpj);
 	}
 
 	public ArrayList<Fornecedor> listaFornecedor() {
