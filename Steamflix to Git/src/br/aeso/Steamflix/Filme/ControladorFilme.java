@@ -27,7 +27,6 @@ public class ControladorFilme {
 	}
 
 	public void atualizar(Filme filme) {
-		
 		this.repositorioFilme.atualizar(filme);
 
 	}
@@ -54,20 +53,15 @@ public class ControladorFilme {
 
 	public ArrayList<Filme> listar() {
 		ArrayList<Filme> filmes = null;
-		Genero genero = null;
-		Fornecedor fornecedor = null;
+		//Genero genero = null;
+		//Fornecedor fornecedor = null;
 
 		filmes = this.repositorioFilme.listar();
 
 		for (Filme filme : filmes) {
-			genero = this.controladorGenero.procurar(filme.getGenero().getId());
-			fornecedor = this.controladorFornecedor.procurar(filme
-					.getFornecedor().getCNPJ());
-
-			filme.setFornecedor(fornecedor);
-			filme.setGenero(genero);
+			filmes.set(filmes.lastIndexOf(filme), this.procurar(filme.getId()));									
 		}
-
+		
 		return filmes;
 	}
 }

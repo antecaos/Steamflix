@@ -167,11 +167,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 				filme.setPrecoAluguel(rs.getDouble(4));
 				filme.setNota(rs.getString(5));
 				filme.setClassificacao(rs.getString(6));
-				genero.setId(rs.getInt(7));
-				filme.setGenero(genero);
-
-				fornecedor.setCNPJ(rs.getString(8));
-				filme.setFornecedor(fornecedor);
+								
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(9));
 				filme.setDataLancamento(data);

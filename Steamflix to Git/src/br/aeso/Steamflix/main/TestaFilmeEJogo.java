@@ -1,5 +1,6 @@
 package br.aeso.Steamflix.main;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import br.aeso.Steamflix.Endereco.Endereco;
@@ -28,7 +29,7 @@ public class TestaFilmeEJogo {
 		Filme fi1 = new Filme();
 		//, 25, 9, "1.2", ,	d1
 		fi1.setClassificacao("12");
-		fi1.setNome("Bom demais para morrer");
+		fi1.setNome("Bom demais para morrer 2");
 		fi1.setDataLancamento(d1);
 		fi1.setFornecedor(f1);
 		fi1.setGenero(g2);
@@ -38,12 +39,21 @@ public class TestaFilmeEJogo {
 		fi1.setDiretor("Berilio Costa Jr.");
 		fi1.setFornecedor(f1);
 		fi1.setGenero(g2);
+		fi1.setId(1);
 		
 		//fachada.cadastrarFilme(fi1);
-		fachada.atualizarFilme(fi1);
+		//fachada.atualizarFilme(fi1);
+		//fachada.removerFilme(12);
 		
 		
-		System.out.println(fi1);
+		//System.out.println(fachada.procuraFilme(1));
+		
+		ArrayList<Filme> lista = fachada.listaFilme();
+		
+		for (Filme filme : lista) {
+			System.out.println(filme);
+			System.out.println("\n-----------------------------------\n");
+		}
 	}
 
 }
