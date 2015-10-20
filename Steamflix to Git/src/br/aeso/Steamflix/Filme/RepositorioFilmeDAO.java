@@ -1,5 +1,6 @@
 package br.aeso.Steamflix.Filme;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +11,9 @@ import java.util.Calendar;
 import br.aeso.Steamflix.Filme.Filme;
 
 public class RepositorioFilmeDAO implements IRepositorioFilme{
-
+	
+	private Connection connection;
+	
 	@Override
 	public void cadastrar(Filme filme) {
 		// TODO Auto-generated method stub
@@ -18,23 +21,24 @@ public class RepositorioFilmeDAO implements IRepositorioFilme{
 				+ "(nomeFilme,precoVendaFilme,precoAluguelFilme, notaFilme, " +
 				"classificacaoFilme,idGeneroFilme,idFornecedorFilme,dataLancamentoFilme," +
 				"diretorFilme,quantidadeFilm)"
-				+ " values (?,?,?)";
+				+ " values (?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			// prepared statement para a inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			// seta os valores
-			stmt.setString(1, filme.getCPF());
+			stmt.setString(1, filme.getNome());
 			stmt.setDouble(2, filme.getPrecoVenda());
 			stmt.setDouble(3, filme.getPrecoAluguel());
-			stmt.setString(4, filme.getNome());
-			stmt.setString(5, filme.getNome());
-			stmt.setString(6, filme.getNome());
-			stmt.setString(7, filme.getNome());
-			stmt.setString(8, filme.getNome());
-			stmt.setString(9, filme.getNome());
-			stmt.setString(9, filme.getNome());
+			stmt.setString(4, filme.getNota());
+			stmt.setString(5, filme.getClassificacao());
+			stmt.setInt(6, filme.getGenero().getId());
+			stmt.setString(7, filme.getFornecedor().getCNPJ());			
+			stmt.setDate(8, new Date(filme.getDataLancamento()
+					.getTimeInMillis()));					
+			stmt.setString(9, filme.getDiretor());
+			stmt.setInt(9, filme.getQuantidade());
 			
 			// executa
 			stmt.execute();
