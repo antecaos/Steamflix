@@ -3,11 +3,11 @@ package br.aeso.Steamflix.Filme;
 import java.util.ArrayList;
 
 public interface IRepositorioFilme {
-	public void cadastrar(Filme endereco);
+	public void cadastrar(Filme filme);
 
-	public void atualizar(Filme endereco);
+	public void atualizar(Filme filme);
 
-	public void remover(Filme endereco);
+	public void remover(int id);
 
 	public Filme procurar(int id);	
 

@@ -10,37 +10,35 @@ import java.util.Calendar;
 
 import br.aeso.Steamflix.Filme.Filme;
 
-public class RepositorioFilmeDAO implements IRepositorioFilme{
-	
+public class RepositorioFilmeDAO implements IRepositorioFilme {
+
 	private Connection connection;
-	
+
 	@Override
 	public void cadastrar(Filme filme) {
 		// TODO Auto-generated method stub
 		String sql = "insert into Steamflix.Filme "
-				+ "(nomeFilme,precoVendaFilme,precoAluguelFilme, notaFilme, " +
-				"classificacaoFilme,idGeneroFilme,idFornecedorFilme,dataLancamentoFilme," +
-				"diretorFilme,quantidadeFilm)"
+				+ "(nomeFilme,precoVendaFilme,precoAluguelFilme, notaFilme, "
+				+ "classificacaoFilme,idGeneroFilme,idFornecedorFilme,dataLancamentoFilme,"
+				+ "diretorFilme,quantidadeFilme)"
 				+ " values (?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			// prepared statement para a inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
-			// seta os valores
 			stmt.setString(1, filme.getNome());
 			stmt.setDouble(2, filme.getPrecoVenda());
 			stmt.setDouble(3, filme.getPrecoAluguel());
 			stmt.setString(4, filme.getNota());
 			stmt.setString(5, filme.getClassificacao());
 			stmt.setInt(6, filme.getGenero().getId());
-			stmt.setString(7, filme.getFornecedor().getCNPJ());			
+			stmt.setString(7, filme.getFornecedor().getCNPJ());
 			stmt.setDate(8, new Date(filme.getDataLancamento()
-					.getTimeInMillis()));					
+					.getTimeInMillis()));
 			stmt.setString(9, filme.getDiretor());
-			stmt.setInt(9, filme.getQuantidade());
-			
-			// executa
+			stmt.setInt(10, filme.getQuantidade());
+
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -51,12 +49,24 @@ public class RepositorioFilmeDAO implements IRepositorioFilme{
 	@Override
 	public void atualizar(Filme filme) {
 		// TODO Auto-generated method stub
-		String sql = "update Steamflix.Filme set nomeFilme = ? where cpfFilme = ?";
+		String sql = "update Steamflix.Filme set nomeFilme =?,precoVendaFilme=?,precoAluguelFilme=?, notaFilme=?, "
+				+ "classificacaoFilme=?,idGeneroFilme=?,idFornecedorFilme=?,dataLancamentoFilme=?,"
+				+ "diretorFilme=?,quantidadeFilme=? where idFilme = ?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			stmt.setString(1, filme.getNome());
-			stmt.setString(2, filme.getCPF());
+			stmt.setDouble(2, filme.getPrecoVenda());
+			stmt.setDouble(3, filme.getPrecoAluguel());
+			stmt.setString(4, filme.getNota());
+			stmt.setString(5, filme.getClassificacao());
+			stmt.setInt(6, filme.getGenero().getId());
+			stmt.setString(7, filme.getFornecedor().getCNPJ());
+			stmt.setDate(8, new Date(filme.getDataLancamento()
+					.getTimeInMillis()));
+			stmt.setString(9, filme.getDiretor());
+			stmt.setInt(10, filme.getQuantidade());
+			stmt.setInt(11, filme.getId());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -67,13 +77,13 @@ public class RepositorioFilmeDAO implements IRepositorioFilme{
 	}
 
 	@Override
-	public void remover(Filme filme) {
+	public void remover(int id) {
 		// TODO Auto-generated method stub
-		String sql = "delete from Steamflix.Filme where cpfFilme = ?";
+		String sql = "delete from Steamflix.Filme where idFilme = ?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
-			stmt.setString(1, filme.getCPF());
+			stmt.setInt(1, id);
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -87,20 +97,27 @@ public class RepositorioFilmeDAO implements IRepositorioFilme{
 	public Filme procurar(int id) {
 		// TODO Auto-generated method stub
 		Filme filmeProcurado = new Filme();
-		String sql = "select * from Steamflix.Filme where cpfFilme = ?";
+		String sql = "select * from Steamflix.Filme where idFilme = ?";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, cpf);
+			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
-				filmeProcurado.setCPF(rs.getString(1));
+				filmeProcurado.setId(rs.getInt(1));
 				filmeProcurado.setNome(rs.getString(2));
-
+				filmeProcurado.setPrecoVenda(rs.getDouble(3));
+				filmeProcurado.setPrecoAluguel(rs.getDouble(4));
+				filmeProcurado.setNota(rs.getString(5));
+				filmeProcurado.setClassificacao(rs.getString(6));
+				
 				Calendar data = Calendar.getInstance();
-				data.setTime(rs.getDate(3));
-				filmeProcurado.setDataDeNascimento(data);
+				data.setTime(rs.getDate(9));
+				filmeProcurado.setDataLancamento(data);
+				
+				filmeProcurado.setDiretor(rs.getString(10));
+				filmeProcurado.setQuantidade(rs.getInt(11));
 			}
 			stmt.close();
 		} catch (Exception e) {
@@ -127,12 +144,19 @@ public class RepositorioFilmeDAO implements IRepositorioFilme{
 			while (rs.next()) {
 				Filme filme = new Filme();
 
-				filme.setCPF(rs.getString(1));
+				filme.setId(rs.getInt(1));
 				filme.setNome(rs.getString(2));
-
+				filme.setPrecoVenda(rs.getDouble(3));
+				filme.setPrecoAluguel(rs.getDouble(4));
+				filme.setNota(rs.getString(5));
+				filme.setClassificacao(rs.getString(6));
+				
 				Calendar data = Calendar.getInstance();
-				data.setTime(rs.getDate(3));
-				filme.setDataDeNascimento(data);
+				data.setTime(rs.getDate(9));
+				filme.setDataLancamento(data);
+				
+				filme.setDiretor(rs.getString(10));
+				filme.setQuantidade(rs.getInt(11));
 
 				filmes.add(filme);
 			}
