@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import br.aeso.Steamflix.Filme.Filme;
+import br.aeso.Steamflix.Fornecedor.Fornecedor;
+import br.aeso.Steamflix.Genero.Genero;
 
 public class RepositorioFilmeDAO implements IRepositorioFilme {
 
@@ -97,6 +98,9 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 	public Filme procurar(int id) {
 		// TODO Auto-generated method stub
 		Filme filmeProcurado = new Filme();
+		Fornecedor fornecedor = new Fornecedor();
+		Genero genero = new Genero();
+		
 		String sql = "select * from Steamflix.Filme where idFilme = ?";
 
 		try {
@@ -111,6 +115,12 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 				filmeProcurado.setPrecoAluguel(rs.getDouble(4));
 				filmeProcurado.setNota(rs.getString(5));
 				filmeProcurado.setClassificacao(rs.getString(6));
+				genero.setId(rs.getInt(7));
+				filmeProcurado.setGenero(genero);
+				
+				fornecedor.setCNPJ(rs.getString(8));
+				filmeProcurado.setFornecedor(fornecedor);
+				
 				
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(9));
