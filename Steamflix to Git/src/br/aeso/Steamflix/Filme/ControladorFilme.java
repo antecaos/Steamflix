@@ -18,17 +18,17 @@ public class ControladorFilme {
 	public ControladorFilme() {
 		this.repositorioFilme = new RepositorioFilmeDAO();
 		this.controladorFornecedor = new ControladorFornecedor();
-		this.controladorGenero = new ControladorGenero();		
+		this.controladorGenero = new ControladorGenero();
 	}
 
 	public void cadastrar(Filme filme) {
 		this.repositorioFilme.cadastrar(filme);
-		
+
 	}
 
 	public void atualizar(Filme filme) {
 		this.repositorioFilme.atualizar(filme);
-		
+
 	}
 
 	public void remover(int id) {
@@ -42,11 +42,9 @@ public class ControladorFilme {
 
 		filme = this.repositorioFilme.procurar(id);
 
-		genero = this.controladorGenero.procurarPorFilme(id);
-		fornecedor = this.controladorFornecedor.procurarPorFilme(id);
-
-		genero.setFilme(filme);
-		fornecedor.setFilme(filme);
+		genero = this.controladorGenero.procurar(filme.getGenero().getId());
+		fornecedor = this.controladorFornecedor.procurar(filme.getFornecedor()
+				.getCNPJ());
 
 		filme.setFornecedor(fornecedor);
 		filme.setGenero(genero);
@@ -61,17 +59,14 @@ public class ControladorFilme {
 		filmes = this.repositorioFilme.listar();
 
 		for (Filme filme : filmes) {
-			genero = this.controladorGenero.procurarPorFilme(filme
-					.getCPF());
-			fornecedor = this.controladorFornecedor.procurarPorFilme(filme
-					.getCPF());
-
-			genero.setFilme(filme);
-			fornecedor.setFilme(filme);
+			genero = this.controladorGenero.procurar(filme.getGenero().getId());
+			fornecedor = this.controladorFornecedor.procurar(filme
+					.getFornecedor().getCNPJ());
 
 			filme.setFornecedor(fornecedor);
 			filme.setGenero(genero);
 		}
 
 		return filmes;
+	}
 }
