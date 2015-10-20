@@ -10,10 +10,15 @@ import java.util.Calendar;
 
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.Genero.Genero;
+import br.aeso.Steamflix.JDBC.ConnectionFactory;
 
 public class RepositorioFilmeDAO implements IRepositorioFilme {
 
 	private Connection connection;
+
+	public RepositorioFilmeDAO() {
+		this.connection = new ConnectionFactory().getConnection();
+	}
 
 	@Override
 	public void cadastrar(Filme filme) {
@@ -50,7 +55,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 	@Override
 	public void atualizar(Filme filme) {
 		// TODO Auto-generated method stub
-		String sql = "update Steamflix.Filme set nomeFilme =?,precoVendaFilme=?,precoAluguelFilme=?, notaFilme=?, "
+		String sql = "update Steamflix.Filme set nomeFilme =?, precoVendaFilme=?,precoAluguelFilme=?, notaFilme=?, "
 				+ "classificacaoFilme=?,idGeneroFilme=?,idFornecedorFilme=?,dataLancamentoFilme=?,"
 				+ "diretorFilme=?,quantidadeFilme=? where idFilme = ?";
 		try {
@@ -71,6 +76,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 
 			stmt.executeUpdate();
 			stmt.close();
+			System.out.println("Filme Atualizado");
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -100,7 +106,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 		Filme filmeProcurado = new Filme();
 		Fornecedor fornecedor = new Fornecedor();
 		Genero genero = new Genero();
-		
+
 		String sql = "select * from Steamflix.Filme where idFilme = ?";
 
 		try {
@@ -117,15 +123,14 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 				filmeProcurado.setClassificacao(rs.getString(6));
 				genero.setId(rs.getInt(7));
 				filmeProcurado.setGenero(genero);
-				
+
 				fornecedor.setCNPJ(rs.getString(8));
 				filmeProcurado.setFornecedor(fornecedor);
-				
-				
+
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(9));
 				filmeProcurado.setDataLancamento(data);
-				
+
 				filmeProcurado.setDiretor(rs.getString(10));
 				filmeProcurado.setQuantidade(rs.getInt(11));
 			}
@@ -164,13 +169,13 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 				filme.setClassificacao(rs.getString(6));
 				genero.setId(rs.getInt(7));
 				filme.setGenero(genero);
-				
+
 				fornecedor.setCNPJ(rs.getString(8));
 				filme.setFornecedor(fornecedor);
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(9));
 				filme.setDataLancamento(data);
-				
+
 				filme.setDiretor(rs.getString(10));
 				filme.setQuantidade(rs.getInt(11));
 

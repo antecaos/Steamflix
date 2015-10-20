@@ -31,7 +31,7 @@ public class TestaFornecedor {
 		
 		Fachada fachada = Fachada.getInstance();		
 				
-		//fachada.cadastrarFornecedor(f1);
+		fachada.cadastrarFornecedor(f1);
 		//fachada.atualizarFornecedor(f1);
 		//System.out.println(fachada.procuraFornecedor("20586463000194"));
 		
@@ -41,7 +41,7 @@ public class TestaFornecedor {
 			System.out.println(fornecedor);			
 		}*/
 		
-		fachada.removerFornecedor("20586463000194");
+		//fachada.removerFornecedor("20586463000194");
 		
 	}
 
