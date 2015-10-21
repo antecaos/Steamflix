@@ -12,6 +12,8 @@ import br.aeso.Steamflix.Fornecedor.ControladorFornecedor;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.Genero.ControladorGenero;
 import br.aeso.Steamflix.Genero.Genero;
+import br.aeso.Steamflix.Jogo.ControladorJogo;
+import br.aeso.Steamflix.Jogo.Jogo;
 
 public class Fachada {
 	private static Fachada instance;
@@ -20,6 +22,7 @@ public class Fachada {
 	private ControladorCliente controladorCliente;
 	private ControladorFornecedor controladorFornecedor;
 	private ControladorFilme controladorFilme;
+	private ControladorJogo controladorJogo;
 
 	private Fachada() {
 		this.controladorGenero = new ControladorGenero();
@@ -27,6 +30,7 @@ public class Fachada {
 		this.controladorCliente = new ControladorCliente();
 		this.controladorFornecedor = new ControladorFornecedor();
 		this.controladorFilme = new ControladorFilme();
+		this.controladorJogo = new ControladorJogo();
 	}
 
 	public static Fachada getInstance() {
@@ -134,5 +138,25 @@ public class Fachada {
 
 	public ArrayList<Filme> listaFilme() {
 		return this.controladorFilme.listar();
+	}
+	
+	public void cadastrarJogo(Jogo jogo){
+		this.controladorJogo.cadastrar(jogo);		
+	}
+	
+	public void atualizarJogo(Jogo jogo){
+		this.controladorJogo.atualizar(jogo);
+	}  
+	
+	public void removerJogo(int id) {
+		this.controladorJogo.remover(id);
+	}
+
+	public Jogo procuraJogo(int id) {
+		return this.controladorJogo.procurar(id);
+	}
+
+	public ArrayList<Jogo> listaJogo() {
+		return this.controladorJogo.listar();
 	}
 }
