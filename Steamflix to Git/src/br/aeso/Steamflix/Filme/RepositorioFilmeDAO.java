@@ -151,8 +151,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 	@Override
 	public ArrayList<Filme> listar() {
 		// TODO Auto-generated method stub
-		Fornecedor fornecedor = new Fornecedor();
-		Genero genero = new Genero();
+		
 		String sql = "select * from Steamflix.Filme";
 		ArrayList<Filme> filmes = new ArrayList<Filme>();
 		try {
