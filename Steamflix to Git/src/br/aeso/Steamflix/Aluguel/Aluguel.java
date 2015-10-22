@@ -135,7 +135,8 @@ public class Aluguel {
 	public String toString() {
 		return "Aluguel id: " + id + "\nData do aluguel: " + dataFormatada()
 				+ "\nData de Devolucao: " + dataDevolucaoFormatada()
-				+ "\nCliente: " + cliente.getNome() + "\n" + retornaJogos()
+				+ "\nCliente: " + cliente.getNome() + "\nID" + "\t" + "Nome"
+				+ "\tR$ " + "\t\t\t\tPreço" + "\n" + retornaJogos()
 				+ retornaFilmes() + "Total: R$" + preco;
 	}
 }

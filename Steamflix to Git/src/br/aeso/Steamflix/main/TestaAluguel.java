@@ -97,6 +97,7 @@ public class TestaAluguel {
 		a1.setDataDevolucao();
 		a1.setFilme(fi1);
 		a1.setJogo(j1);
+		a1.setJogo(j1);
 		a1.setId(1);
 		
 		System.out.println(a1);
