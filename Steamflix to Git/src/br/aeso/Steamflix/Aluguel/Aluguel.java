@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.Jogo.Jogo;
 
@@ -17,6 +18,7 @@ public class Aluguel {
 	private ArrayList<Jogo> jogos;
 	private ArrayList<Filme> filmes;
 	private Cliente cliente;
+	private Cupom cupom;
 	private Date date;
 
 	public Aluguel() {
@@ -129,6 +131,16 @@ public class Aluguel {
 					+ "\tR$ " + jogo.getPrecoAluguel() + "\n";
 		}
 		return listaJogos;
+	}
+	
+	
+
+	public Cupom getCupom() {
+		return cupom;
+	}
+
+	public void setCupom(Cupom cupom) {
+		this.cupom = cupom;
 	}
 
 	@Override
