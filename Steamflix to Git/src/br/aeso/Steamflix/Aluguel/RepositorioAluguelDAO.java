@@ -3,10 +3,13 @@ package br.aeso.Steamflix.Aluguel;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
+import br.aeso.Steamflix.Jogo.Jogo;
 
 public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	private Connection connection;
@@ -20,6 +23,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 		// TODO Auto-generated method stub
 		String sql = "insert into Steamflix.Aluguel(dataAluguel,dataDevolucaoAluguel,"
 				+ "idClienteAluguel,precoAluguel,idCupomAluguel)values(?,?,?,?,?)";
+		int codigo = 0;
 		try {
 			// prepared statement para a inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -33,6 +37,17 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 
 			// executa
 			stmt.execute();
+			
+			//Pega o código do aluguel gerado;
+			ResultSet rs = stmt.getGeneratedKeys();
+
+			while (rs.next()) {
+				codigo = rs.getInt(1);
+			}
+			
+			aluguel.setId(codigo);
+			
+			this.cadastraProdutos(aluguel);
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -67,6 +82,34 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	public ArrayList<Aluguel> listar() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private void cadastraProdutos(Aluguel aluguel){
+		String sql1 = "insert into Steamflix.AluguelFilme (idAluguel, idFilme) values (?,?)";
+		String sql2 = "insert into Steamflix.AluguelJogo (idAluguel, idJogo) values (?,?)";
+		try {
+			// prepared statement para a inserção
+			PreparedStatement stmt1 = connection.prepareStatement(sql1);
+			PreparedStatement stmt2 = connection.prepareStatement(sql2);
+
+			// seta os valores
+			for (Filme filme : aluguel.getFilme()) {
+				stmt1.setInt(1, aluguel.getId());
+				stmt1.setInt(2, filme.getId());
+				stmt1.execute();
+			}
+			
+			for(Jogo jogo : aluguel.getJogo()){
+				stmt2.setInt(1,aluguel.getId());
+				stmt2.setInt(2, jogo.getId());
+				stmt2.execute();
+			}
+			
+			stmt1.close();
+			stmt2.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
