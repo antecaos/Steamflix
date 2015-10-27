@@ -2,6 +2,8 @@ package br.aeso.Steamflix.Fachada;
 
 import java.util.ArrayList;
 
+import br.aeso.Steamflix.Aluguel.Aluguel;
+import br.aeso.Steamflix.Aluguel.ControladorAluguel;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Cliente.ControladorCliente;
 import br.aeso.Steamflix.Cupom.ControladorCupom;
@@ -23,6 +25,7 @@ public class Fachada {
 	private ControladorFornecedor controladorFornecedor;
 	private ControladorFilme controladorFilme;
 	private ControladorJogo controladorJogo;
+	private ControladorAluguel controladorAluguel;
 
 	private Fachada() {
 		this.controladorGenero = new ControladorGenero();
@@ -31,6 +34,7 @@ public class Fachada {
 		this.controladorFornecedor = new ControladorFornecedor();
 		this.controladorFilme = new ControladorFilme();
 		this.controladorJogo = new ControladorJogo();
+		this.controladorAluguel = new ControladorAluguel();
 	}
 
 	public static Fachada getInstance() {
@@ -158,5 +162,25 @@ public class Fachada {
 
 	public ArrayList<Jogo> listaJogo() {
 		return this.controladorJogo.listar();
+	}
+	
+	public void cadastrarAluguel(Aluguel aluguel){
+		this.controladorAluguel.cadastrar(aluguel);		
+	}
+	
+	public void atualizarAluguel(Aluguel aluguel){
+		this.controladorAluguel.atualizar(aluguel);
+	}  
+	
+	public void removerAluguel(int id) {
+		this.controladorAluguel.remover(id);
+	}
+
+	public Aluguel procuraAluguel(int id) {
+		return this.controladorAluguel.procurar(id);
+	}
+
+	public ArrayList<Aluguel> listaAluguel() {
+		return this.controladorAluguel.listar();
 	}
 }
