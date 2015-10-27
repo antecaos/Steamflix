@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.mysql.jdbc.Statement;
+
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 import br.aeso.Steamflix.Jogo.Jogo;
@@ -22,18 +24,18 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	public void cadastrar(Aluguel aluguel) {
 		// TODO Auto-generated method stub
 		String sql = "insert into Steamflix.Aluguel(dataAluguel,dataDevolucaoAluguel,"
-				+ "idClienteAluguel,precoAluguel,idCupomAluguel)values(?,?,?,?,?)";
+				+ "idClienteAluguel,precoAluguel)values(?,?,?,?)";
 		int codigo = 0;
 		try {
 			// prepared statement para a inserção
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = connection.prepareStatement(sql,
+					Statement.RETURN_GENERATED_KEYS);
 
 			// seta os valores
 			stmt.setDate(1, new Date(aluguel.getData().getTimeInMillis()));
 			stmt.setDate(2, new Date(aluguel.getDataDevolucao().getTimeInMillis()));
 			stmt.setString(3, aluguel.getCliente().getCPF());
-			stmt.setDouble(4, aluguel.getPreco());
-			stmt.setInt(5, aluguel.getCupom().getId());
+			stmt.setDouble(4, aluguel.getPreco());			
 
 			// executa
 			stmt.execute();

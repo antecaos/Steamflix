@@ -148,7 +148,7 @@ public class Aluguel {
 		return "Aluguel id: " + id + "\nData do aluguel: " + dataFormatada()
 				+ "\nData de Devolucao: " + dataDevolucaoFormatada()
 				+ "\nCliente: " + cliente.getNome() + "\nID" + "\t" + "Nome"
-				+ "\tR$ " + "\t\t\t\tPreço" + "\n" + retornaJogos()
+				+ "\tR$ " + "Preço" + "\n" + retornaJogos()
 				+ retornaFilmes() + "Total: R$" + preco;
 	}
 }
