@@ -148,6 +148,7 @@ public class Aluguel {
 				+ "\nData de Devolucao: " + dataDevolucaoFormatada()
 				+ "\nCliente: " + cliente.getNome() + "\nID" + "\t" + "Nome"
 				+ "\tR$ " + "Preço" + "\n" + retornaJogos() + retornaFilmes()
-				+ "Total: R$" + preco;
+				+ "Cupom: " + this.getCupom().getValorFormatado()
+				+ "\nTotal: R$" + preco;
 	}
 }

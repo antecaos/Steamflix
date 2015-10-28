@@ -33,6 +33,10 @@ public class Cupom {
 	public double getValor() {
 		return valor / 100;
 	}
+	
+	public String getValorFormatado(){
+		return this.valor + "%";
+	}
 
 	public void setValor(double valor) {
 		this.valor = valor;
