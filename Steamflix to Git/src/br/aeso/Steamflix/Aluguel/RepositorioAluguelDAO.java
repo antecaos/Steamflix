@@ -61,15 +61,16 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	public void atualizar(Aluguel aluguel) {
 		// TODO Auto-generated method stub
 		String sql = "update Steamflix.Aluguel set dataAluguel = ?, dataDevolucaoAluguel = ?,"
-				+ "cupomAluguel = ?  where cpfAluguel = ?";
+				+ "precoAluguel = ?, idCupomAluguel = ?  where idAluguel = ?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
 			stmt.setDate(1, new Date(aluguel.getData().getTimeInMillis()));
 			stmt.setDate(2, new Date(aluguel.getDataDevolucao()
 					.getTimeInMillis()));
-			stmt.setInt(3, aluguel.getCupom().getId());
-			stmt.setInt(4, aluguel.getId());
+			stmt.setDouble(3, aluguel.getPreco());
+			stmt.setInt(4, aluguel.getCupom().getId());
+			stmt.setInt(5, aluguel.getId());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -88,6 +89,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	@Override
 	public Aluguel procurar(int id) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
