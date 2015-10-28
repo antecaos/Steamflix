@@ -31,7 +31,7 @@ public class Cupom {
 	}
 
 	public double getValor() {
-		return valor;
+		return valor / 100;
 	}
 
 	public void setValor(double valor) {

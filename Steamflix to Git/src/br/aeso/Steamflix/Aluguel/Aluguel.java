@@ -132,8 +132,6 @@ public class Aluguel {
 		}
 		return listaJogos;
 	}
-	
-	
 
 	public Cupom getCupom() {
 		return cupom;
@@ -141,6 +139,7 @@ public class Aluguel {
 
 	public void setCupom(Cupom cupom) {
 		this.cupom = cupom;
+		this.preco = this.preco - (this.preco * this.getCupom().getValor());
 	}
 
 	@Override
@@ -148,7 +147,7 @@ public class Aluguel {
 		return "Aluguel id: " + id + "\nData do aluguel: " + dataFormatada()
 				+ "\nData de Devolucao: " + dataDevolucaoFormatada()
 				+ "\nCliente: " + cliente.getNome() + "\nID" + "\t" + "Nome"
-				+ "\tR$ " + "Preço" + "\n" + retornaJogos()
-				+ retornaFilmes() + "Total: R$" + preco;
+				+ "\tR$ " + "Preço" + "\n" + retornaJogos() + retornaFilmes()
+				+ "Total: R$" + preco;
 	}
 }
