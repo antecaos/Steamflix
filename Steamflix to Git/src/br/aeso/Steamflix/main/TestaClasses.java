@@ -84,8 +84,7 @@ public class TestaClasses {
 		
 		Aluguel a1 = new Aluguel();
 		a1.setCliente(cliente);		
-		a1.setData();
-		a1.setDataDevolucao();
+		a1.setDataAtual();
 		a1.setFilme(fi1);
 		a1.setJogo(j1);
 		a1.setId(1);

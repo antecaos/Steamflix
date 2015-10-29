@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.mysql.jdbc.Statement;
 
@@ -83,14 +84,50 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	@Override
 	public void remover(int id) {
 		// TODO Auto-generated method stub
+		String sql = "update Steamflix.Aluguel set flagAluguel = ? where idAluguel = ?";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
 
+			stmt.setInt(1, 0);
+			stmt.setInt(2, id);
+
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public Aluguel procurar(int id) {
 		// TODO Auto-generated method stub
-		
-		return null;
+		Aluguel aluguelProcurado = new Aluguel();
+		String sql = "select * from Steamflix.Aluguel where idAluguel = ? and flagAluguel = 1";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				aluguelProcurado.setId(rs.getInt(1));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate(2));
+				aluguelProcurado.setData(data);
+				aluguelProcurado.setPreco(rs.getDouble(5));
+				aluguelProcurado.setFlag(rs.getInt(7));
+
+			}
+			stmt.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+
+		return aluguelProcurado;
 	}
 
 	@Override

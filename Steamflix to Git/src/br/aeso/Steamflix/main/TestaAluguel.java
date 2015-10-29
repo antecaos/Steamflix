@@ -24,8 +24,7 @@ public class TestaAluguel {
 		Cupom cupom = fachada.procurarCupom(2);
 		Aluguel a1 = new Aluguel();
 		a1.setCliente(c);
-		a1.setData();
-		a1.setDataDevolucao();
+		a1.setDataAtual();
 		a1.setFilme(fi1);
 		a1.setFilme(fi2);
 		a1.setJogo(j1);

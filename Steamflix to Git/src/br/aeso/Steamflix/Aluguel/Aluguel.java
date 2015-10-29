@@ -20,6 +20,7 @@ public class Aluguel {
 	private Cliente cliente;
 	private Cupom cupom;
 	private Date date;
+	private int flag;
 
 	public Aluguel() {
 		this.jogos = new ArrayList<Jogo>();
@@ -50,16 +51,27 @@ public class Aluguel {
 	public Calendar getData() {
 		return data;
 	}
-
-	public void setData() {
+	
+	public void setData(Calendar data){
+		this.data = data;
+		this.dataDevolucao();
+	}
+	
+	public void setDataAtual() {
 		this.data.setTime(date);
+		this.dataDevolucao();
 	}
 
 	public Calendar getDataDevolucao() {
 		return dataDevolucao;
 	}
+	
+	public void setDataDevolucao(Calendar dataDevolucao) {
+		this.dataDevolucao = dataDevolucao;
+		
+	}
 
-	public void setDataDevolucao() {
+	public void dataDevolucao() {
 		this.dataDevolucao.setTime(date);
 		this.dataDevolucao.add(Calendar.DAY_OF_MONTH, 3);
 	}
@@ -94,6 +106,10 @@ public class Aluguel {
 		return preco;
 	}
 
+	public void setPreco(double preco){
+		this.preco = preco;
+	}
+	
 	public void setPreco() {
 		double preco = 0;
 		for (Filme filme : filmes) {
@@ -140,6 +156,14 @@ public class Aluguel {
 	public void setCupom(Cupom cupom) {
 		this.cupom = cupom;
 		this.preco = this.preco - (this.preco * this.getCupom().getValor());
+	}
+	
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override
