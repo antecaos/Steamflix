@@ -8,11 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import com.mysql.jdbc.Statement;
-
+import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 import br.aeso.Steamflix.Jogo.Jogo;
+
+import com.mysql.jdbc.Statement;
 
 public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	private Connection connection;
@@ -75,7 +77,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 
 			stmt.executeUpdate();
 			stmt.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}
@@ -93,7 +95,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 
 			stmt.executeUpdate();
 			stmt.close();
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}
@@ -103,6 +105,8 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	public Aluguel procurar(int id) {
 		// TODO Auto-generated method stub
 		Aluguel aluguelProcurado = new Aluguel();
+		Cliente cliente = new Cliente();
+		Cupom cupom = new Cupom();
 		String sql = "select * from Steamflix.Aluguel where idAluguel = ? and flagAluguel = 1";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -116,13 +120,23 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(2));
 				aluguelProcurado.setData(data);
+				
+				cliente.setCPF(rs.getString(4));
+				aluguelProcurado.setCliente(cliente);
+								
 				aluguelProcurado.setPreco(rs.getDouble(5));
+				
+				cupom.setId(rs.getInt(6));
+				aluguelProcurado.setCupom(cupom);
+				
 				aluguelProcurado.setFlag(rs.getInt(7));
 
 			}
+			
+			aluguelProcurado = this.procuraProdutos(aluguelProcurado);
 			stmt.close();
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}
@@ -168,6 +182,40 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	private Aluguel procuraProdutos(Aluguel aluguel){
+		String sql1 = "select idFilme from Steamflix.AluguelFilme where idAluguel = ?";
+		String sql2 = "select idJogo from Steamflix.AluguelJogo where idAluguel = ?";
+		
+		try {
+			PreparedStatement stmt1 = connection.prepareStatement(sql1);
+			PreparedStatement stmt2 = connection.prepareStatement(sql2);
+			
+			stmt1.setInt(1, aluguel.getId());
+			stmt2.setInt(1, aluguel.getId());
+			
+			ResultSet rs1 = stmt1.executeQuery();
+			ResultSet rs2 = stmt2.executeQuery();
+			
+			while(rs1.next()){
+				Filme filme = new Filme();
+				filme.setId(rs1.getInt("idFilme"));
+				aluguel.setFilme(filme);
+			}
+			
+			while(rs2.next()){
+				Jogo jogo = new Jogo();
+				jogo.setId(rs2.getInt("idJogo"));
+				aluguel.setJogo(jogo);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+		
+		return aluguel;
 	}
 
 }

@@ -37,6 +37,10 @@ public class TestaAluguel {
 
 		//fachada.cadastrarAluguel(a1);
 		//fachada.atualizarAluguel(a1);
+		System.out.println("\n");
+		
+		System.out.println(fachada.procuraAluguel(2));
+		//Ajustar o preço!!
 	}
 
 }
