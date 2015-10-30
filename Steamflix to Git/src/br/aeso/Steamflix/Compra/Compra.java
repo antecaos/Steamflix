@@ -55,6 +55,10 @@ public class Compra {
 		this.data.setTime(date);
 	}
 
+	public void setData(Calendar data) {
+		this.data = data;
+	}
+
 	public ArrayList<Jogo> getJogos() {
 		return jogos;
 	}
@@ -82,7 +86,15 @@ public class Compra {
 	}
 
 	public double getPreco() {
-		return preco;
+		if (this.cupom.getValor() == 0) {
+			return this.preco;
+		} else {
+			return this.preco - (this.preco * this.cupom.getValor());
+		}
+	}
+
+	public void setPreco(double preco) {
+		this.preco = preco;
 	}
 
 	public void setPreco() {
@@ -118,7 +130,7 @@ public class Compra {
 		}
 		return listaJogos;
 	}
-		
+
 	public Cupom getCupom() {
 		return cupom;
 	}
@@ -139,6 +151,7 @@ public class Compra {
 	public String toString() {
 		return "Compra id: " + id + "\nData da compra: " + this.dataFormatada()
 				+ "\n" + cliente.getNome() + "\n" + retornaJogos()
-				+ this.retornaFilmes() + "Total: R$" + preco;
+				+ this.retornaFilmes() + "Cupom "
+				+ this.getCupom().getValorFormatado() + "Total: R$" + preco;
 	}
 }
