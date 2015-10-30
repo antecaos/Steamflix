@@ -40,7 +40,7 @@ public class TestaAluguel {
 		System.out.println("\n");
 		
 		System.out.println(fachada.procuraAluguel(2));
-		//Ajustar o preço!!
+		
 	}
 
 }

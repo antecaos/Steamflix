@@ -118,14 +118,17 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 				aluguelProcurado.setId(rs.getInt(1));
 
 				Calendar data = Calendar.getInstance();
+				Calendar dataDevolucao = Calendar.getInstance();
 				data.setTime(rs.getDate(2));
 				aluguelProcurado.setData(data);
+				dataDevolucao.setTime(rs.getDate(3));
+				aluguelProcurado.setDataDevolucao(dataDevolucao);
 				
 				cliente.setCPF(rs.getString(4));
 				aluguelProcurado.setCliente(cliente);
 								
 				aluguelProcurado.setPreco(rs.getDouble(5));
-				
+						
 				cupom.setId(rs.getInt(6));
 				aluguelProcurado.setCupom(cupom);
 				

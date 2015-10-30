@@ -51,12 +51,11 @@ public class Aluguel {
 	public Calendar getData() {
 		return data;
 	}
-	
-	public void setData(Calendar data){
-		this.data = data;
-		this.dataDevolucao();
+
+	public void setData(Calendar data) {
+		this.data = data;		
 	}
-	
+
 	public void setDataAtual() {
 		this.data.setTime(date);
 		this.dataDevolucao();
@@ -65,10 +64,10 @@ public class Aluguel {
 	public Calendar getDataDevolucao() {
 		return dataDevolucao;
 	}
-	
+
 	public void setDataDevolucao(Calendar dataDevolucao) {
 		this.dataDevolucao = dataDevolucao;
-		
+
 	}
 
 	public void dataDevolucao() {
@@ -103,13 +102,18 @@ public class Aluguel {
 	}
 
 	public double getPreco() {
-		return preco;
+		if (this.cupom.getValor() == 0) {
+			return this.preco;
+		}else{
+			return this.preco - (this.preco * this.cupom.getValor());
+		}
+
 	}
 
-	public void setPreco(double preco){
+	public void setPreco(double preco) {
 		this.preco = preco;
 	}
-	
+
 	public void setPreco() {
 		double preco = 0;
 		for (Filme filme : filmes) {
@@ -155,9 +159,8 @@ public class Aluguel {
 
 	public void setCupom(Cupom cupom) {
 		this.cupom = cupom;
-		this.preco = this.preco - (this.preco * this.getCupom().getValor());
 	}
-	
+
 	public int getFlag() {
 		return flag;
 	}
@@ -173,6 +176,6 @@ public class Aluguel {
 				+ "\nCliente: " + cliente.getNome() + "\nID" + "\t" + "Nome"
 				+ "\tR$ " + "Preço" + "\n" + retornaJogos() + retornaFilmes()
 				+ "Cupom: " + this.getCupom().getValorFormatado()
-				+ "\nTotal: R$" + preco;
+				+ "\nTotal: R$" + this.getPreco();
 	}
 }

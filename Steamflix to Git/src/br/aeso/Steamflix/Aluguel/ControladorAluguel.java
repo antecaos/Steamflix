@@ -53,12 +53,14 @@ public class ControladorAluguel {
 		for (Filme filme : aluguel.getFilme()) {
 			aluguel.getFilme().set(aluguel.getFilme().lastIndexOf(filme),
 					this.controladorFilme.procurar(filme.getId()));
+			aluguel.setPreco();
 
 		}
 
 		for (Jogo jogo : aluguel.getJogo()) {
 			aluguel.getJogo().set(aluguel.getJogo().lastIndexOf(jogo),
 					this.controladorJogo.procurar(jogo.getId()));
+			aluguel.setPreco();
 		}
 
 		return aluguel;
