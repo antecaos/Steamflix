@@ -27,7 +27,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	public void cadastrar(Aluguel aluguel) {
 		// TODO Auto-generated method stub
 		String sql = "insert into Steamflix.Aluguel(dataAluguel,dataDevolucaoAluguel,"
-				+ "idClienteAluguel,precoAluguel,flagAluguel)values(?,?,?,?,1)";
+				+ "idClienteAluguel,precoAluguel,idCupomAluguel,flagAluguel)values(?,?,?,?,?,1)";
 		int codigo = 0;
 		try {
 			// prepared statement para a inserção
@@ -40,6 +40,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 					.getTimeInMillis()));
 			stmt.setString(3, aluguel.getCliente().getCPF());
 			stmt.setDouble(4, aluguel.getPreco());
+			stmt.setInt(5, aluguel.getCupom().getId());
 
 			// executa
 			stmt.execute();
@@ -156,7 +157,46 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	@Override
 	public ArrayList<Aluguel> listar() {
 		// TODO Auto-generated method stub
-		return null;
+		Cliente cliente = new Cliente();
+		Cupom cupom = new Cupom();
+		String sql = "select * from Steamflix.Aluguel where flagAluguel = 1";
+		ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Aluguel aluguel = new Aluguel();
+
+				aluguel.setId(rs.getInt(1));
+
+				Calendar data = Calendar.getInstance();
+				Calendar dataDevolucao = Calendar.getInstance();
+				data.setTime(rs.getDate(2));
+				aluguel.setData(data);
+				dataDevolucao.setTime(rs.getDate(3));
+				aluguel.setDataDevolucao(dataDevolucao);
+				
+				cliente.setCPF(rs.getString(4));
+				aluguel.setCliente(cliente);
+								
+				aluguel.setPreco(rs.getDouble(5));
+						
+				cupom.setId(rs.getInt(6));
+				aluguel.setCupom(cupom);
+				
+				aluguel.setFlag(rs.getInt(7));
+				
+				aluguel = this.procuraProdutos(aluguel);
+
+				alugueis.add(aluguel);
+			}
+			rs.close();
+			stmt.close();
+			return alugueis;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
 	}
 
 	private void cadastraProdutos(Aluguel aluguel) {

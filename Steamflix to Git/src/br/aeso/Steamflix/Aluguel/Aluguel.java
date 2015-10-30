@@ -39,6 +39,7 @@ public class Aluguel {
 		this.data = Calendar.getInstance();
 		this.dataDevolucao = Calendar.getInstance();
 		this.date = new Date();
+		this.cupom = new Cupom();
 	}
 
 	public int getId() {

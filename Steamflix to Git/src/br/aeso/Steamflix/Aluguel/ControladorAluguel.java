@@ -45,8 +45,12 @@ public class ControladorAluguel {
 		aluguel = this.repositorioAluguel.procurar(id);
 
 		cliente = controladorCliente.procurar(aluguel.getCliente().getCPF());
+		if(aluguel.getCupom().getId() == 0){
+			aluguel.getCupom().setId(12);			
+		}
 		cupom = controladorCupom.procurar(aluguel.getCupom().getId());
-
+		
+		
 		aluguel.setCliente(cliente);
 		aluguel.setCupom(cupom);
 
@@ -72,7 +76,8 @@ public class ControladorAluguel {
 		alugueis = this.repositorioAluguel.listar();
 
 		for (Aluguel aluguel : alugueis) {
-
+			alugueis.set(alugueis.lastIndexOf(aluguel),
+					this.procurar(aluguel.getId()));
 		}
 
 		return alugueis;

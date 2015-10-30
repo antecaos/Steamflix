@@ -7,6 +7,7 @@ public class Cupom {
 	private int flag;
 
 	public Cupom() {
+		this.id = 12;
 		this.flag = 1;
 	}
 
@@ -36,15 +37,20 @@ public class Cupom {
 	public double getValor() {
 		return valor / 100;
 	}
-	
-	public String getValorFormatado(){
-		return this.valor + "%";
+
+	public String getValorFormatado() {
+		if (this.getId() == 0) {
+			return 0.0 + "%";
+		} else {
+			return this.valor + "%";
+		}
+
 	}
 
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	
+
 	public int getFlag() {
 		return flag;
 	}
