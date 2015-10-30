@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.Jogo.Jogo;
 
@@ -17,6 +18,8 @@ public class Compra {
 	private ArrayList<Filme> filmes;
 	private Cliente cliente;
 	private Date date;
+	private Cupom cupom;
+	private int flag;
 
 	public Compra(int id, Calendar data, Cliente cliente) {
 		this.id = id;
@@ -33,6 +36,7 @@ public class Compra {
 		this.data = Calendar.getInstance();
 		this.date = new Date();
 		this.setData();
+		this.cupom = new Cupom();
 	}
 
 	public int getId() {
@@ -113,6 +117,22 @@ public class Compra {
 					+ "\tR$ " + jogo.getPrecoVenda() + "\n";
 		}
 		return listaJogos;
+	}
+		
+	public Cupom getCupom() {
+		return cupom;
+	}
+
+	public void setCupom(Cupom cupom) {
+		this.cupom = cupom;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override
