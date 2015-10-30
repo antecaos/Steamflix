@@ -27,7 +27,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 	public void cadastrar(Aluguel aluguel) {
 		// TODO Auto-generated method stub
 		String sql = "insert into Steamflix.Aluguel(dataAluguel,dataDevolucaoAluguel,"
-				+ "idAluguelAluguel,precoAluguel)values(?,?,?,?)";
+				+ "idClienteAluguel,precoAluguel,flagAluguel)values(?,?,?,?,1)";
 		int codigo = 0;
 		try {
 			// prepared statement para a inserção

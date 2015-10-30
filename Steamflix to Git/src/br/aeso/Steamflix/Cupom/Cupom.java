@@ -4,14 +4,17 @@ public class Cupom {
 	private int id;
 	private String nome;
 	private double valor;
+	private int flag;
 
 	public Cupom() {
+		this.flag = 1;
 	}
 
-	public Cupom(int id, String nome, double valor) {
-		this.id = id;
+	public Cupom(String nome, double valor) {
+		this.id = 12;
 		this.nome = nome;
 		this.valor = valor;
+		this.flag = 1;
 	}
 
 	public int getId() {
@@ -40,6 +43,14 @@ public class Cupom {
 
 	public void setValor(double valor) {
 		this.valor = valor;
+	}
+	
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

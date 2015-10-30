@@ -35,11 +35,11 @@ public class TestaAluguel {
 
 		System.out.println(a1);
 
-		//fachada.cadastrarAluguel(a1);
+		fachada.cadastrarAluguel(a1);
 		//fachada.atualizarAluguel(a1);
-		System.out.println("\n");
+		//System.out.println("\n");
 		
-		System.out.println(fachada.procuraAluguel(2));
+		//System.out.println(fachada.procuraAluguel(2));
 		
 	}
 
