@@ -28,6 +28,7 @@ public class Compra {
 		this.jogos = new ArrayList<Jogo>();
 		this.filmes = new ArrayList<Filme>();
 		this.date = new Date();
+		this.cupom = new Cupom();
 	}
 
 	public Compra() {
