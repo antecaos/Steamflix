@@ -6,7 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import br.aeso.Steamflix.Compra.Compra;
+import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 import br.aeso.Steamflix.Jogo.Jogo;
@@ -89,19 +93,84 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 	@Override
 	public void atualizar(Compra compra) {
 		// TODO Auto-generated method stub
+		String sql = "update Steamflix.Compra set dataCompra = ?, "
+				+ "precoCompra = ?, idCupomCompra = ?  where idCompra = ?";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
 
+			stmt.setDate(1, new Date(compra.getData().getTimeInMillis()));			
+			stmt.setDouble(2, compra.getPreco());
+			stmt.setInt(3, compra.getCupom().getId());
+			stmt.setInt(4, compra.getId());
+
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public void remover(int id) {
 		// TODO Auto-generated method stub
+		String sql = "update Steamflix.Compra set flagCompra = ? where idCompra = ?";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
 
+			stmt.setInt(1, 0);
+			stmt.setInt(2, id);
+
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public Compra procurar(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		Compra compraProcurado = new Compra();
+		Cliente cliente = new Cliente();
+		Cupom cupom = new Cupom();
+		String sql = "select * from Steamflix.Compra where idCompra = ? and flagCompra = 1";
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				compraProcurado.setId(rs.getInt(1));
+
+				Calendar data = Calendar.getInstance();
+				
+				data.setTime(rs.getDate(2));
+				compraProcurado.setData(data);
+				
+				cliente.setCPF(rs.getString(3));
+				compraProcurado.setCliente(cliente);
+								
+				compraProcurado.setPreco(rs.getDouble(4));
+						
+				cupom.setId(rs.getInt(5));
+				compraProcurado.setCupom(cupom);
+				
+				compraProcurado.setFlag(rs.getInt(6));
+
+			}
+			
+			compraProcurado = this.procuraProdutos(compraProcurado);
+			stmt.close();
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+
+		return compraProcurado;
 	}
 
 	@Override
@@ -113,7 +182,78 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 	@Override
 	public ArrayList<Compra> listar() {
 		// TODO Auto-generated method stub
-		return null;
+		Cliente cliente = new Cliente();
+		Cupom cupom = new Cupom();
+		String sql = "select * from Steamflix.Compra where flagCompra = 1";
+		ArrayList<Compra> alugueis = new ArrayList<Compra>();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Compra compra = new Compra();
+
+				compra.setId(rs.getInt(1));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate(2));
+				compra.setData(data);
+				
+				cliente.setCPF(rs.getString(3));
+				compra.setCliente(cliente);
+								
+				compra.setPreco(rs.getDouble(4));
+						
+				cupom.setId(rs.getInt(5));
+				compra.setCupom(cupom);
+				
+				compra.setFlag(rs.getInt(6));
+				
+				compra = this.procuraProdutos(compra);
+
+				alugueis.add(compra);
+			}
+			rs.close();
+			stmt.close();
+			return alugueis;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+	}
+
+	private Compra procuraProdutos(Compra compra) {
+		// TODO Auto-generated method stub
+		String sql1 = "select idFilme from Steamflix.CompraFilme where idCompra = ?";
+		String sql2 = "select idJogo from Steamflix.CompraJogo where idCompra = ?";
+		
+		try {
+			PreparedStatement stmt1 = connection.prepareStatement(sql1);
+			PreparedStatement stmt2 = connection.prepareStatement(sql2);
+			
+			stmt1.setInt(1, compra.getId());
+			stmt2.setInt(1, compra.getId());
+			
+			ResultSet rs1 = stmt1.executeQuery();
+			ResultSet rs2 = stmt2.executeQuery();
+			
+			while(rs1.next()){
+				Filme filme = new Filme();
+				filme.setId(rs1.getInt("idFilme"));
+				compra.setFilmes(filme);
+			}
+			
+			while(rs2.next()){
+				Jogo jogo = new Jogo();
+				jogo.setId(rs2.getInt("idJogo"));
+				compra.setJogos(jogo);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+		
+		return compra;
 	}
 
 }

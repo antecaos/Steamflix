@@ -6,6 +6,8 @@ import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Aluguel.ControladorAluguel;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Cliente.ControladorCliente;
+import br.aeso.Steamflix.Compra.Compra;
+import br.aeso.Steamflix.Compra.ControladorCompra;
 import br.aeso.Steamflix.Cupom.ControladorCupom;
 import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Filme.ControladorFilme;
@@ -26,6 +28,7 @@ public class Fachada {
 	private ControladorFilme controladorFilme;
 	private ControladorJogo controladorJogo;
 	private ControladorAluguel controladorAluguel;
+	private ControladorCompra controladorCompra;
 
 	private Fachada() {
 		this.controladorGenero = new ControladorGenero();
@@ -35,6 +38,7 @@ public class Fachada {
 		this.controladorFilme = new ControladorFilme();
 		this.controladorJogo = new ControladorJogo();
 		this.controladorAluguel = new ControladorAluguel();
+		this.controladorCompra = new ControladorCompra();
 	}
 
 	public static Fachada getInstance() {
@@ -182,5 +186,25 @@ public class Fachada {
 
 	public ArrayList<Aluguel> listaAluguel() {
 		return this.controladorAluguel.listar();
+	}
+	
+	public void cadastrarCompra(Compra aluguel){
+		this.controladorCompra.cadastrar(aluguel);		
+	}
+	
+	public void atualizarCompra(Compra aluguel){
+		this.controladorCompra.atualizar(aluguel);
+	}  
+	
+	public void removerCompra(int id) {
+		this.controladorCompra.remover(id);
+	}
+
+	public Compra procuraCompra(int id) {
+		return this.controladorCompra.procurar(id);
+	}
+
+	public ArrayList<Compra> listaCompra() {
+		return this.controladorCompra.listar();
 	}
 }

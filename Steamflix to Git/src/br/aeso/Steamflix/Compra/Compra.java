@@ -153,6 +153,6 @@ public class Compra {
 		return "Compra id: " + id + "\nData da compra: " + this.dataFormatada()
 				+ "\n" + cliente.getNome() + "\n" + retornaJogos()
 				+ this.retornaFilmes() + "Cupom "
-				+ this.getCupom().getValorFormatado() + "Total: R$" + preco;
+				+ this.getCupom().getValorFormatado() + "\nTotal: R$" + this.getPreco();
 	}
 }
