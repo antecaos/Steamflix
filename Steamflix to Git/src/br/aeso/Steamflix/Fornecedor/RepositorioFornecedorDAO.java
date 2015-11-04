@@ -80,7 +80,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	public Fornecedor procurar(String cnpj) {
 		// TODO Auto-generated method stub
 		Fornecedor fornecedorProcurado = new Fornecedor();
-		String sql = "select * from Steamflix.Fornecedor where cnpjFornecedor = ?";
+		String sql = "select * from Steamflix.Fornecedor where cnpjFornecedor = ? and flagFornecedor = 1";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -109,7 +109,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	@Override
 	public ArrayList<Fornecedor> listar() {
 		// TODO Auto-generated method stub
-		String sql = "select * from Steamflix.Fornecedor";
+		String sql = "select * from Steamflix.Fornecedor where flagFornecedor = 1";
 		ArrayList<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);

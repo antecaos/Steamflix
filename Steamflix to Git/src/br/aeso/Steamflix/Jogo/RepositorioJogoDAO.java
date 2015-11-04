@@ -106,7 +106,7 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 		Fornecedor fornecedor = new Fornecedor();
 		Genero genero = new Genero();
 
-		String sql = "select * from Steamflix.Jogo where idJogo = ?";
+		String sql = "select * from Steamflix.Jogo where idJogo = ? and flagJogo = 1";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -150,7 +150,7 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 	@Override
 	public ArrayList<Jogo> listar() {
 		// TODO Auto-generated method stub
-		String sql = "select * from Steamflix.Jogo";
+		String sql = "select * from Steamflix.Jogo where flagJogo = 1";
 		ArrayList<Jogo> jogos = new ArrayList<Jogo>();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);

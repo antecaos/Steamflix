@@ -82,7 +82,7 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 	public Cliente procurar(String cpf) {
 		// TODO Auto-generated method stub
 		Cliente clienteProcurado = new Cliente();
-		String sql = "select * from Steamflix.Cliente where cpfCliente = ?";
+		String sql = "select * from Steamflix.Cliente where cpfCliente = ? and flagCliente = 1";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -114,7 +114,7 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 	@Override
 	public ArrayList<Cliente> listar() {
 		// TODO Auto-generated method stub
-		String sql = "select * from Steamflix.Cliente";
+		String sql = "select * from Steamflix.Cliente where flagCliente = 1";
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);

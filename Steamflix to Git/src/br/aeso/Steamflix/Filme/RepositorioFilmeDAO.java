@@ -107,7 +107,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 		Fornecedor fornecedor = new Fornecedor();
 		Genero genero = new Genero();
 
-		String sql = "select * from Steamflix.Filme where idFilme = ?";
+		String sql = "select * from Steamflix.Filme where idFilme = ? and flagFilme = 1";
 
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -152,7 +152,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 	public ArrayList<Filme> listar() {
 		// TODO Auto-generated method stub
 		
-		String sql = "select * from Steamflix.Filme";
+		String sql = "select * from Steamflix.Filme where flagFilme = 1";
 		ArrayList<Filme> filmes = new ArrayList<Filme>();
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);

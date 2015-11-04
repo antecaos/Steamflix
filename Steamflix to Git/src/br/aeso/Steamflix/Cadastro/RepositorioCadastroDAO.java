@@ -54,7 +54,8 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement stmt = connection
-					.prepareStatement("update Steamflix.Cadastro set flagCadastro = ? where idFornecedorCadastro =?");
+					.prepareStatement("update Steamflix.Cadastro "
+							+ "set flagCadastro = ? where idFornecedorCadastro =?");
 			stmt.setInt(1, 0);
 			stmt.setString(2, cadastro.getFornecedor().getCNPJ());
 
@@ -69,7 +70,8 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement stmt = connection
-					.prepareStatement("update Steamflix.Cadastro set flagCadastro = ? where idClienteCadastro =?");
+					.prepareStatement("update Steamflix.Cadastro "
+							+ "set flagCadastro = ? where idClienteCadastro =?");
 			stmt.setInt(1, 0);
 			stmt.setString(2, cadastro.getCliente().getCPF());
 			stmt.executeUpdate();
@@ -83,7 +85,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 	public Cadastro procurar(int id) {
 		// TODO Auto-generated method stub
 		Cadastro cadastroProcurado = null;
-		String sql = "select * from Steamflix.Cadastro where idCadastro = ?";
+		String sql = "select * from Steamflix.Cadastro where idCadastro = ? and flagCadastro = 1";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
@@ -118,7 +120,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 		try {
 			ArrayList<Cadastro> cadastros = new ArrayList<Cadastro>();
 			PreparedStatement stmt = this.connection
-					.prepareStatement("select * from  Steamflix.Cadastro");
+					.prepareStatement("select * from  Steamflix.Cadastro where flagCadastro = 1");
 
 			ResultSet rs = stmt.executeQuery();
 

@@ -167,7 +167,8 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement stmt = connection
-					.prepareStatement("update Steamflix.Endereco set flagEndereco = ? where idFornecedorEndereco = ?");
+					.prepareStatement("update Steamflix.Endereco"
+							+ " set flagEndereco = ? where idFornecedorEndereco = ?");
 			stmt.setInt(1, 0);
 			stmt.setString(2, endereco.getFornecedor().getCNPJ());
 			stmt.executeUpdate();
@@ -199,7 +200,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 		// TODO Auto-generated method stub
 		Endereco enderecoProcurado = new Endereco();
 		String sql = "select * from Steamflix.Endereco "
-				+ "where idEndereco = ?";
+				+ "where idEndereco = ? and flagEndereco = 1";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
@@ -235,7 +236,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 		try {
 			ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
 			PreparedStatement stmt = this.connection
-					.prepareStatement("select * from Steamflix.Endereco");
+					.prepareStatement("select * from Steamflix.Endereco where flagEndereco = 1");
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {

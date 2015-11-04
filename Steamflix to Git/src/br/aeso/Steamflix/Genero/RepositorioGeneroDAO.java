@@ -86,7 +86,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 	public Genero procurar(int id) {
 		// TODO Auto-generated method stub
 		Genero generoProcurado = null;
-		String sql = "select * from Steamflix.Genero where idGenero = ?";
+		String sql = "select * from Steamflix.Genero where idGenero = ? and flagGenero = 1";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
@@ -116,7 +116,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 		try {
 			ArrayList<Genero> generos = new ArrayList<Genero>();
 			PreparedStatement stmt = this.connection
-					.prepareStatement("select * from  Steamflix.Genero");
+					.prepareStatement("select * from  Steamflix.Genero where flagGenero = 1");
 
 			ResultSet rs = stmt.executeQuery();
 

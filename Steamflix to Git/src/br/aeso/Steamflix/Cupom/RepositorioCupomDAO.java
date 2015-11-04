@@ -85,7 +85,7 @@ public class RepositorioCupomDAO implements IRepositorioCupom {
 	public Cupom procurar(int id) {
 		// TODO Auto-generated method stub
 		Cupom cupomProcurado = null;
-		String sql = "select * from Steamflix.Cupom where idCupom = ?";
+		String sql = "select * from Steamflix.Cupom where idCupom = ? and flagCupom = 1";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
@@ -116,7 +116,7 @@ public class RepositorioCupomDAO implements IRepositorioCupom {
 		try {
 			ArrayList<Cupom> cupoms = new ArrayList<Cupom>();
 			PreparedStatement stmt = this.connection
-					.prepareStatement("select * from  Steamflix.Cupom");
+					.prepareStatement("select * from  Steamflix.Cupom where flagCupom = 1");
 
 			ResultSet rs = stmt.executeQuery();
 
