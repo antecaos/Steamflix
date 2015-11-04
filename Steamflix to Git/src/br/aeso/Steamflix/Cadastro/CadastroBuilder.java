@@ -12,40 +12,44 @@ public class CadastroBuilder {
 	private ArrayList<String> telefone;
 	private Cliente cliente;
 	private Fornecedor fornecedor;
-	
-	public CadastroBuilder(){
+
+	public CadastroBuilder() {
 		this.email = new ArrayList<String>();
 		this.telefone = new ArrayList<String>();
 	}
-	
-	public CadastroBuilder comLogin(String login){
+
+	public CadastroBuilder comLogin(String login) {
 		this.login = login;
 		return this;
 	}
-	
-	public CadastroBuilder comSenha(String senha){
+
+	public CadastroBuilder comSenha(String senha) {
 		this.senha = senha;
 		return this;
 	}
-	
+
 	public CadastroBuilder comEmail(String email) {
 		this.email.add(email);
 		return this;
 	}
-	
-	public CadastroBuilder comTelefone(String telefone){
+
+	public CadastroBuilder comTelefone(String telefone) {
 		this.telefone.add(telefone);
 		return this;
 	}
-	
-	public CadastroBuilder comCliente(Cliente cliente){
+
+	public CadastroBuilder comCliente(Cliente cliente) {
 		this.cliente = cliente;
 		return this;
 	}
-	
-	public CadastroBuilder comFornecedor(Fornecedor fornecedor){
+
+	public CadastroBuilder comFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
 		return this;
 	}
-	
+
+	public Cadastro construirCliente() {
+		return new Cadastro();
+	}
+
 }

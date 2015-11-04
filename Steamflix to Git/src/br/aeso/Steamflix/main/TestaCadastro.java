@@ -1,12 +1,9 @@
 package br.aeso.Steamflix.main;
 
-import java.util.Calendar;
-
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cadastro.CadastroBuilder;
 import br.aeso.Steamflix.Cliente.Cliente;
-import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
-import br.aeso.Steamflix.Fornecedor.Fornecedor;
 
 public class TestaCadastro {
 
@@ -15,7 +12,7 @@ public class TestaCadastro {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Cliente cliente = new Cliente();
+		/*Cliente cliente = new Cliente();
 		Endereco e1 = new Endereco(1, "Rua Rutilo", "18", "",
 				"Jardim Atlântico", "Olinda", "PE", "Brasil", "53.060-360");
 		Calendar d1 = Calendar.getInstance();
@@ -38,9 +35,15 @@ public class TestaCadastro {
 
 		Fornecedor f1 = new Fornecedor("11111111111111", "Costinha S.A",
 				"Costinha Games");
-		cadastro.setFornecedor(f1);
-
-			
-	
+		cadastro.setFornecedor(f1);*/
+		Fachada fachada = Fachada.getInstance();
+		
+		
+		Cliente cliente = fachada.procuraCliente("09750906403");
+		
+		CadastroBuilder cadastro = new CadastroBuilder();	
+		cadastro.comCliente(cliente).comEmail("giuliocaetano@yahoo.com.br").comLogin("antecaos").comSenha("123");
+		Cadastro cad = cadastro.construirCliente();
+		System.out.println(cad);
 	}
 }
