@@ -44,7 +44,6 @@ public class Cupom {
 		} else {
 			return this.valor + "%";
 		}
-
 	}
 
 	public void setValor(double valor) {

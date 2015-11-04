@@ -17,9 +17,9 @@ public class Cliente {
 	}
 
 	public Cliente(String nome, String CPF, Calendar dataNascimento) {
-		setCPF(CPF);
-		setNome(nome);
-		setDataDeNascimento(dataNascimento);
+		this.setCPF(CPF);
+		this.setNome(nome);
+		this.setDataDeNascimento(dataNascimento);
 	}
 
 	public String getNome() {
