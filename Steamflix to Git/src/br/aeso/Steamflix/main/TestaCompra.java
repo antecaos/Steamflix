@@ -16,8 +16,8 @@ public class TestaCompra {
 		// TODO Auto-generated method stub
 		Fachada fachada = Fachada.getInstance();
 		
-		Cliente cliente = fachada.procuraCliente("99999999999");
-		Jogo j1 = fachada.procuraJogo(4);
+		Cliente cliente = fachada.procuraCliente("77777777777");
+		//Jogo j1 = fachada.procuraJogo(4);
 		Filme f1 = fachada.procuraFilme(6);
 		Filme f2 = fachada.procuraFilme(1);
 		Cupom cupom = fachada.procurarCupom(4);
@@ -28,7 +28,7 @@ public class TestaCompra {
 		compra.setData();
 		compra.setFilmes(f1);
 		compra.setFilmes(f2);
-		compra.setJogos(j1);
+		//compra.setJogos(j1);
 		
 		
 		System.out.println(compra);

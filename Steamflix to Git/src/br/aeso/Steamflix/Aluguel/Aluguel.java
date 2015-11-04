@@ -55,7 +55,7 @@ public class Aluguel {
 	}
 
 	public void setData(Calendar data) {
-		this.data = data;		
+		this.data = data;
 	}
 
 	public void setDataAtual() {
@@ -104,16 +104,11 @@ public class Aluguel {
 	}
 
 	public double getPreco() {
-		if (this.cupom.getValor() == 0) {
-			return this.preco;
-		}else{
-			return this.preco - (this.preco * this.cupom.getValor());
-		}
-
+		return this.preco;
 	}
 
 	public void setPreco(double preco) {
-		this.preco = preco;
+		this.preco = preco - (preco * this.cupom.getValor());
 	}
 
 	public void setPreco() {
@@ -124,7 +119,7 @@ public class Aluguel {
 		for (Jogo jogo : jogos) {
 			preco = preco + jogo.getPrecoAluguel();
 		}
-		this.preco = preco;
+		this.preco = preco - (preco * this.cupom.getValor());
 	}
 
 	public String dataFormatada() {
