@@ -10,6 +10,10 @@ public class ControladorCadastro {
 	}
 
 	public void cadastrar(Cadastro cadastro) {
+		if(cadastro == null)
+			throw new IllegalArgumentException("Cadastro Inválido.");
+		
+		
 		this.repositorioCadastro.cadastrar(cadastro);
 	}
 	
