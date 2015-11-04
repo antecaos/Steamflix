@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Cliente.Cliente;
-import br.aeso.Steamflix.Cupom.Cupom;
+//import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Fachada.Fachada;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.Jogo.Jogo;
@@ -21,7 +21,7 @@ public class TestaAluguel {
 		Filme fi1 = fachada.procuraFilme(2);
 		Jogo j1 = fachada.procuraJogo(6);
 		Jogo j2 = fachada.procuraJogo(3);
-		Filme fi2 = fachada.procuraFilme(1);
+		//Filme fi2 = fachada.procuraFilme(1);
 		Cliente c = fachada.procuraCliente("09750906403");
 		//Cupom cupom = fachada.procurarCupom(10);
 		Aluguel a1 = new Aluguel();
