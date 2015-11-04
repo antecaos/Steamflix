@@ -15,6 +15,7 @@ public class Endereco {
 	private String CEP;
 	private Fornecedor fornecedor;
 	private Cliente cliente;
+	private int flag;
 
 	public Endereco(int id, String logradouro, String numero,
 			String complemento, String bairro, String cidade, String estado,
@@ -119,6 +120,14 @@ public class Endereco {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

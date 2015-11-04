@@ -13,6 +13,7 @@ public class Cadastro {
 	private String[] telefone;
 	private Cliente cliente;
 	private Fornecedor fornecedor;
+	private int flag;
 
 	public Cadastro(int id, String login, String senha, Cliente cliente) {
 		this.id = id;
@@ -107,6 +108,14 @@ public class Cadastro {
 
 	public String getTelefoneCelular() {
 		return this.telefone[1];
+	}	
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

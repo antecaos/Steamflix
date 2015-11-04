@@ -3,6 +3,7 @@ package br.aeso.Steamflix.Genero;
 public class Genero {
 	private int id;
 	private String nome;
+	private int flag;
 
 	public Genero(int id, String nome) {
 		this.id = id;
@@ -26,6 +27,14 @@ public class Genero {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

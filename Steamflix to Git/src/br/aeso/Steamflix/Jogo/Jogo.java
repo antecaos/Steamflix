@@ -8,6 +8,7 @@ import br.aeso.Steamflix.Produtos.Produtos;
 public class Jogo extends Produtos {
 
 	private String desenvolvedor;
+	private int flag;
 
 	public Jogo(int id, String nome, double precoVenda, double precoAluguel,
 			String nota, String classificacao, Calendar dataLancamento) {
@@ -25,6 +26,14 @@ public class Jogo extends Produtos {
 
 	public void setDesenvolvedor(String desenvolvedor) {
 		this.desenvolvedor = desenvolvedor;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

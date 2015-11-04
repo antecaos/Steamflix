@@ -12,6 +12,7 @@ public class Cliente {
 	private Calendar dataDeNascimento;
 	private Endereco endereco;
 	private Cadastro cadastro;
+	private int flag;
 
 	public Cliente() {
 	}
@@ -65,6 +66,14 @@ public class Cliente {
 	public String dataFormatada() {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 		return df.format(this.dataDeNascimento.getTime());
+	}	
+	
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

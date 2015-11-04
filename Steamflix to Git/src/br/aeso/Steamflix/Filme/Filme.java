@@ -8,6 +8,7 @@ import br.aeso.Steamflix.Produtos.Produtos;
 public class Filme extends Produtos {
 
 	private String diretor;
+	private int flag;
 
 	public Filme(int id, String nome, double precoVenda, double precoAluguel,
 			String nota, String classificacao, Calendar dataLancamento) {
@@ -25,6 +26,14 @@ public class Filme extends Produtos {
 
 	public void setDiretor(String diretor) {
 		this.diretor = diretor;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

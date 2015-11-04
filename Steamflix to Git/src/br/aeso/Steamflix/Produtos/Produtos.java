@@ -17,6 +17,7 @@ public abstract class Produtos {
 	protected Fornecedor fornecedor;
 	protected Calendar dataLancamento;
 	protected int quantidade;
+	private int flag;
 
 	public Produtos() {
 	}
@@ -116,6 +117,14 @@ public abstract class Produtos {
 	public String dataFormatada(){
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 		return df.format(this.dataLancamento.getTime());
+	}
+	
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override

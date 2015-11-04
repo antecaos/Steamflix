@@ -9,6 +9,7 @@ public class Fornecedor {
 	private String nomeFantasia;
 	private Endereco endereco;
 	private Cadastro cadastro;
+	private int flag;
 
 	public Fornecedor(String CNPJ, String razaoSocial, String nomeFantasia) {
 		this.CNPJ = CNPJ;
@@ -57,6 +58,14 @@ public class Fornecedor {
 
 	public void setCadastro(Cadastro cadastro) {
 		this.cadastro = cadastro;
+	}
+
+	public int getFlag() {
+		return flag;
+	}
+
+	public void setFlag(int flag) {
+		this.flag = flag;
 	}
 
 	@Override
