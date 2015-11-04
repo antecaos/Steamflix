@@ -85,11 +85,11 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 	@Override
 	public void remover(int id) {
 		// TODO Auto-generated method stub
-		String sql = "delete from Steamflix.Jogo where idJogo = ?";
+		String sql = "update Steamflix.Jogo set flagJogo = ? where idJogo = ?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-
-			stmt.setInt(1, id);
+			stmt.setInt(1, 0);
+			stmt.setInt(2, id);
 
 			stmt.executeUpdate();
 			stmt.close();

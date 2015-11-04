@@ -70,9 +70,11 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 		// TODO Auto-generated method stub
 		Genero genero = this.procurar(id);
 		try {
-			PreparedStatement stmt = connection.prepareStatement("delete "
-					+ "from Steamflix.Genero where idGenero =?");
-			stmt.setInt(1, genero.getId());
+			PreparedStatement stmt = connection.prepareStatement("update "
+					+ "Steamflix.Genero set flagGenero = ? where idGenero =?");
+			stmt.setInt(1, 0);
+			stmt.setInt(2, genero.getId());
+			
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
