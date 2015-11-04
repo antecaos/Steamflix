@@ -64,11 +64,11 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 	@Override
 	public void remover(Cliente cliente) {
 		// TODO Auto-generated method stub
-		String sql = "delete from Steamflix.Cliente where cpfCliente = ?";
+		String sql = "update Steamflix.Cliente set flagCliente = ? where cpfCliente = ?";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-
-			stmt.setString(1, cliente.getCPF());
+			stmt.setInt(1, 0);
+			stmt.setString(2, cliente.getCPF());
 
 			stmt.executeUpdate();
 			stmt.close();

@@ -8,14 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 
-public class RepositorioCupomDAO implements IRepositorioCupom{
-	
+public class RepositorioCupomDAO implements IRepositorioCupom {
+
 	private Connection connection;
 
 	public RepositorioCupomDAO() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
-	
+
 	@Override
 	public void cadastrar(Cupom cupom) {
 		// TODO Auto-generated method stub
@@ -68,11 +68,12 @@ public class RepositorioCupomDAO implements IRepositorioCupom{
 
 	@Override
 	public void remover(int id) {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		try {
-			PreparedStatement stmt = connection.prepareStatement("delete "
-					+ "from Steamflix.Cupom where idCupom =?");
-			stmt.setInt(1, id);
+			PreparedStatement stmt = connection
+					.prepareStatement("update Steamflix.Cupom set flagCupom = ? where idCupom =?");
+			stmt.setInt(1, 0);
+			stmt.setInt(2, id);
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -127,7 +128,7 @@ public class RepositorioCupomDAO implements IRepositorioCupom{
 				cupom.setId(rs.getInt(1));
 				cupom.setValor(rs.getDouble(2));
 				cupom.setNome(rs.getString(3));
-				
+
 				// adicionando o objeto à lista
 				cupoms.add(cupom);
 			}

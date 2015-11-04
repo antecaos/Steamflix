@@ -167,9 +167,9 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement stmt = connection
-					.prepareStatement("delete from Steamflix.Endereco"
-							+ " where idFornecedorEndereco = ?");
-			stmt.setString(1, endereco.getFornecedor().getCNPJ());
+					.prepareStatement("update Steamflix.Endereco set flagEndereco = ? where idFornecedorEndereco = ?");
+			stmt.setInt(1, 0);
+			stmt.setString(2, endereco.getFornecedor().getCNPJ());
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (Exception e) {
@@ -182,9 +182,10 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 		// TODO Auto-generated method stub
 		try {
 			PreparedStatement stmt = connection
-					.prepareStatement("delete from Steamflix.Endereco"
-							+ " where idClienteEndereco = ?");
-			stmt.setString(1, endereco.getCliente().getCPF());
+					.prepareStatement("update Steamflix.Endereco"
+							+ "set flagEndereco = ? where idClienteEndereco = ?");
+			stmt.setInt(1, 0);
+			stmt.setString(2, endereco.getCliente().getCPF());
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (Exception e) {
@@ -203,7 +204,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setInt(1, id);
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				enderecoProcurado.setId(rs.getInt(1));
 				enderecoProcurado.setLogradouro(rs.getString(2));
 				enderecoProcurado.setNumero(rs.getString(3));
@@ -214,7 +215,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 				enderecoProcurado.setPais(rs.getString(8));
 				enderecoProcurado.setCEP(rs.getString(9));
 			}
-			stmt.close();			
+			stmt.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -300,7 +301,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 			stmt.setString(1, cnpj);
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				enderecoProcurado.setId(rs.getInt(1));
 				enderecoProcurado.setLogradouro(rs.getString(2));
 				enderecoProcurado.setNumero(rs.getString(3));

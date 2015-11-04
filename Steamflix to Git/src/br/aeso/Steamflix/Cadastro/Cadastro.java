@@ -90,7 +90,7 @@ public class Cadastro {
 		this.email[1] = email;
 	}
 
-	public String getEmailSecundário() {
+	public String getEmailSecundario() {
 		return this.email[1];
 	}
 
@@ -122,7 +122,7 @@ public class Cadastro {
 	public String toString() {
 		return "\nlogin: " + login + "\nsenha: " + senha
 				+ "\nemail principal: " + this.getEmailPrincipal()
-				+ "\nemail secundário:" + this.getEmailSecundário()
+				+ "\nemail secundário:" + this.getEmailSecundario()
 				+ "\ntelefone celular:" + this.getTelefoneCelular() 
 				+ "\ntelefone fixo:" + this.getTelefoneFixo();
 	}

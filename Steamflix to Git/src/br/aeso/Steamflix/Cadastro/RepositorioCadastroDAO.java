@@ -49,14 +49,15 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			this.removeCadastroFornecedor(cadastro);
 		}
 	}
-	
+
 	private void removeCadastroFornecedor(Cadastro cadastro) {
 		// TODO Auto-generated method stub
 		try {
-			PreparedStatement stmt = connection.prepareStatement("delete "
-					+ "from Steamflix.Cadastro where idFornecedorCadastro =?");
-			stmt.setString(1, cadastro.getFornecedor().getCNPJ());
-					
+			PreparedStatement stmt = connection
+					.prepareStatement("update Steamflix.Cadastro set flagCadastro = ? where idFornecedorCadastro =?");
+			stmt.setInt(1, 0);
+			stmt.setString(2, cadastro.getFornecedor().getCNPJ());
+
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -67,9 +68,10 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 	private void removeCadastroCliente(Cadastro cadastro) {
 		// TODO Auto-generated method stub
 		try {
-			PreparedStatement stmt = connection.prepareStatement("delete "
-					+ "from Steamflix.Cadastro where idClienteCadastro =?");
-			stmt.setString(1, cadastro.getCliente().getCPF());
+			PreparedStatement stmt = connection
+					.prepareStatement("update Steamflix.Cadastro set flagCadastro = ? where idClienteCadastro =?");
+			stmt.setInt(1, 0);
+			stmt.setString(2, cadastro.getCliente().getCPF());
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -158,7 +160,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.setString(1, cadastro.getLogin());
 			stmt.setString(2, cadastro.getSenha());
 			stmt.setString(3, cadastro.getEmailPrincipal());
-			stmt.setString(4, cadastro.getEmailSecundário());
+			stmt.setString(4, cadastro.getEmailSecundario());
 			stmt.setString(5, cadastro.getTelefoneFixo());
 			stmt.setString(6, cadastro.getTelefoneCelular());
 			stmt.setString(7, cadastro.getCliente().getCPF());
@@ -193,7 +195,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.setString(1, cadastro.getLogin());
 			stmt.setString(2, cadastro.getSenha());
 			stmt.setString(3, cadastro.getEmailPrincipal());
-			stmt.setString(4, cadastro.getEmailSecundário());
+			stmt.setString(4, cadastro.getEmailSecundario());
 			stmt.setString(5, cadastro.getTelefoneFixo());
 			stmt.setString(6, cadastro.getTelefoneCelular());
 			stmt.setString(7, cadastro.getFornecedor().getCNPJ());
@@ -227,11 +229,10 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.setString(1, cadastro.getLogin());
 			stmt.setString(2, cadastro.getSenha());
 			stmt.setString(3, cadastro.getEmailPrincipal());
-			stmt.setString(4, cadastro.getEmailSecundário());
+			stmt.setString(4, cadastro.getEmailSecundario());
 			stmt.setString(5, cadastro.getTelefoneFixo());
 			stmt.setString(6, cadastro.getTelefoneCelular());
 			stmt.setString(7, cadastro.getCliente().getCPF());
-			
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -253,10 +254,10 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.setString(1, cadastro.getLogin());
 			stmt.setString(2, cadastro.getSenha());
 			stmt.setString(3, cadastro.getEmailPrincipal());
-			stmt.setString(4, cadastro.getEmailSecundário());
+			stmt.setString(4, cadastro.getEmailSecundario());
 			stmt.setString(5, cadastro.getTelefoneFixo());
 			stmt.setString(6, cadastro.getTelefoneCelular());
-			stmt.setString(7, cadastro.getFornecedor().getCNPJ());			
+			stmt.setString(7, cadastro.getFornecedor().getCNPJ());
 
 			stmt.executeUpdate();
 			stmt.close();
@@ -283,7 +284,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 				cadastroProcurado.setEmailPrincipal(rs.getString(4));
 				cadastroProcurado.setEmailSecundario(rs.getString(5));
 				cadastroProcurado.setTelefoneFixo(rs.getString(6));
-				cadastroProcurado.setTelefoneCelular(rs.getString(7));				
+				cadastroProcurado.setTelefoneCelular(rs.getString(7));
 			}
 			stmt.close();
 		} catch (SQLException e) {
