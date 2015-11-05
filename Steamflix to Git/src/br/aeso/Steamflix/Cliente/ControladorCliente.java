@@ -3,6 +3,7 @@ package br.aeso.Steamflix.Cliente;
 import java.util.ArrayList;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cadastro.CampoVazioException;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
 import br.aeso.Steamflix.Endereco.ControladorEndereco;
 import br.aeso.Steamflix.Endereco.Endereco;
@@ -18,7 +19,7 @@ public class ControladorCliente {
 		this.controladorCadastro = new ControladorCadastro();
 	}
 
-	public void cadastrar(Cliente cliente) {
+	public void cadastrar(Cliente cliente) throws CampoVazioException {
 		this.repositorioCliente.cadastrar(cliente);
 		controladorCadastro.cadastrar(cliente.getCadastro());
 		controladorEndereco.cadastrar(cliente.getEndereco());

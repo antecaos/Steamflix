@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Aluguel.ControladorAluguel;
+import br.aeso.Steamflix.Cadastro.CampoVazioException;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Cliente.ControladorCliente;
 import br.aeso.Steamflix.Compra.Compra;
@@ -88,7 +89,7 @@ public class Fachada {
 		return this.controladorCupom.listar();
 	}
 
-	public void cadastrarCliente(Cliente cliente) {
+	public void cadastrarCliente(Cliente cliente) throws CampoVazioException {
 		this.controladorCliente.cadastrar(cliente);
 	}
 
@@ -108,7 +109,7 @@ public class Fachada {
 		return this.controladorCliente.listar();
 	}
 
-	public void cadastrarFornecedor(Fornecedor fornecedor){
+	public void cadastrarFornecedor(Fornecedor fornecedor) throws CampoVazioException{
 		this.controladorFornecedor.cadastrar(fornecedor);		
 	}
 	

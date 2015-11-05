@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class ControladorCadastro {
 	private IRepositorioCadastro repositorioCadastro;
+	private CamposNulosCadastro camposNulos;
 
 	public ControladorCadastro() {
 		repositorioCadastro = new RepositorioCadastroDAO();
+		camposNulos = new CamposNulosCadastro();
 	}
 
-	public void cadastrar(Cadastro cadastro) {
+	public void cadastrar(Cadastro cadastro) throws CampoVazioException {
 		if(cadastro == null)
 			throw new IllegalArgumentException("Cadastro Inválido.");
+		if(camposNulos.estaVazio(cadastro))
+			throw new CampoVazioException();
 		
 		
 		this.repositorioCadastro.cadastrar(cadastro);
