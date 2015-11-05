@@ -25,8 +25,8 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 		String sql = "insert into Steamflix.Jogo "
 				+ "(nomeJogo,precoVendaJogo,precoAluguelJogo, notaJogo, "
 				+ "classificacaoJogo,idGeneroJogo,idFornecedorJogo,dataLancamentoJogo,"
-				+ "desenvolvedorJogo,quantidadeJogo)"
-				+ " values (?,?,?,?,?,?,?,?,?,?)";
+				+ "desenvolvedorJogo,quantidadeJogo,flagJogo)"
+				+ " values (?,?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			// prepared statement para a inserção
@@ -43,6 +43,7 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 					.getTimeInMillis()));
 			stmt.setString(9, jogo.getDesenvolvedor());
 			stmt.setInt(10, jogo.getQuantidade());
+			stmt.setInt(11, 1);
 
 			stmt.execute();
 			stmt.close();

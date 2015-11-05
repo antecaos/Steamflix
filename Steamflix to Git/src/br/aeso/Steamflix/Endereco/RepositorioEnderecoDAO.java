@@ -32,8 +32,8 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 
 		String sql = "insert into Steamflix.Endereco "
 				+ "(logradouroEndereco, numeroEndereco, complementoEndereco, bairroEndereco,"
-				+ " cidadeEndereco, estadoEndereco, paisEndereco, cepEndereco, idFornecedorEndereco)"
-				+ " values(?,?,?,?,?,?,?,?,?)";
+				+ " cidadeEndereco, estadoEndereco, paisEndereco, cepEndereco, idFornecedorEndereco, flagEndereco)"
+				+ " values(?,?,?,?,?,?,?,?,?,?)";
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -47,6 +47,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 			stmt.setString(7, endereco.getPais());
 			stmt.setString(8, endereco.getCEP());
 			stmt.setString(9, endereco.getFornecedor().getCNPJ());
+			stmt.setInt(10, 1);
 
 			stmt.executeUpdate();
 			stmt.close();

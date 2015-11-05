@@ -187,8 +187,8 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 	public void cadastrarFornecedor(Cadastro cadastro) {
 		String sql = "insert into Steamflix.Cadastro"
 				+ "(loginCadastro, senhaCadastro, emailCadastro, emailSecundarioCadastro,"
-				+ "telefoneFixoCadastro,telefoneCelularCadastro,idFornecedorCadastro)"
-				+ "values(?,?,?,?,?,?,?)";
+				+ "telefoneFixoCadastro,telefoneCelularCadastro,idFornecedorCadastro,flagCadastro)"
+				+ "values(?,?,?,?,?,?,?,?)";
 		int codigo = 0;
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql,
@@ -201,6 +201,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.setString(5, cadastro.getTelefoneFixo());
 			stmt.setString(6, cadastro.getTelefoneCelular());
 			stmt.setString(7, cadastro.getFornecedor().getCNPJ());
+			stmt.setInt(8, 1);
 
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -321,5 +322,10 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			throw new RuntimeException();
 		}
 		return cadastroProcurado;
+	}
+	
+	public boolean verificaDados(Cadastro cadastro){
+		
+		return false;		
 	}
 }

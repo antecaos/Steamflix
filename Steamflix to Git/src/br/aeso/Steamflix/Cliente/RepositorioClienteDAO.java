@@ -22,8 +22,8 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 	public void cadastrar(Cliente cliente) {
 		// TODO Auto-generated method stub
 		String sql = "insert into Steamflix.Cliente "
-				+ "(cpfCliente,nomeCliente,dataNascimentoCliente)"
-				+ " values (?,?,?)";
+				+ "(cpfCliente,nomeCliente,dataNascimentoCliente,flagCliente)"
+				+ " values (?,?,?,?)";
 
 		try {
 			// prepared statement para a inserção
@@ -34,6 +34,7 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 			stmt.setString(2, cliente.getNome());
 			stmt.setDate(3, new Date(cliente.getDataDeNascimento()
 					.getTimeInMillis()));
+			stmt.setInt(4, 1);
 
 			// executa
 			stmt.execute();

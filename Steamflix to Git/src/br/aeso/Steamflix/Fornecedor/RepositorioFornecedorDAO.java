@@ -21,7 +21,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	public void cadastrar(Fornecedor fornecedor) {
 		// TODO Auto-generated method stub
 		String sql = "insert into Steamflix.Fornecedor(cnpjFornecedor, "
-				+ "razaoSocialFornecedor, nomeFantasiaFornecedor) values(?,?,?)";
+				+ "razaoSocialFornecedor, nomeFantasiaFornecedor,flagFornecedor) values(?,?,?,?)";
 		try {
 			// prepared statement para a inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -30,6 +30,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 			stmt.setString(1, fornecedor.getCNPJ());
 			stmt.setString(2, fornecedor.getRazaoSocial());
 			stmt.setString(3, fornecedor.getNomeFantasia());
+			stmt.setInt(4, 1);
 
 			// executa
 			stmt.execute();

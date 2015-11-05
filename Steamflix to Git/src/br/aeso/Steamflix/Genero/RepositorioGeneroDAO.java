@@ -21,13 +21,14 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 	public void cadastrar(Genero genero) {
 		// TODO Auto-generated method stub
 		int codigo = 0;
-		String sql = "insert into Steamflix.Genero " + "(nomeGenero)"
-				+ "values (?)";
+		String sql = "insert into Steamflix.Genero" + "(nomeGenero,flagGenero)"
+				+ "values (?,?)";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1, genero.getNome());
+			stmt.setInt(2, 1);
 
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -74,7 +75,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 					+ "Steamflix.Genero set flagGenero = ? where idGenero =?");
 			stmt.setInt(1, 0);
 			stmt.setInt(2, genero.getId());
-			
+
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -127,7 +128,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 				// Pegar o resto dos dados para setar no endereço
 				genero.setId(rs.getInt(1));
 				genero.setNome(rs.getString(2));
-				
+
 				// adicionando o objeto à lista
 				generos.add(genero);
 			}

@@ -3,6 +3,7 @@ package br.aeso.Steamflix.main;
 import java.util.ArrayList;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cadastro.CampoVazioException;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
@@ -31,7 +32,12 @@ public class TestaFornecedor {
 		
 		Fachada fachada = Fachada.getInstance();		
 				
-		fachada.cadastrarFornecedor(f1);
+		try {
+			fachada.cadastrarFornecedor(f1);
+		} catch (CampoVazioException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		}
 		//fachada.atualizarFornecedor(f1);
 		//System.out.println(fachada.procuraFornecedor("20586463000194"));
 		
