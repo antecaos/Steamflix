@@ -51,11 +51,8 @@ public class ControladorCadastro {
 	}
 	
 	public Cadastro retornaCadastro(String login, String senha){		
-		//Cadastro cadastroProcurado = this;
-		//Cliente cliente;
-		//Fornecedor fornecedor;		
-		return this.repositorioCadastro.retornaCadastro(login, senha);
-		
+		Cadastro cadastroProcurado = this.repositorioCadastro.retornaCadastro(login, senha);			
+		return cadastroProcurado;		
 	}
 	
 	public ArrayList<Cadastro> listar(){
