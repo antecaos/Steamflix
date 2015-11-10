@@ -23,6 +23,7 @@ public class TelaLogin extends JFrame {
 	private JButton entrarBotao;
 	private JLabel lblNoCadastrado;
 	private JLabel lblLogo;
+	private TelaCadastro telaCadastro;
 
 	/**
 	 * Launch the application.
@@ -33,6 +34,7 @@ public class TelaLogin extends JFrame {
 				try {
 					TelaLogin frame = new TelaLogin();
 					frame.setVisible(true);
+					frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -76,6 +78,7 @@ public class TelaLogin extends JFrame {
 		entrarBotao = new JButton("Entrar");
 		entrarBotao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 			}
 		});
 		entrarBotao.setBounds(122, 259, 117, 25);
@@ -85,7 +88,8 @@ public class TelaLogin extends JFrame {
 		lblNoCadastrado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				telaCadastro = new TelaCadastro();
+				telaCadastro.setVisible(true);
 			}
 		});
 		lblNoCadastrado.setBounds(69, 313, 224, 15);
