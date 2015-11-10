@@ -29,36 +29,38 @@ import java.awt.GridLayout;
 public class TelaCadastro extends JFrame {
 
 	private JPanel contentPane;
-	private JFormattedTextField dataNasciementoField;
-	private JTextField nomeField;
-	private JFormattedTextField cpfField;
-	private JTextField ruaField;
-	private JTextField numeroField;
-	private JTextField complementoField;
-	private JTextField bairroField;
-	private JTextField cidadeField;
-	private JTextField paisField;
-	private JFormattedTextField cepField;
-	private JTextField loginField;
-	private JPasswordField senhaField;
-	private JTextField emailField;
-	private JTextField emailSecField;
-	private JFormattedTextField telfoneField;
-	private JFormattedTextField celularField;
+	private JFormattedTextField dataNasciementoClienteField;
+	private JTextField nomeClienteField;
+	private JFormattedTextField cpfClienteField;
+	private JTextField ruaClienteField;
+	private JTextField numeroClienteField;
+	private JTextField complementoClienteField;
+	private JTextField bairroClienteField;
+	private JTextField cidadClienteField;
+	private JTextField paisClienteField;
+	private JFormattedTextField cepClienteField;
+	private JTextField loginClienteField;
+	private JPasswordField senhaClienteField;
+	private JTextField emailClienteField;
+	private JTextField emailSecundarioClienteField;
+	private JFormattedTextField telfoneClienteField;
+	private JFormattedTextField celularClienteField;
 	private JTextField nomeFantasiaFornecedorField;
 	private JTextField razaoFornecedorField;
 	private JTextField ruaFornecedorField;
 	private JTextField numeroFornecedorField;
 	private JTextField complementoFornecedorField;
 	private JTextField bairroFornecedorField;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JPasswordField passwordField;
-	private JTextField textField_9;
-	private JTextField textField_10;
+	private JTextField cidadeFornecedorField;
+	private JTextField paisFornecedorField;
+	private JTextField loginFornecedorField;
+	private JPasswordField senhaFornecedorPasswordField;
+	private JTextField emailFornecedorField;
+	private JTextField emailSecundarioFornecedorField;
 	private JFormattedTextField cnpjFornecedorField;
 	private JFormattedTextField cepFornecedorField;
+	private JFormattedTextField telefoneFornecedorField;
+	private JFormattedTextField celulcarFornecedorField;
 
 	/**
 	 * Launch the application.
@@ -144,293 +146,301 @@ public class TelaCadastro extends JFrame {
 				0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		painelCadastroCliente.setLayout(gbl_painelCadastroCliente);
 
-		JLabel lblNome = new JLabel("Nome");
-		GridBagConstraints gbc_lblNome = new GridBagConstraints();
-		gbc_lblNome.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNome.gridx = 0;
-		gbc_lblNome.gridy = 0;
-		painelCadastroCliente.add(lblNome, gbc_lblNome);
+		JLabel nomeClienteLabel = new JLabel("Nome");
+		GridBagConstraints gbc_nomeClienteLabel = new GridBagConstraints();
+		gbc_nomeClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_nomeClienteLabel.gridx = 0;
+		gbc_nomeClienteLabel.gridy = 0;
+		painelCadastroCliente.add(nomeClienteLabel, gbc_nomeClienteLabel);
 
-		nomeField = new JTextField();
-		GridBagConstraints gbc_nomeField = new GridBagConstraints();
-		gbc_nomeField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_nomeField.gridwidth = 7;
-		gbc_nomeField.insets = new Insets(0, 0, 5, 0);
-		gbc_nomeField.gridx = 1;
-		gbc_nomeField.gridy = 0;
-		painelCadastroCliente.add(nomeField, gbc_nomeField);
-		nomeField.setColumns(10);
+		nomeClienteField = new JTextField();
+		GridBagConstraints gbc_nomeClienteField = new GridBagConstraints();
+		gbc_nomeClienteField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_nomeClienteField.gridwidth = 7;
+		gbc_nomeClienteField.insets = new Insets(0, 0, 5, 0);
+		gbc_nomeClienteField.gridx = 1;
+		gbc_nomeClienteField.gridy = 0;
+		painelCadastroCliente.add(nomeClienteField, gbc_nomeClienteField);
+		nomeClienteField.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("CPF*");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 1;
-		painelCadastroCliente.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel cpfClienteLabel = new JLabel("CPF");
+		GridBagConstraints gbc_cpfClienteLabel = new GridBagConstraints();
+		gbc_cpfClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_cpfClienteLabel.gridx = 0;
+		gbc_cpfClienteLabel.gridy = 1;
+		painelCadastroCliente.add(cpfClienteLabel, gbc_cpfClienteLabel);
 		try {
-			cpfField = new JFormattedTextField(new MaskFormatter(
+			cpfClienteField = new JFormattedTextField(new MaskFormatter(
 					"###.###.###-##"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		GridBagConstraints gbc_cpfField = new GridBagConstraints();
-		gbc_cpfField.insets = new Insets(0, 0, 5, 5);
-		gbc_cpfField.gridx = 1;
-		gbc_cpfField.gridy = 1;
-		painelCadastroCliente.add(cpfField, gbc_cpfField);
-		cpfField.setColumns(10);
+		GridBagConstraints gbc_cpfClienteField = new GridBagConstraints();
+		gbc_cpfClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_cpfClienteField.gridx = 1;
+		gbc_cpfClienteField.gridy = 1;
+		painelCadastroCliente.add(cpfClienteField, gbc_cpfClienteField);
+		cpfClienteField.setColumns(10);
 
-		JLabel lblNewLabel_1 = new JLabel("Data Nascimento");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 2;
-		gbc_lblNewLabel_1.gridy = 1;
-		painelCadastroCliente.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel dataNascimentoClienteLabel = new JLabel("Data Nascimento");
+		GridBagConstraints gbc_dataNascimentoClienteLabel = new GridBagConstraints();
+		gbc_dataNascimentoClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_dataNascimentoClienteLabel.gridx = 2;
+		gbc_dataNascimentoClienteLabel.gridy = 1;
+		painelCadastroCliente.add(dataNascimentoClienteLabel, gbc_dataNascimentoClienteLabel);
 		try {
-			dataNasciementoField = new JFormattedTextField(new MaskFormatter(
+			dataNasciementoClienteField = new JFormattedTextField(new MaskFormatter(
 					"##/##/####"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		GridBagConstraints gbc_dataNasciementoField = new GridBagConstraints();
-		gbc_dataNasciementoField.insets = new Insets(0, 0, 5, 5);
-		gbc_dataNasciementoField.gridx = 3;
-		gbc_dataNasciementoField.gridy = 1;
-		painelCadastroCliente.add(dataNasciementoField,
-				gbc_dataNasciementoField);
-		dataNasciementoField.setColumns(10);
+		GridBagConstraints gbc_dataNasciementoClienteField = new GridBagConstraints();
+		gbc_dataNasciementoClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_dataNasciementoClienteField.gridx = 3;
+		gbc_dataNasciementoClienteField.gridy = 1;
+		painelCadastroCliente.add(dataNasciementoClienteField,
+				gbc_dataNasciementoClienteField);
+		dataNasciementoClienteField.setColumns(10);
 
-		JLabel lblCep = new JLabel("CEP");
-		GridBagConstraints gbc_lblCep = new GridBagConstraints();
-		gbc_lblCep.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCep.gridx = 4;
-		gbc_lblCep.gridy = 1;
-		painelCadastroCliente.add(lblCep, gbc_lblCep);
+		JLabel cepClienteLabel = new JLabel("CEP");
+		GridBagConstraints gbc_cepClienteLabel = new GridBagConstraints();
+		gbc_cepClienteLabel.anchor = GridBagConstraints.EAST;
+		gbc_cepClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_cepClienteLabel.gridx = 4;
+		gbc_cepClienteLabel.gridy = 1;
+		painelCadastroCliente.add(cepClienteLabel, gbc_cepClienteLabel);
 		try {
-			cepField = new JFormattedTextField(new MaskFormatter("##.###-###"));
+			cepClienteField = new JFormattedTextField(new MaskFormatter("##.###-###"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		GridBagConstraints gbc_cepField = new GridBagConstraints();
-		gbc_cepField.insets = new Insets(0, 0, 5, 5);
-		gbc_cepField.gridx = 5;
-		gbc_cepField.gridy = 1;
-		painelCadastroCliente.add(cepField, gbc_cepField);
-		cepField.setColumns(10);
+		GridBagConstraints gbc_cepClienteField = new GridBagConstraints();
+		gbc_cepClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_cepClienteField.gridx = 5;
+		gbc_cepClienteField.gridy = 1;
+		painelCadastroCliente.add(cepClienteField, gbc_cepClienteField);
+		cepClienteField.setColumns(10);
 
-		JLabel lblRua = new JLabel("Rua");
-		GridBagConstraints gbc_lblRua = new GridBagConstraints();
-		gbc_lblRua.insets = new Insets(0, 0, 5, 5);
-		gbc_lblRua.gridx = 0;
-		gbc_lblRua.gridy = 2;
-		painelCadastroCliente.add(lblRua, gbc_lblRua);
+		JLabel ruaClienteLabel = new JLabel("Rua");
+		GridBagConstraints gbc_ruaClienteLabel = new GridBagConstraints();
+		gbc_ruaClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_ruaClienteLabel.gridx = 0;
+		gbc_ruaClienteLabel.gridy = 2;
+		painelCadastroCliente.add(ruaClienteLabel, gbc_ruaClienteLabel);
 
-		ruaField = new JTextField();
-		GridBagConstraints gbc_ruaField = new GridBagConstraints();
-		gbc_ruaField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_ruaField.gridwidth = 3;
-		gbc_ruaField.insets = new Insets(0, 0, 5, 5);
-		gbc_ruaField.gridx = 1;
-		gbc_ruaField.gridy = 2;
-		painelCadastroCliente.add(ruaField, gbc_ruaField);
-		ruaField.setColumns(10);
+		ruaClienteField = new JTextField();
+		GridBagConstraints gbc_ruaClienteField = new GridBagConstraints();
+		gbc_ruaClienteField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_ruaClienteField.gridwidth = 3;
+		gbc_ruaClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_ruaClienteField.gridx = 1;
+		gbc_ruaClienteField.gridy = 2;
+		painelCadastroCliente.add(ruaClienteField, gbc_ruaClienteField);
+		ruaClienteField.setColumns(10);
 
-		JLabel lblNewLabel_3 = new JLabel("Nº");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 4;
-		gbc_lblNewLabel_3.gridy = 2;
-		painelCadastroCliente.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel numeroClienteLabel = new JLabel("Nº");
+		GridBagConstraints gbc_numeroClienteLabel = new GridBagConstraints();
+		gbc_numeroClienteLabel.anchor = GridBagConstraints.EAST;
+		gbc_numeroClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_numeroClienteLabel.gridx = 4;
+		gbc_numeroClienteLabel.gridy = 2;
+		painelCadastroCliente.add(numeroClienteLabel, gbc_numeroClienteLabel);
 
-		numeroField = new JTextField();
-		GridBagConstraints gbc_numeroField = new GridBagConstraints();
-		gbc_numeroField.insets = new Insets(0, 0, 5, 5);
-		gbc_numeroField.gridx = 5;
-		gbc_numeroField.gridy = 2;
-		painelCadastroCliente.add(numeroField, gbc_numeroField);
-		numeroField.setColumns(10);
+		numeroClienteField = new JTextField();
+		GridBagConstraints gbc_numeroClienteField = new GridBagConstraints();
+		gbc_numeroClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_numeroClienteField.gridx = 5;
+		gbc_numeroClienteField.gridy = 2;
+		painelCadastroCliente.add(numeroClienteField, gbc_numeroClienteField);
+		numeroClienteField.setColumns(10);
 
-		JLabel lblComplemento = new JLabel("Complemento");
-		GridBagConstraints gbc_lblComplemento = new GridBagConstraints();
-		gbc_lblComplemento.insets = new Insets(0, 0, 5, 5);
-		gbc_lblComplemento.gridx = 6;
-		gbc_lblComplemento.gridy = 2;
-		painelCadastroCliente.add(lblComplemento, gbc_lblComplemento);
+		JLabel complementoClienteLabel = new JLabel("Complemento");
+		GridBagConstraints gbc_complementoClienteLabel = new GridBagConstraints();
+		gbc_complementoClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_complementoClienteLabel.gridx = 6;
+		gbc_complementoClienteLabel.gridy = 2;
+		painelCadastroCliente.add(complementoClienteLabel, gbc_complementoClienteLabel);
 
-		complementoField = new JTextField();
-		GridBagConstraints gbc_complementoField = new GridBagConstraints();
-		gbc_complementoField.insets = new Insets(0, 0, 5, 0);
-		gbc_complementoField.gridx = 7;
-		gbc_complementoField.gridy = 2;
-		painelCadastroCliente.add(complementoField, gbc_complementoField);
-		complementoField.setColumns(10);
+		complementoClienteField = new JTextField();
+		GridBagConstraints gbc_complementoClienteField = new GridBagConstraints();
+		gbc_complementoClienteField.insets = new Insets(0, 0, 5, 0);
+		gbc_complementoClienteField.gridx = 7;
+		gbc_complementoClienteField.gridy = 2;
+		painelCadastroCliente.add(complementoClienteField, gbc_complementoClienteField);
+		complementoClienteField.setColumns(10);
 
-		JLabel lblBairro = new JLabel("Bairro");
-		GridBagConstraints gbc_lblBairro = new GridBagConstraints();
-		gbc_lblBairro.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBairro.gridx = 0;
-		gbc_lblBairro.gridy = 3;
-		painelCadastroCliente.add(lblBairro, gbc_lblBairro);
+		JLabel bairroClienteLabel = new JLabel("Bairro");
+		GridBagConstraints gbc_bairroClienteLabel = new GridBagConstraints();
+		gbc_bairroClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_bairroClienteLabel.gridx = 0;
+		gbc_bairroClienteLabel.gridy = 3;
+		painelCadastroCliente.add(bairroClienteLabel, gbc_bairroClienteLabel);
 
-		bairroField = new JTextField();
-		GridBagConstraints gbc_bairroField = new GridBagConstraints();
-		gbc_bairroField.insets = new Insets(0, 0, 5, 5);
-		gbc_bairroField.gridx = 1;
-		gbc_bairroField.gridy = 3;
-		painelCadastroCliente.add(bairroField, gbc_bairroField);
-		bairroField.setColumns(10);
+		bairroClienteField = new JTextField();
+		GridBagConstraints gbc_bairroClienteField = new GridBagConstraints();
+		gbc_bairroClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_bairroClienteField.gridx = 1;
+		gbc_bairroClienteField.gridy = 3;
+		painelCadastroCliente.add(bairroClienteField, gbc_bairroClienteField);
+		bairroClienteField.setColumns(10);
 
-		JLabel lblEstado = new JLabel("Estado");
-		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
-		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 2;
-		gbc_lblEstado.gridy = 3;
-		painelCadastroCliente.add(lblEstado, gbc_lblEstado);
-		JComboBox estadoComboBox = new JComboBox(estados);
-		GridBagConstraints gbc_estadoComboBox = new GridBagConstraints();
-		gbc_estadoComboBox.insets = new Insets(0, 0, 5, 5);
-		gbc_estadoComboBox.gridx = 3;
-		gbc_estadoComboBox.gridy = 3;
-		painelCadastroCliente.add(estadoComboBox, gbc_estadoComboBox);
+		JLabel estadoClienteLabel = new JLabel("Estado");
+		GridBagConstraints gbc_estadoClienteLabel = new GridBagConstraints();
+		gbc_estadoClienteLabel.anchor = GridBagConstraints.EAST;
+		gbc_estadoClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_estadoClienteLabel.gridx = 2;
+		gbc_estadoClienteLabel.gridy = 3;
+		painelCadastroCliente.add(estadoClienteLabel, gbc_estadoClienteLabel);
+		JComboBox estadoClienteComboBox = new JComboBox(estados);
+		GridBagConstraints gbc_estadoClienteComboBox = new GridBagConstraints();
+		gbc_estadoClienteComboBox.anchor = GridBagConstraints.WEST;
+		gbc_estadoClienteComboBox.insets = new Insets(0, 0, 5, 5);
+		gbc_estadoClienteComboBox.gridx = 3;
+		gbc_estadoClienteComboBox.gridy = 3;
+		painelCadastroCliente.add(estadoClienteComboBox, gbc_estadoClienteComboBox);
 
-		JLabel lblCidade = new JLabel("Cidade");
-		GridBagConstraints gbc_lblCidade = new GridBagConstraints();
-		gbc_lblCidade.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCidade.gridx = 4;
-		gbc_lblCidade.gridy = 3;
-		painelCadastroCliente.add(lblCidade, gbc_lblCidade);
+		JLabel cidadeClienteLabel = new JLabel("Cidade");
+		GridBagConstraints gbc_cidadeClienteLabel = new GridBagConstraints();
+		gbc_cidadeClienteLabel.anchor = GridBagConstraints.EAST;
+		gbc_cidadeClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_cidadeClienteLabel.gridx = 4;
+		gbc_cidadeClienteLabel.gridy = 3;
+		painelCadastroCliente.add(cidadeClienteLabel, gbc_cidadeClienteLabel);
 
-		cidadeField = new JTextField();
-		GridBagConstraints gbc_cidadeField = new GridBagConstraints();
-		gbc_cidadeField.insets = new Insets(0, 0, 5, 5);
-		gbc_cidadeField.gridx = 5;
-		gbc_cidadeField.gridy = 3;
-		painelCadastroCliente.add(cidadeField, gbc_cidadeField);
-		cidadeField.setColumns(10);
+		cidadClienteField = new JTextField();
+		GridBagConstraints gbc_cidadClienteField = new GridBagConstraints();
+		gbc_cidadClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_cidadClienteField.gridx = 5;
+		gbc_cidadClienteField.gridy = 3;
+		painelCadastroCliente.add(cidadClienteField, gbc_cidadClienteField);
+		cidadClienteField.setColumns(10);
 
-		JLabel lblPais = new JLabel("País");
-		GridBagConstraints gbc_lblPais = new GridBagConstraints();
-		gbc_lblPais.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPais.gridx = 6;
-		gbc_lblPais.gridy = 3;
-		painelCadastroCliente.add(lblPais, gbc_lblPais);
+		JLabel paisClienteLabel = new JLabel("País");
+		GridBagConstraints gbc_paisClienteLabel = new GridBagConstraints();
+		gbc_paisClienteLabel.anchor = GridBagConstraints.EAST;
+		gbc_paisClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_paisClienteLabel.gridx = 6;
+		gbc_paisClienteLabel.gridy = 3;
+		painelCadastroCliente.add(paisClienteLabel, gbc_paisClienteLabel);
 
-		paisField = new JTextField();
-		GridBagConstraints gbc_paisField = new GridBagConstraints();
-		gbc_paisField.insets = new Insets(0, 0, 5, 0);
-		gbc_paisField.gridx = 7;
-		gbc_paisField.gridy = 3;
-		painelCadastroCliente.add(paisField, gbc_paisField);
-		paisField.setColumns(10);
+		paisClienteField = new JTextField();
+		GridBagConstraints gbc_paisClienteField = new GridBagConstraints();
+		gbc_paisClienteField.insets = new Insets(0, 0, 5, 0);
+		gbc_paisClienteField.gridx = 7;
+		gbc_paisClienteField.gridy = 3;
+		painelCadastroCliente.add(paisClienteField, gbc_paisClienteField);
+		paisClienteField.setColumns(10);
 
-		JLabel lblLogin = new JLabel("Login");
-		GridBagConstraints gbc_lblLogin = new GridBagConstraints();
-		gbc_lblLogin.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLogin.gridx = 0;
-		gbc_lblLogin.gridy = 4;
-		painelCadastroCliente.add(lblLogin, gbc_lblLogin);
+		JLabel loginClienteLabel = new JLabel("Login");
+		GridBagConstraints gbc_loginClienteLabel = new GridBagConstraints();
+		gbc_loginClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_loginClienteLabel.gridx = 0;
+		gbc_loginClienteLabel.gridy = 4;
+		painelCadastroCliente.add(loginClienteLabel, gbc_loginClienteLabel);
 
-		loginField = new JTextField();
-		GridBagConstraints gbc_loginField = new GridBagConstraints();
-		gbc_loginField.insets = new Insets(0, 0, 5, 5);
-		gbc_loginField.gridx = 1;
-		gbc_loginField.gridy = 4;
-		painelCadastroCliente.add(loginField, gbc_loginField);
-		loginField.setColumns(10);
+		loginClienteField = new JTextField();
+		GridBagConstraints gbc_loginClienteField = new GridBagConstraints();
+		gbc_loginClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_loginClienteField.gridx = 1;
+		gbc_loginClienteField.gridy = 4;
+		painelCadastroCliente.add(loginClienteField, gbc_loginClienteField);
+		loginClienteField.setColumns(10);
 
-		JLabel lblSenha = new JLabel("Senha");
-		GridBagConstraints gbc_lblSenha = new GridBagConstraints();
-		gbc_lblSenha.insets = new Insets(0, 0, 5, 5);
-		gbc_lblSenha.gridx = 2;
-		gbc_lblSenha.gridy = 4;
-		painelCadastroCliente.add(lblSenha, gbc_lblSenha);
+		JLabel senhaClienteLabel = new JLabel("Senha");
+		GridBagConstraints gbc_senhaClienteLabel = new GridBagConstraints();
+		gbc_senhaClienteLabel.anchor = GridBagConstraints.EAST;
+		gbc_senhaClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_senhaClienteLabel.gridx = 2;
+		gbc_senhaClienteLabel.gridy = 4;
+		painelCadastroCliente.add(senhaClienteLabel, gbc_senhaClienteLabel);
 
-		senhaField = new JPasswordField();
-		GridBagConstraints gbc_senhaField = new GridBagConstraints();
-		gbc_senhaField.insets = new Insets(0, 0, 5, 5);
-		gbc_senhaField.gridx = 3;
-		gbc_senhaField.gridy = 4;
-		painelCadastroCliente.add(senhaField, gbc_senhaField);
-		senhaField.setColumns(10);
+		senhaClienteField = new JPasswordField();
+		GridBagConstraints gbc_senhaClienteField = new GridBagConstraints();
+		gbc_senhaClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_senhaClienteField.gridx = 3;
+		gbc_senhaClienteField.gridy = 4;
+		painelCadastroCliente.add(senhaClienteField, gbc_senhaClienteField);
+		senhaClienteField.setColumns(10);
 
-		JLabel lblEmail = new JLabel("Email");
-		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
-		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 5;
-		painelCadastroCliente.add(lblEmail, gbc_lblEmail);
+		JLabel emailClienteLabel = new JLabel("Email");
+		GridBagConstraints gbc_emailClienteLabel = new GridBagConstraints();
+		gbc_emailClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_emailClienteLabel.gridx = 0;
+		gbc_emailClienteLabel.gridy = 5;
+		painelCadastroCliente.add(emailClienteLabel, gbc_emailClienteLabel);
 
-		emailField = new JTextField();
-		GridBagConstraints gbc_emailField = new GridBagConstraints();
-		gbc_emailField.insets = new Insets(0, 0, 5, 5);
-		gbc_emailField.gridx = 1;
-		gbc_emailField.gridy = 5;
-		painelCadastroCliente.add(emailField, gbc_emailField);
-		emailField.setColumns(10);
+		emailClienteField = new JTextField();
+		GridBagConstraints gbc_emailClienteField = new GridBagConstraints();
+		gbc_emailClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_emailClienteField.gridx = 1;
+		gbc_emailClienteField.gridy = 5;
+		painelCadastroCliente.add(emailClienteField, gbc_emailClienteField);
+		emailClienteField.setColumns(10);
 
-		JLabel lblNewLabel_4 = new JLabel("Email Secundário");
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_4.gridx = 2;
-		gbc_lblNewLabel_4.gridy = 5;
-		painelCadastroCliente.add(lblNewLabel_4, gbc_lblNewLabel_4);
+		JLabel emailSecundarioClienteLabel = new JLabel("Email Secundário");
+		GridBagConstraints gbc_emailSecundarioClienteLabel = new GridBagConstraints();
+		gbc_emailSecundarioClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_emailSecundarioClienteLabel.gridx = 2;
+		gbc_emailSecundarioClienteLabel.gridy = 5;
+		painelCadastroCliente.add(emailSecundarioClienteLabel, gbc_emailSecundarioClienteLabel);
 
-		emailSecField = new JTextField();
-		GridBagConstraints gbc_emailSecField = new GridBagConstraints();
-		gbc_emailSecField.insets = new Insets(0, 0, 5, 5);
-		gbc_emailSecField.gridx = 3;
-		gbc_emailSecField.gridy = 5;
-		painelCadastroCliente.add(emailSecField, gbc_emailSecField);
-		emailSecField.setColumns(10);
+		emailSecundarioClienteField = new JTextField();
+		GridBagConstraints gbc_emailSecundarioClienteField = new GridBagConstraints();
+		gbc_emailSecundarioClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_emailSecundarioClienteField.gridx = 3;
+		gbc_emailSecundarioClienteField.gridy = 5;
+		painelCadastroCliente.add(emailSecundarioClienteField, gbc_emailSecundarioClienteField);
+		emailSecundarioClienteField.setColumns(10);
 
-		JLabel lblTelefone = new JLabel("Telefone");
-		GridBagConstraints gbc_lblTelefone = new GridBagConstraints();
-		gbc_lblTelefone.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTelefone.gridx = 4;
-		gbc_lblTelefone.gridy = 5;
-		painelCadastroCliente.add(lblTelefone, gbc_lblTelefone);
+		JLabel telefoneClienteLabel = new JLabel("Telefone");
+		GridBagConstraints gbc_telefoneClienteLabel = new GridBagConstraints();
+		gbc_telefoneClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_telefoneClienteLabel.gridx = 4;
+		gbc_telefoneClienteLabel.gridy = 5;
+		painelCadastroCliente.add(telefoneClienteLabel, gbc_telefoneClienteLabel);
 		try {
-			telfoneField = new JFormattedTextField(new MaskFormatter(
+			telfoneClienteField = new JFormattedTextField(new MaskFormatter(
 					"(##)####-####"));
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		GridBagConstraints gbc_telfoneField = new GridBagConstraints();
-		gbc_telfoneField.insets = new Insets(0, 0, 5, 5);
-		gbc_telfoneField.gridx = 5;
-		gbc_telfoneField.gridy = 5;
-		painelCadastroCliente.add(telfoneField, gbc_telfoneField);
-		telfoneField.setColumns(10);
+		GridBagConstraints gbc_telfoneClienteField = new GridBagConstraints();
+		gbc_telfoneClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_telfoneClienteField.gridx = 5;
+		gbc_telfoneClienteField.gridy = 5;
+		painelCadastroCliente.add(telfoneClienteField, gbc_telfoneClienteField);
+		telfoneClienteField.setColumns(10);
 
-		JLabel lblCelular = new JLabel("Celular");
-		GridBagConstraints gbc_lblCelular = new GridBagConstraints();
-		gbc_lblCelular.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCelular.gridx = 6;
-		gbc_lblCelular.gridy = 5;
-		painelCadastroCliente.add(lblCelular, gbc_lblCelular);
+		JLabel celularClienteLabel = new JLabel("Celular");
+		GridBagConstraints gbc_celularClienteLabel = new GridBagConstraints();
+		gbc_celularClienteLabel.anchor = GridBagConstraints.EAST;
+		gbc_celularClienteLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_celularClienteLabel.gridx = 6;
+		gbc_celularClienteLabel.gridy = 5;
+		painelCadastroCliente.add(celularClienteLabel, gbc_celularClienteLabel);
 		try {
-			celularField = new JFormattedTextField(new MaskFormatter(
+			celularClienteField = new JFormattedTextField(new MaskFormatter(
 					"(##)#####-####"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		GridBagConstraints gbc_celularField = new GridBagConstraints();
-		gbc_celularField.insets = new Insets(0, 0, 5, 0);
-		gbc_celularField.gridx = 7;
-		gbc_celularField.gridy = 5;
-		painelCadastroCliente.add(celularField, gbc_celularField);
-		celularField.setColumns(10);
+		GridBagConstraints gbc_celularClienteField = new GridBagConstraints();
+		gbc_celularClienteField.insets = new Insets(0, 0, 5, 0);
+		gbc_celularClienteField.gridx = 7;
+		gbc_celularClienteField.gridy = 5;
+		painelCadastroCliente.add(celularClienteField, gbc_celularClienteField);
+		celularClienteField.setColumns(10);
 
-		JButton btnCadastrar = new JButton("Cadastrar");
-		GridBagConstraints gbc_btnCadastrar = new GridBagConstraints();
-		gbc_btnCadastrar.gridx = 7;
-		gbc_btnCadastrar.gridy = 6;
-		painelCadastroCliente.add(btnCadastrar, gbc_btnCadastrar);
+		JButton cadastrarClienteButton = new JButton("Cadastrar");
+		GridBagConstraints gbc_cadastrarClienteButton = new GridBagConstraints();
+		gbc_cadastrarClienteButton.gridx = 7;
+		gbc_cadastrarClienteButton.gridy = 6;
+		painelCadastroCliente.add(cadastrarClienteButton, gbc_cadastrarClienteButton);
 
 		JPanel painelCadastroFornecedor = new JPanel();
 		cadastroPane
@@ -505,7 +515,7 @@ public class TelaCadastro extends JFrame {
 		JFormattedTextField formattedTextField = null;
 		try {
 			cnpjFornecedorField = new JFormattedTextField(
-					new MaskFormatter("(##)#####-####"));
+					new MaskFormatter("##.###.###/####-##"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -528,7 +538,7 @@ public class TelaCadastro extends JFrame {
 		JFormattedTextField formattedTextField_1 = null;
 		try {
 			cepFornecedorField = new JFormattedTextField(
-					new MaskFormatter("(##)#####-####"));
+					new MaskFormatter("##.###-###"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -623,153 +633,152 @@ public class TelaCadastro extends JFrame {
 		gbc_estadoFornecedorComboBox.gridy = 3;
 		painelFornecedor.add(estadoFornecedorComboBox, gbc_estadoFornecedorComboBox);
 
-		JLabel label_9 = new JLabel("Cidade");
-		GridBagConstraints gbc_label_9 = new GridBagConstraints();
-		gbc_label_9.anchor = GridBagConstraints.EAST;
-		gbc_label_9.insets = new Insets(0, 0, 5, 5);
-		gbc_label_9.gridx = 4;
-		gbc_label_9.gridy = 3;
-		painelFornecedor.add(label_9, gbc_label_9);
+		JLabel cidadeFornecedorLabel = new JLabel("Cidade");
+		GridBagConstraints gbc_cidadeFornecedorLabel = new GridBagConstraints();
+		gbc_cidadeFornecedorLabel.anchor = GridBagConstraints.EAST;
+		gbc_cidadeFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_cidadeFornecedorLabel.gridx = 4;
+		gbc_cidadeFornecedorLabel.gridy = 3;
+		painelFornecedor.add(cidadeFornecedorLabel, gbc_cidadeFornecedorLabel);
 
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-		gbc_textField_6.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_6.gridx = 5;
-		gbc_textField_6.gridy = 3;
-		painelFornecedor.add(textField_6, gbc_textField_6);
+		cidadeFornecedorField = new JTextField();
+		cidadeFornecedorField.setColumns(10);
+		GridBagConstraints gbc_cidadeFornecedorField = new GridBagConstraints();
+		gbc_cidadeFornecedorField.insets = new Insets(0, 0, 5, 5);
+		gbc_cidadeFornecedorField.gridx = 5;
+		gbc_cidadeFornecedorField.gridy = 3;
+		painelFornecedor.add(cidadeFornecedorField, gbc_cidadeFornecedorField);
 
-		JLabel label_10 = new JLabel("País");
-		GridBagConstraints gbc_label_10 = new GridBagConstraints();
-		gbc_label_10.anchor = GridBagConstraints.EAST;
-		gbc_label_10.insets = new Insets(0, 0, 5, 5);
-		gbc_label_10.gridx = 6;
-		gbc_label_10.gridy = 3;
-		painelFornecedor.add(label_10, gbc_label_10);
+		JLabel paisFornecedorLabel = new JLabel("País");
+		GridBagConstraints gbc_paisFornecedorLabel = new GridBagConstraints();
+		gbc_paisFornecedorLabel.anchor = GridBagConstraints.EAST;
+		gbc_paisFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_paisFornecedorLabel.gridx = 6;
+		gbc_paisFornecedorLabel.gridy = 3;
+		painelFornecedor.add(paisFornecedorLabel, gbc_paisFornecedorLabel);
 
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-		gbc_textField_7.insets = new Insets(0, 0, 5, 0);
-		gbc_textField_7.gridx = 7;
-		gbc_textField_7.gridy = 3;
-		painelFornecedor.add(textField_7, gbc_textField_7);
+		paisFornecedorField = new JTextField();
+		paisFornecedorField.setColumns(10);
+		GridBagConstraints gbc_paisFornecedorField = new GridBagConstraints();
+		gbc_paisFornecedorField.insets = new Insets(0, 0, 5, 0);
+		gbc_paisFornecedorField.gridx = 7;
+		gbc_paisFornecedorField.gridy = 3;
+		painelFornecedor.add(paisFornecedorField, gbc_paisFornecedorField);
 
-		JLabel label_11 = new JLabel("Login");
-		GridBagConstraints gbc_label_11 = new GridBagConstraints();
-		gbc_label_11.anchor = GridBagConstraints.EAST;
-		gbc_label_11.insets = new Insets(0, 0, 5, 5);
-		gbc_label_11.gridx = 0;
-		gbc_label_11.gridy = 4;
-		painelFornecedor.add(label_11, gbc_label_11);
+		JLabel loginFornecedorLabel = new JLabel("Login");
+		GridBagConstraints gbc_loginFornecedorLabel = new GridBagConstraints();
+		gbc_loginFornecedorLabel.anchor = GridBagConstraints.EAST;
+		gbc_loginFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_loginFornecedorLabel.gridx = 0;
+		gbc_loginFornecedorLabel.gridy = 4;
+		painelFornecedor.add(loginFornecedorLabel, gbc_loginFornecedorLabel);
 
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		GridBagConstraints gbc_textField_8 = new GridBagConstraints();
-		gbc_textField_8.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_8.gridx = 1;
-		gbc_textField_8.gridy = 4;
-		painelFornecedor.add(textField_8, gbc_textField_8);
+		loginFornecedorField = new JTextField();
+		loginFornecedorField.setColumns(10);
+		GridBagConstraints gbc_loginFornecedorField = new GridBagConstraints();
+		gbc_loginFornecedorField.insets = new Insets(0, 0, 5, 5);
+		gbc_loginFornecedorField.gridx = 1;
+		gbc_loginFornecedorField.gridy = 4;
+		painelFornecedor.add(loginFornecedorField, gbc_loginFornecedorField);
 
-		JLabel label_12 = new JLabel("Senha");
-		GridBagConstraints gbc_label_12 = new GridBagConstraints();
-		gbc_label_12.anchor = GridBagConstraints.EAST;
-		gbc_label_12.insets = new Insets(0, 0, 5, 5);
-		gbc_label_12.gridx = 2;
-		gbc_label_12.gridy = 4;
-		painelFornecedor.add(label_12, gbc_label_12);
+		JLabel senhaFornecedorLabel = new JLabel("Senha");
+		GridBagConstraints gbc_senhaFornecedorLabel = new GridBagConstraints();
+		gbc_senhaFornecedorLabel.anchor = GridBagConstraints.EAST;
+		gbc_senhaFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_senhaFornecedorLabel.gridx = 2;
+		gbc_senhaFornecedorLabel.gridy = 4;
+		painelFornecedor.add(senhaFornecedorLabel, gbc_senhaFornecedorLabel);
 
-		passwordField = new JPasswordField();
-		passwordField.setColumns(10);
-		GridBagConstraints gbc_passwordField = new GridBagConstraints();
-		gbc_passwordField.insets = new Insets(0, 0, 5, 5);
-		gbc_passwordField.gridx = 3;
-		gbc_passwordField.gridy = 4;
-		painelFornecedor.add(passwordField, gbc_passwordField);
+		senhaFornecedorPasswordField = new JPasswordField();
+		senhaFornecedorPasswordField.setColumns(10);
+		GridBagConstraints gbc_senhaFornecedorPasswordField = new GridBagConstraints();
+		gbc_senhaFornecedorPasswordField.insets = new Insets(0, 0, 5, 5);
+		gbc_senhaFornecedorPasswordField.gridx = 3;
+		gbc_senhaFornecedorPasswordField.gridy = 4;
+		painelFornecedor.add(senhaFornecedorPasswordField, gbc_senhaFornecedorPasswordField);
 
-		JLabel label_13 = new JLabel("Email");
-		GridBagConstraints gbc_label_13 = new GridBagConstraints();
-		gbc_label_13.anchor = GridBagConstraints.EAST;
-		gbc_label_13.insets = new Insets(0, 0, 5, 5);
-		gbc_label_13.gridx = 0;
-		gbc_label_13.gridy = 5;
-		painelFornecedor.add(label_13, gbc_label_13);
+		JLabel emailFornecedorLabel = new JLabel("Email");
+		GridBagConstraints gbc_emailFornecedorLabel = new GridBagConstraints();
+		gbc_emailFornecedorLabel.anchor = GridBagConstraints.EAST;
+		gbc_emailFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_emailFornecedorLabel.gridx = 0;
+		gbc_emailFornecedorLabel.gridy = 5;
+		painelFornecedor.add(emailFornecedorLabel, gbc_emailFornecedorLabel);
 
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
-		GridBagConstraints gbc_textField_9 = new GridBagConstraints();
-		gbc_textField_9.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_9.gridx = 1;
-		gbc_textField_9.gridy = 5;
-		painelFornecedor.add(textField_9, gbc_textField_9);
+		emailFornecedorField = new JTextField();
+		emailFornecedorField.setColumns(10);
+		GridBagConstraints gbc_emailFornecedorField = new GridBagConstraints();
+		gbc_emailFornecedorField.insets = new Insets(0, 0, 5, 5);
+		gbc_emailFornecedorField.gridx = 1;
+		gbc_emailFornecedorField.gridy = 5;
+		painelFornecedor.add(emailFornecedorField, gbc_emailFornecedorField);
 
-		JLabel label_14 = new JLabel("Email Secundário");
-		GridBagConstraints gbc_label_14 = new GridBagConstraints();
-		gbc_label_14.insets = new Insets(0, 0, 5, 5);
-		gbc_label_14.gridx = 2;
-		gbc_label_14.gridy = 5;
-		painelFornecedor.add(label_14, gbc_label_14);
+		JLabel emailSecundarioFornecedorLabel = new JLabel("Email Secundário");
+		GridBagConstraints gbc_emailSecundarioFornecedorLabel = new GridBagConstraints();
+		gbc_emailSecundarioFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_emailSecundarioFornecedorLabel.gridx = 2;
+		gbc_emailSecundarioFornecedorLabel.gridy = 5;
+		painelFornecedor.add(emailSecundarioFornecedorLabel, gbc_emailSecundarioFornecedorLabel);
 
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
-		GridBagConstraints gbc_textField_10 = new GridBagConstraints();
-		gbc_textField_10.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_10.gridx = 3;
-		gbc_textField_10.gridy = 5;
-		painelFornecedor.add(textField_10, gbc_textField_10);
+		emailSecundarioFornecedorField = new JTextField();
+		emailSecundarioFornecedorField.setColumns(10);
+		GridBagConstraints gbc_emailSecundarioFornecedorField = new GridBagConstraints();
+		gbc_emailSecundarioFornecedorField.insets = new Insets(0, 0, 5, 5);
+		gbc_emailSecundarioFornecedorField.gridx = 3;
+		gbc_emailSecundarioFornecedorField.gridy = 5;
+		painelFornecedor.add(emailSecundarioFornecedorField, gbc_emailSecundarioFornecedorField);
 
-		JLabel label_15 = new JLabel("Telefone");
-		GridBagConstraints gbc_label_15 = new GridBagConstraints();
-		gbc_label_15.anchor = GridBagConstraints.EAST;
-		gbc_label_15.insets = new Insets(0, 0, 5, 5);
-		gbc_label_15.gridx = 4;
-		gbc_label_15.gridy = 5;
-		painelFornecedor.add(label_15, gbc_label_15);
+		JLabel telefoneFornecedorLabel = new JLabel("Telefone");
+		GridBagConstraints gbc_telefoneFornecedorLabel = new GridBagConstraints();
+		gbc_telefoneFornecedorLabel.anchor = GridBagConstraints.EAST;
+		gbc_telefoneFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_telefoneFornecedorLabel.gridx = 4;
+		gbc_telefoneFornecedorLabel.gridy = 5;
+		painelFornecedor.add(telefoneFornecedorLabel, gbc_telefoneFornecedorLabel);
 
 		JFormattedTextField formattedTextField_5 = null;
 		try {
-			formattedTextField_5 = new JFormattedTextField(
-					new MaskFormatter("(##)#####-####"));
+			telefoneFornecedorField = new JFormattedTextField(
+					new MaskFormatter("(##)####-####"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		formattedTextField_5.setColumns(10);
-		GridBagConstraints gbc_formattedTextField_5 = new GridBagConstraints();
-		gbc_formattedTextField_5.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedTextField_5.gridx = 5;
-		gbc_formattedTextField_5.gridy = 5;
-		painelFornecedor.add(formattedTextField_5, gbc_formattedTextField_5);
+		telefoneFornecedorField.setColumns(10);
+		GridBagConstraints gbc_telefoneFornecedorField = new GridBagConstraints();
+		gbc_telefoneFornecedorField.insets = new Insets(0, 0, 5, 5);
+		gbc_telefoneFornecedorField.gridx = 5;
+		gbc_telefoneFornecedorField.gridy = 5;
+		painelFornecedor.add(telefoneFornecedorField, gbc_telefoneFornecedorField);
 
-		JLabel label_16 = new JLabel("Celular");
-		GridBagConstraints gbc_label_16 = new GridBagConstraints();
-		gbc_label_16.anchor = GridBagConstraints.EAST;
-		gbc_label_16.insets = new Insets(0, 0, 5, 5);
-		gbc_label_16.gridx = 6;
-		gbc_label_16.gridy = 5;
-		painelFornecedor.add(label_16, gbc_label_16);
+		JLabel celularFornecedorLabel = new JLabel("Celular");
+		GridBagConstraints gbc_celularFornecedorLabel = new GridBagConstraints();
+		gbc_celularFornecedorLabel.anchor = GridBagConstraints.EAST;
+		gbc_celularFornecedorLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_celularFornecedorLabel.gridx = 6;
+		gbc_celularFornecedorLabel.gridy = 5;
+		painelFornecedor.add(celularFornecedorLabel, gbc_celularFornecedorLabel);
 
 		JFormattedTextField formattedTextField_6 = null;
 		try {
-			formattedTextField_6 = new JFormattedTextField(
+			celulcarFornecedorField = new JFormattedTextField(
 					new MaskFormatter("(##)#####-####"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		formattedTextField_6.setColumns(10);
-		GridBagConstraints gbc_formattedTextField_6 = new GridBagConstraints();
-		gbc_formattedTextField_6.insets = new Insets(0, 0, 5, 0);
-		gbc_formattedTextField_6.gridx = 7;
-		gbc_formattedTextField_6.gridy = 5;
-		painelFornecedor.add(formattedTextField_6, gbc_formattedTextField_6);
+		celulcarFornecedorField.setColumns(10);
+		GridBagConstraints gbc_celulcarFornecedorField = new GridBagConstraints();
+		gbc_celulcarFornecedorField.insets = new Insets(0, 0, 5, 0);
+		gbc_celulcarFornecedorField.gridx = 7;
+		gbc_celulcarFornecedorField.gridy = 5;
+		painelFornecedor.add(celulcarFornecedorField, gbc_celulcarFornecedorField);
 
-		JButton button = new JButton("Cadastrar");
-		GridBagConstraints gbc_button = new GridBagConstraints();
-		gbc_button.fill = GridBagConstraints.HORIZONTAL;
-		gbc_button.gridx = 7;
-		gbc_button.gridy = 6;
-		painelFornecedor.add(button, gbc_button);
+		JButton cadastrarFornecedorButton = new JButton("Cadastrar");
+		GridBagConstraints gbc_cadastrarFornecedorButton = new GridBagConstraints();
+		gbc_cadastrarFornecedorButton.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cadastrarFornecedorButton.gridx = 7;
+		gbc_cadastrarFornecedorButton.gridy = 6;
+		painelFornecedor.add(cadastrarFornecedorButton, gbc_cadastrarFornecedorButton);
 	}
-
 }

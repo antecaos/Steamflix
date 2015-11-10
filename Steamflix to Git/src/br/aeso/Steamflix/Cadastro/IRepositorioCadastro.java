@@ -18,4 +18,6 @@ public interface IRepositorioCadastro {
 	public boolean existe(int id);
 
 	public ArrayList<Cadastro> listar();
+	
+	public Cadastro retornaCadastro(String login,String senha);
 }

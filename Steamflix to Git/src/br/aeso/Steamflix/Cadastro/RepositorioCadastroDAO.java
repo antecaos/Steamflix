@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 
 public class RepositorioCadastroDAO implements IRepositorioCadastro {
@@ -324,8 +325,40 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 		return cadastroProcurado;
 	}
 	
-	public boolean verificaDados(Cadastro cadastro){
-		
-		return false;		
+	
+	public Cadastro retornaCadastro(String login, String senha) {
+		Cadastro cadastroProcurado = null;
+		Cliente cliente = new Cliente();
+		Fornecedor fornecedor = new Fornecedor();
+		String sql = "select * from Steamflix.Cadastro where loginCadastro = ? and senhaCadastro = ? and flagCadastro = 1";
+		try {
+			// prepared statement para inserção
+			PreparedStatement stmt = connection.prepareStatement(sql);
+
+			stmt.setString(1, login);
+			stmt.setString(2, senha);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				cadastroProcurado = new Cadastro();
+				cadastroProcurado.setId(rs.getInt(1));
+				cadastroProcurado.setLogin(rs.getString(2));
+				cadastroProcurado.setSenha(rs.getString(3));
+				cadastroProcurado.setEmailPrincipal(rs.getString(4));
+				cadastroProcurado.setEmailSecundario(rs.getString(5));
+				cadastroProcurado.setTelefoneFixo(rs.getString(6));
+				cadastroProcurado.setTelefoneCelular(rs.getString(7));
+				cliente.setCPF(rs.getString(8));
+				fornecedor.setCNPJ(rs.getString(9));		
+				cadastroProcurado.setCliente(cliente);
+				cadastroProcurado.setFornecedor(fornecedor);
+				
+			}
+			stmt.close();
+			rs.close();			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+		return cadastroProcurado;		
 	}
 }

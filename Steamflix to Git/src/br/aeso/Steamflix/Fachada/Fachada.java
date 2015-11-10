@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Aluguel.ControladorAluguel;
+import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cadastro.CampoVazioException;
+import br.aeso.Steamflix.Cadastro.ControladorCadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Cliente.ControladorCliente;
 import br.aeso.Steamflix.Compra.Compra;
@@ -30,7 +32,8 @@ public class Fachada {
 	private ControladorJogo controladorJogo;
 	private ControladorAluguel controladorAluguel;
 	private ControladorCompra controladorCompra;
-
+	private ControladorCadastro controladorCadastro;
+	
 	private Fachada() {
 		this.controladorGenero = new ControladorGenero();
 		this.controladorCupom = new ControladorCupom();
@@ -40,6 +43,7 @@ public class Fachada {
 		this.controladorJogo = new ControladorJogo();
 		this.controladorAluguel = new ControladorAluguel();
 		this.controladorCompra = new ControladorCompra();
+		this.controladorCadastro = new ControladorCadastro();
 	}
 
 	public static Fachada getInstance() {
@@ -207,5 +211,9 @@ public class Fachada {
 
 	public ArrayList<Compra> listaCompra() {
 		return this.controladorCompra.listar();
+	}
+	
+	public Cadastro retornaCadastro(String login,String senha){
+		return this.controladorCadastro.retornaCadastro(login, senha);		
 	}
 }

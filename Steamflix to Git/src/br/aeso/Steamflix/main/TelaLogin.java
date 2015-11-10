@@ -1,29 +1,32 @@
 package br.aeso.Steamflix.main;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Fachada.Fachada;
 
 public class TelaLogin extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField loginField;
-	private JTextField senhaField;
+	private JPasswordField senhaField;
 	private JButton entrarBotao;
 	private JLabel lblNoCadastrado;
 	private JLabel lblLogo;
 	private TelaCadastro telaCadastro;
+	Fachada fachada = Fachada.getInstance();
 
 	/**
 	 * Launch the application.
@@ -35,6 +38,7 @@ public class TelaLogin extends JFrame {
 					TelaLogin frame = new TelaLogin();
 					frame.setVisible(true);
 					frame.setResizable(false);
+					frame.setTitle("SteamFlix - Login");					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,6 +50,7 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
+		
 		start();
 	}
 	
@@ -70,7 +75,7 @@ public class TelaLogin extends JFrame {
 		senhaLabel.setBounds(158, 199, 45, 15);
 		contentPane.add(senhaLabel);
 		
-		senhaField = new JTextField();
+		senhaField = new JPasswordField();
 		senhaField.setColumns(10);
 		senhaField.setBounds(124, 228, 114, 19);
 		contentPane.add(senhaField);
@@ -78,7 +83,7 @@ public class TelaLogin extends JFrame {
 		entrarBotao = new JButton("Entrar");
 		entrarBotao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				entrar();				
 			}
 		});
 		entrarBotao.setBounds(122, 259, 117, 25);
@@ -90,6 +95,7 @@ public class TelaLogin extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				telaCadastro = new TelaCadastro();
 				telaCadastro.setVisible(true);
+				telaCadastro.setTitle("SteamFlix - Cadastro Cliente/Fornecedor");
 			}
 		});
 		lblNoCadastrado.setBounds(69, 313, 224, 15);
@@ -98,6 +104,13 @@ public class TelaLogin extends JFrame {
 		lblLogo = new JLabel("LOGO");
 		lblLogo.setBounds(161, 53, 40, 15);
 		contentPane.add(lblLogo);
+	}
+	
+	private void entrar(){
+		String login = this.loginField.getText();
+		String senha = new String(this.senhaField.getPassword());
+		Cadastro cadastro = fachada.retornaCadastro(login, senha);
+		System.out.println(cadastro);
 	}
 
 }
