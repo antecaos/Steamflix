@@ -15,7 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Fachada.Fachada;
+import br.aeso.Steamflix.Fornecedor.Fornecedor;
 
 public class TelaLogin extends JFrame {
 
@@ -111,9 +113,20 @@ public class TelaLogin extends JFrame {
 		String login = this.loginField.getText();
 		String senha = new String(this.senhaField.getPassword());
 		Cadastro cadastro = fachada.retornaCadastro(login, senha);
-		System.out.println(cadastro);
-		System.out.println(cadastro.getCliente().getCPF());
-		System.out.println(cadastro.getFornecedor().getCNPJ());
+		System.out.println(cadastro);		
+		if (cadastro.getCliente().getCPF() == null) {
+			
+		} else {
+
+		}
+	}
+	
+	private void entrarTelaFornecedor(Fornecedor fornecedor){
+		
+	}
+	
+	private void entrarTelaCliente(Cliente cliente){
+		
 	}
 
 }
