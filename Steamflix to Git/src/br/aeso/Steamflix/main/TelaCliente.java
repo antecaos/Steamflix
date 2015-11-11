@@ -15,6 +15,9 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.CardLayout;
 import java.awt.GridBagConstraints;
+import com.jgoodies.forms.factories.FormFactory;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class TelaCliente extends JFrame {
 
@@ -61,9 +64,7 @@ public class TelaCliente extends JFrame {
 		gbc_tabbedPane.gridy = 0;
 		contentPane.add(tabbedPane, gbc_tabbedPane);
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("New tab", null, panel, null);
-		panel.setLayout(new FormLayout(new ColumnSpec[] {},
-			new RowSpec[] {}));
+		JScrollPane scrollPane = new JScrollPane();
+		tabbedPane.addTab("New tab", null, scrollPane, null);
 	}
 }
