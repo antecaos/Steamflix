@@ -18,10 +18,12 @@ import java.awt.GridBagConstraints;
 import com.jgoodies.forms.factories.FormFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Insets;
 
 public class TelaCliente extends JFrame {
 
 	private JPanel contentPane;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -50,21 +52,46 @@ public class TelaCliente extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{1114, 0};
-		gbl_contentPane.rowHeights = new int[]{469, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, Double.MIN_VALUE};
-		contentPane.setLayout(gbl_contentPane);
-		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
-		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
-		gbc_tabbedPane.gridx = 0;
-		gbc_tabbedPane.gridy = 0;
-		contentPane.add(tabbedPane, gbc_tabbedPane);
+		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		tabbedPane.addTab("New tab", null, scrollPane, null);
+		scrollPane.setBounds(12, 12, 1114, 469);
+		contentPane.add(scrollPane);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		scrollPane.setViewportView(tabbedPane);
+		
+		JPanel panel = new JPanel();
+		tabbedPane.addTab("New tab", null, panel, null);
+		panel.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,}));
+		
+		JLabel lblNewLabel = new JLabel("Nome");
+		panel.add(lblNewLabel, "2, 4, right, default");
+		
+		textField = new JTextField();
+		panel.add(textField, "4, 4, fill, default");
+		textField.setColumns(10);
+		
+		JLabel lblEndereo = new JLabel("Endereço");
+		panel.add(lblEndereo, "2, 8");
+		
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_1, null);
+		
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("New tab", null, panel_2, null);
 	}
 }
