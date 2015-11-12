@@ -103,7 +103,7 @@ public class Endereco {
 	}
 
 	public void setCEP(String CEP) {
-		this.CEP = CEP;
+		this.CEP = CEP.replaceAll("\\.|\\-|\\ ", "");
 	}
 
 	public Fornecedor getFornecedor() {
