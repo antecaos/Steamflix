@@ -1,32 +1,28 @@
 package br.aeso.Steamflix.main;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import javax.swing.JScrollBar;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.text.ParseException;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JButton;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+
+import br.aeso.Steamflix.Fachada.Fachada;
 
 public class TelaCadastro extends JFrame {
 
+	private Fachada fachada;
 	private JPanel contentPane;
 	private JFormattedTextField dataNasciementoClienteField;
 	private JTextField nomeClienteField;
@@ -60,6 +56,7 @@ public class TelaCadastro extends JFrame {
 	private JFormattedTextField cepFornecedorField;
 	private JFormattedTextField telefoneFornecedorField;
 	private JFormattedTextField celulcarFornecedorField;
+	
 
 	public TelaCadastro() {
 		start();
@@ -786,5 +783,9 @@ public class TelaCadastro extends JFrame {
 		gbc_cadastrarFornecedorButton.gridy = 6;
 		painelFornecedor.add(cadastrarFornecedorButton,
 				gbc_cadastrarFornecedorButton);
+	}
+	
+	public void cadastrarCliente(){
+		
 	}
 }
