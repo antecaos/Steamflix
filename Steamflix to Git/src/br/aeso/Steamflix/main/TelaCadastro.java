@@ -25,7 +25,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.BoxLayout;
 import java.awt.GridLayout;
 
-
 public class TelaCadastro extends JFrame {
 
 	private JPanel contentPane;
@@ -61,22 +60,6 @@ public class TelaCadastro extends JFrame {
 	private JFormattedTextField cepFornecedorField;
 	private JFormattedTextField telefoneFornecedorField;
 	private JFormattedTextField celulcarFornecedorField;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastro frame = new TelaCadastro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public TelaCadastro() {
 		start();
@@ -133,8 +116,8 @@ public class TelaCadastro extends JFrame {
 		panel.add(cadastroPane, gbc_cadastroPane);
 
 		JPanel painelCadastroCliente = new JPanel();
-		cadastroPane
-				.addTab("Cadastro Cliente", null, painelCadastroCliente, null);
+		cadastroPane.addTab("Cadastro Cliente", null, painelCadastroCliente,
+				null);
 		GridBagLayout gbl_painelCadastroCliente = new GridBagLayout();
 		gbl_painelCadastroCliente.columnWidths = new int[] { 0, 0, 0, 0, 0, 0,
 				0, 0, 0 };
@@ -188,10 +171,11 @@ public class TelaCadastro extends JFrame {
 		gbc_dataNascimentoClienteLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_dataNascimentoClienteLabel.gridx = 2;
 		gbc_dataNascimentoClienteLabel.gridy = 1;
-		painelCadastroCliente.add(dataNascimentoClienteLabel, gbc_dataNascimentoClienteLabel);
+		painelCadastroCliente.add(dataNascimentoClienteLabel,
+				gbc_dataNascimentoClienteLabel);
 		try {
-			dataNasciementoClienteField = new JFormattedTextField(new MaskFormatter(
-					"##/##/####"));
+			dataNasciementoClienteField = new JFormattedTextField(
+					new MaskFormatter("##/##/####"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -212,7 +196,8 @@ public class TelaCadastro extends JFrame {
 		gbc_cepClienteLabel.gridy = 1;
 		painelCadastroCliente.add(cepClienteLabel, gbc_cepClienteLabel);
 		try {
-			cepClienteField = new JFormattedTextField(new MaskFormatter("##.###-###"));
+			cepClienteField = new JFormattedTextField(new MaskFormatter(
+					"##.###-###"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -262,14 +247,16 @@ public class TelaCadastro extends JFrame {
 		gbc_complementoClienteLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_complementoClienteLabel.gridx = 6;
 		gbc_complementoClienteLabel.gridy = 2;
-		painelCadastroCliente.add(complementoClienteLabel, gbc_complementoClienteLabel);
+		painelCadastroCliente.add(complementoClienteLabel,
+				gbc_complementoClienteLabel);
 
 		complementoClienteField = new JTextField();
 		GridBagConstraints gbc_complementoClienteField = new GridBagConstraints();
 		gbc_complementoClienteField.insets = new Insets(0, 0, 5, 0);
 		gbc_complementoClienteField.gridx = 7;
 		gbc_complementoClienteField.gridy = 2;
-		painelCadastroCliente.add(complementoClienteField, gbc_complementoClienteField);
+		painelCadastroCliente.add(complementoClienteField,
+				gbc_complementoClienteField);
 		complementoClienteField.setColumns(10);
 
 		JLabel bairroClienteLabel = new JLabel("Bairro");
@@ -300,7 +287,8 @@ public class TelaCadastro extends JFrame {
 		gbc_estadoClienteComboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_estadoClienteComboBox.gridx = 3;
 		gbc_estadoClienteComboBox.gridy = 3;
-		painelCadastroCliente.add(estadoClienteComboBox, gbc_estadoClienteComboBox);
+		painelCadastroCliente.add(estadoClienteComboBox,
+				gbc_estadoClienteComboBox);
 
 		JLabel cidadeClienteLabel = new JLabel("Cidade");
 		GridBagConstraints gbc_cidadeClienteLabel = new GridBagConstraints();
@@ -385,14 +373,16 @@ public class TelaCadastro extends JFrame {
 		gbc_emailSecundarioClienteLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_emailSecundarioClienteLabel.gridx = 2;
 		gbc_emailSecundarioClienteLabel.gridy = 5;
-		painelCadastroCliente.add(emailSecundarioClienteLabel, gbc_emailSecundarioClienteLabel);
+		painelCadastroCliente.add(emailSecundarioClienteLabel,
+				gbc_emailSecundarioClienteLabel);
 
 		emailSecundarioClienteField = new JTextField();
 		GridBagConstraints gbc_emailSecundarioClienteField = new GridBagConstraints();
 		gbc_emailSecundarioClienteField.insets = new Insets(0, 0, 5, 5);
 		gbc_emailSecundarioClienteField.gridx = 3;
 		gbc_emailSecundarioClienteField.gridy = 5;
-		painelCadastroCliente.add(emailSecundarioClienteField, gbc_emailSecundarioClienteField);
+		painelCadastroCliente.add(emailSecundarioClienteField,
+				gbc_emailSecundarioClienteField);
 		emailSecundarioClienteField.setColumns(10);
 
 		JLabel telefoneClienteLabel = new JLabel("Telefone");
@@ -400,7 +390,8 @@ public class TelaCadastro extends JFrame {
 		gbc_telefoneClienteLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_telefoneClienteLabel.gridx = 4;
 		gbc_telefoneClienteLabel.gridy = 5;
-		painelCadastroCliente.add(telefoneClienteLabel, gbc_telefoneClienteLabel);
+		painelCadastroCliente.add(telefoneClienteLabel,
+				gbc_telefoneClienteLabel);
 		try {
 			telfoneClienteField = new JFormattedTextField(new MaskFormatter(
 					"(##)####-####"));
@@ -440,11 +431,12 @@ public class TelaCadastro extends JFrame {
 		GridBagConstraints gbc_cadastrarClienteButton = new GridBagConstraints();
 		gbc_cadastrarClienteButton.gridx = 7;
 		gbc_cadastrarClienteButton.gridy = 6;
-		painelCadastroCliente.add(cadastrarClienteButton, gbc_cadastrarClienteButton);
+		painelCadastroCliente.add(cadastrarClienteButton,
+				gbc_cadastrarClienteButton);
 
 		JPanel painelCadastroFornecedor = new JPanel();
-		cadastroPane
-				.addTab("Cadastro Fornecedor", null, painelCadastroFornecedor, null);
+		cadastroPane.addTab("Cadastro Fornecedor", null,
+				painelCadastroFornecedor, null);
 		GridBagLayout gbl_painelCadastroFornecedor = new GridBagLayout();
 		gbl_painelCadastroFornecedor.columnWidths = new int[] { 0, 0 };
 		gbl_painelCadastroFornecedor.rowHeights = new int[] { 0, 0 };
@@ -461,12 +453,13 @@ public class TelaCadastro extends JFrame {
 		gbc_painelFornecedor.gridy = 0;
 		painelCadastroFornecedor.add(painelFornecedor, gbc_painelFornecedor);
 		GridBagLayout gbl_painelFornecedor = new GridBagLayout();
-		gbl_painelFornecedor.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 50, 0, 0 };
+		gbl_painelFornecedor.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 50,
+				0, 0 };
 		gbl_painelFornecedor.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_painelFornecedor.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+		gbl_painelFornecedor.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_painelFornecedor.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gbl_painelFornecedor.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, Double.MIN_VALUE };
 		painelFornecedor.setLayout(gbl_painelFornecedor);
 
 		JLabel nomeFantasiaFornecedorLabel = new JLabel("Nome");
@@ -474,7 +467,8 @@ public class TelaCadastro extends JFrame {
 		gbc_nomeFantasiaFornecedorLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_nomeFantasiaFornecedorLabel.gridx = 0;
 		gbc_nomeFantasiaFornecedorLabel.gridy = 0;
-		painelFornecedor.add(nomeFantasiaFornecedorLabel, gbc_nomeFantasiaFornecedorLabel);
+		painelFornecedor.add(nomeFantasiaFornecedorLabel,
+				gbc_nomeFantasiaFornecedorLabel);
 
 		nomeFantasiaFornecedorField = new JTextField();
 		nomeFantasiaFornecedorField.setColumns(10);
@@ -484,7 +478,8 @@ public class TelaCadastro extends JFrame {
 		gbc_nomeFantasiaFornecedorField.insets = new Insets(0, 0, 5, 5);
 		gbc_nomeFantasiaFornecedorField.gridx = 1;
 		gbc_nomeFantasiaFornecedorField.gridy = 0;
-		painelFornecedor.add(nomeFantasiaFornecedorField, gbc_nomeFantasiaFornecedorField);
+		painelFornecedor.add(nomeFantasiaFornecedorField,
+				gbc_nomeFantasiaFornecedorField);
 
 		JLabel razaoFornecedorLabel = new JLabel("Razão \nSocial");
 		GridBagConstraints gbc_razaoFornecedorLabel = new GridBagConstraints();
@@ -493,16 +488,16 @@ public class TelaCadastro extends JFrame {
 		gbc_razaoFornecedorLabel.gridx = 3;
 		gbc_razaoFornecedorLabel.gridy = 0;
 		painelFornecedor.add(razaoFornecedorLabel, gbc_razaoFornecedorLabel);
-		
-				razaoFornecedorField = new JTextField();
-				razaoFornecedorField.setColumns(10);
-				GridBagConstraints gbc_razaoFornecedorField = new GridBagConstraints();
-				gbc_razaoFornecedorField.fill = GridBagConstraints.HORIZONTAL;
-				gbc_razaoFornecedorField.gridwidth = 2;
-				gbc_razaoFornecedorField.insets = new Insets(0, 0, 5, 5);
-				gbc_razaoFornecedorField.gridx = 4;
-				gbc_razaoFornecedorField.gridy = 0;
-				painelFornecedor.add(razaoFornecedorField, gbc_razaoFornecedorField);
+
+		razaoFornecedorField = new JTextField();
+		razaoFornecedorField.setColumns(10);
+		GridBagConstraints gbc_razaoFornecedorField = new GridBagConstraints();
+		gbc_razaoFornecedorField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_razaoFornecedorField.gridwidth = 2;
+		gbc_razaoFornecedorField.insets = new Insets(0, 0, 5, 5);
+		gbc_razaoFornecedorField.gridx = 4;
+		gbc_razaoFornecedorField.gridy = 0;
+		painelFornecedor.add(razaoFornecedorField, gbc_razaoFornecedorField);
 
 		JLabel cnpjFornecedorLabel = new JLabel("CNPJ");
 		GridBagConstraints gbc_cnpjFornecedorLabel = new GridBagConstraints();
@@ -514,8 +509,8 @@ public class TelaCadastro extends JFrame {
 
 		JFormattedTextField formattedTextField = null;
 		try {
-			cnpjFornecedorField = new JFormattedTextField(
-					new MaskFormatter("##.###.###/####-##"));
+			cnpjFornecedorField = new JFormattedTextField(new MaskFormatter(
+					"##.###.###/####-##"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -537,8 +532,8 @@ public class TelaCadastro extends JFrame {
 
 		JFormattedTextField formattedTextField_1 = null;
 		try {
-			cepFornecedorField = new JFormattedTextField(
-					new MaskFormatter("##.###-###"));
+			cepFornecedorField = new JFormattedTextField(new MaskFormatter(
+					"##.###-###"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -591,7 +586,8 @@ public class TelaCadastro extends JFrame {
 		gbc_complementoFornecedorLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_complementoFornecedorLabel.gridx = 6;
 		gbc_complementoFornecedorLabel.gridy = 2;
-		painelFornecedor.add(complementoFornecedorLabel, gbc_complementoFornecedorLabel);
+		painelFornecedor.add(complementoFornecedorLabel,
+				gbc_complementoFornecedorLabel);
 
 		complementoFornecedorField = new JTextField();
 		complementoFornecedorField.setColumns(10);
@@ -599,7 +595,8 @@ public class TelaCadastro extends JFrame {
 		gbc_complementoFornecedorField.insets = new Insets(0, 0, 5, 0);
 		gbc_complementoFornecedorField.gridx = 7;
 		gbc_complementoFornecedorField.gridy = 2;
-		painelFornecedor.add(complementoFornecedorField, gbc_complementoFornecedorField);
+		painelFornecedor.add(complementoFornecedorField,
+				gbc_complementoFornecedorField);
 
 		JLabel bairroFornecedorLabel = new JLabel("Bairro");
 		GridBagConstraints gbc_bairroFornecedorLabel = new GridBagConstraints();
@@ -631,7 +628,8 @@ public class TelaCadastro extends JFrame {
 		gbc_estadoFornecedorComboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_estadoFornecedorComboBox.gridx = 3;
 		gbc_estadoFornecedorComboBox.gridy = 3;
-		painelFornecedor.add(estadoFornecedorComboBox, gbc_estadoFornecedorComboBox);
+		painelFornecedor.add(estadoFornecedorComboBox,
+				gbc_estadoFornecedorComboBox);
 
 		JLabel cidadeFornecedorLabel = new JLabel("Cidade");
 		GridBagConstraints gbc_cidadeFornecedorLabel = new GridBagConstraints();
@@ -695,7 +693,8 @@ public class TelaCadastro extends JFrame {
 		gbc_senhaFornecedorPasswordField.insets = new Insets(0, 0, 5, 5);
 		gbc_senhaFornecedorPasswordField.gridx = 3;
 		gbc_senhaFornecedorPasswordField.gridy = 4;
-		painelFornecedor.add(senhaFornecedorPasswordField, gbc_senhaFornecedorPasswordField);
+		painelFornecedor.add(senhaFornecedorPasswordField,
+				gbc_senhaFornecedorPasswordField);
 
 		JLabel emailFornecedorLabel = new JLabel("Email");
 		GridBagConstraints gbc_emailFornecedorLabel = new GridBagConstraints();
@@ -718,7 +717,8 @@ public class TelaCadastro extends JFrame {
 		gbc_emailSecundarioFornecedorLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_emailSecundarioFornecedorLabel.gridx = 2;
 		gbc_emailSecundarioFornecedorLabel.gridy = 5;
-		painelFornecedor.add(emailSecundarioFornecedorLabel, gbc_emailSecundarioFornecedorLabel);
+		painelFornecedor.add(emailSecundarioFornecedorLabel,
+				gbc_emailSecundarioFornecedorLabel);
 
 		emailSecundarioFornecedorField = new JTextField();
 		emailSecundarioFornecedorField.setColumns(10);
@@ -726,7 +726,8 @@ public class TelaCadastro extends JFrame {
 		gbc_emailSecundarioFornecedorField.insets = new Insets(0, 0, 5, 5);
 		gbc_emailSecundarioFornecedorField.gridx = 3;
 		gbc_emailSecundarioFornecedorField.gridy = 5;
-		painelFornecedor.add(emailSecundarioFornecedorField, gbc_emailSecundarioFornecedorField);
+		painelFornecedor.add(emailSecundarioFornecedorField,
+				gbc_emailSecundarioFornecedorField);
 
 		JLabel telefoneFornecedorLabel = new JLabel("Telefone");
 		GridBagConstraints gbc_telefoneFornecedorLabel = new GridBagConstraints();
@@ -734,7 +735,8 @@ public class TelaCadastro extends JFrame {
 		gbc_telefoneFornecedorLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_telefoneFornecedorLabel.gridx = 4;
 		gbc_telefoneFornecedorLabel.gridy = 5;
-		painelFornecedor.add(telefoneFornecedorLabel, gbc_telefoneFornecedorLabel);
+		painelFornecedor.add(telefoneFornecedorLabel,
+				gbc_telefoneFornecedorLabel);
 
 		JFormattedTextField formattedTextField_5 = null;
 		try {
@@ -749,7 +751,8 @@ public class TelaCadastro extends JFrame {
 		gbc_telefoneFornecedorField.insets = new Insets(0, 0, 5, 5);
 		gbc_telefoneFornecedorField.gridx = 5;
 		gbc_telefoneFornecedorField.gridy = 5;
-		painelFornecedor.add(telefoneFornecedorField, gbc_telefoneFornecedorField);
+		painelFornecedor.add(telefoneFornecedorField,
+				gbc_telefoneFornecedorField);
 
 		JLabel celularFornecedorLabel = new JLabel("Celular");
 		GridBagConstraints gbc_celularFornecedorLabel = new GridBagConstraints();
@@ -757,7 +760,8 @@ public class TelaCadastro extends JFrame {
 		gbc_celularFornecedorLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_celularFornecedorLabel.gridx = 6;
 		gbc_celularFornecedorLabel.gridy = 5;
-		painelFornecedor.add(celularFornecedorLabel, gbc_celularFornecedorLabel);
+		painelFornecedor
+				.add(celularFornecedorLabel, gbc_celularFornecedorLabel);
 
 		JFormattedTextField formattedTextField_6 = null;
 		try {
@@ -772,13 +776,15 @@ public class TelaCadastro extends JFrame {
 		gbc_celulcarFornecedorField.insets = new Insets(0, 0, 5, 0);
 		gbc_celulcarFornecedorField.gridx = 7;
 		gbc_celulcarFornecedorField.gridy = 5;
-		painelFornecedor.add(celulcarFornecedorField, gbc_celulcarFornecedorField);
+		painelFornecedor.add(celulcarFornecedorField,
+				gbc_celulcarFornecedorField);
 
 		JButton cadastrarFornecedorButton = new JButton("Cadastrar");
 		GridBagConstraints gbc_cadastrarFornecedorButton = new GridBagConstraints();
 		gbc_cadastrarFornecedorButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cadastrarFornecedorButton.gridx = 7;
 		gbc_cadastrarFornecedorButton.gridy = 6;
-		painelFornecedor.add(cadastrarFornecedorButton, gbc_cadastrarFornecedorButton);
+		painelFornecedor.add(cadastrarFornecedorButton,
+				gbc_cadastrarFornecedorButton);
 	}
 }

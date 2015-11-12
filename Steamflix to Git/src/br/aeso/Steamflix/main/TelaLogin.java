@@ -28,6 +28,7 @@ public class TelaLogin extends JFrame {
 	private JLabel lblNoCadastrado;
 	private JLabel lblLogo;
 	private TelaCadastro telaCadastro;
+	private TelaCliente telaCliente;
 	Fachada fachada = Fachada.getInstance();
 
 	/**
@@ -116,8 +117,10 @@ public class TelaLogin extends JFrame {
 		System.out.println(cadastro);		
 		if (cadastro.getCliente().getCPF() == null) {
 			
-		} else {
-
+		} else if(cadastro.getFornecedor().getCNPJ() == null){
+			telaCliente = new TelaCliente();
+			telaCliente.setVisible(true);
+			telaCliente.setTitle("SteamFlix - Cliente");
 		}
 	}
 	

@@ -42,23 +42,6 @@ public class TelaCliente extends JFrame {
 	private JTextField textField_14;
 	private JTextField textField_16;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCliente frame = new TelaCliente();
-					frame.setVisible(true);
-					frame.setTitle("Tela cliente");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public TelaCliente() {
 		start();
 	}
