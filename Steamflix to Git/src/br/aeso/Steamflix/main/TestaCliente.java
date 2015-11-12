@@ -1,7 +1,9 @@
 package br.aeso.Steamflix.main;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
@@ -20,8 +22,20 @@ public class TestaCliente {
 		Endereco e = new Endereco();
 		Fachada fachada = Fachada.getInstance();
 		c.setNome("Gobinho");
-		Calendar d1 = Calendar.getInstance();
-		d1.set(2005, 00, 05);
+		//Calendar d1 = Calendar.getInstance();
+		Calendar d1 = null;
+		String dataEmTexto = "05/01/2005";
+		
+		try {
+			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
+			d1 = Calendar.getInstance();
+			d1.setTime(date);
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}		
+		
+		//d1.set(2005, 00, 05);
 		c.setDataDeNascimento(d1);
 		c.setCPF("01223665987");
 
@@ -47,7 +61,7 @@ public class TestaCliente {
 
 		c.setEndereco(e);
 
-		//System.out.println(c);
+		System.out.println(c);
 		//fachada.cadastrarCliente(c);
 
 		//c.setNome("Leonardo Heitor Alves");
@@ -57,12 +71,12 @@ public class TestaCliente {
 		
 		//System.out.println(fachada.procuraCliente("01223665987"));
 		
-		ArrayList<Cliente> lista = fachada.listaCliente();
-		
+		//ArrayList<Cliente> lista = fachada.listaCliente();
+		/*
 		for (Cliente cliente : lista) {
 			System.out.println(cliente);
 			System.out.println("\n");
-		}
+		}*/
 	}
 
 }

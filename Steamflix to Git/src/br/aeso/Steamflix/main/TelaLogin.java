@@ -99,7 +99,7 @@ public class TelaLogin extends JFrame {
 				telaCadastro = new TelaCadastro();
 				telaCadastro.setVisible(true);
 				telaCadastro
-						.setTitle("SteamFlix - Cadastro Cliente/Fornecedor");
+						.setTitle("SteamFlix - Cadastro Cliente/Fornecedor");				
 			}
 		});
 		lblNoCadastrado.setBounds(69, 313, 224, 15);
