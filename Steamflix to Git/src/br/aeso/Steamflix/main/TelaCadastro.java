@@ -27,6 +27,8 @@ import br.aeso.Steamflix.Cadastro.CampoVazioException;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaCadastro extends JFrame {
 
@@ -434,6 +436,11 @@ public class TelaCadastro extends JFrame {
 		celularClienteField.setColumns(10);
 
 		JButton cadastrarClienteButton = new JButton("Cadastrar");
+		cadastrarClienteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				cadastrarCliente();
+			}
+		});
 		GridBagConstraints gbc_cadastrarClienteButton = new GridBagConstraints();
 		gbc_cadastrarClienteButton.gridx = 7;
 		gbc_cadastrarClienteButton.gridy = 6;
@@ -795,6 +802,7 @@ public class TelaCadastro extends JFrame {
 	}
 
 	public void cadastrarCliente() {
+		fachada = Fachada.getInstance();
 		Cliente cliente = new Cliente();
 		Cadastro cadastro = new Cadastro();
 		Endereco endereco = new Endereco();
@@ -831,6 +839,9 @@ public class TelaCadastro extends JFrame {
 		cliente.setEndereco(endereco);
 		endereco.setCliente(cliente);
 		cadastro.setCliente(cliente);
+		
+		//JOptionPane.showMessageDialog(this,
+			//	cliente);
 		
 		try {
 			fachada.cadastrarCliente(cliente);

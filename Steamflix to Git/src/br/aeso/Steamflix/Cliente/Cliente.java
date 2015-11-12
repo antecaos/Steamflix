@@ -36,7 +36,7 @@ public class Cliente {
 	}
 
 	public void setCPF(String CPF) {
-		this.CPF = CPF;
+		this.CPF = CPF.replaceAll("\\.|\\-|\\ ", "");
 	}
 
 	public Calendar getDataDeNascimento() {

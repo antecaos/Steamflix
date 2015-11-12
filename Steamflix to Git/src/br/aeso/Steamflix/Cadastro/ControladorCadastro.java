@@ -19,47 +19,49 @@ public class ControladorCadastro {
 	}
 
 	public void cadastrar(Cadastro cadastro) throws CampoVazioException {
-		if(cadastro == null)
+		if (cadastro == null)
 			throw new IllegalArgumentException("Cadastro Inválido.");
-		if(camposNulos.estaVazio(cadastro))
+		if (camposNulos.estaVazio(cadastro))
 			throw new CampoVazioException();
+		cadastro.setTelefoneCelular(cadastro.getTelefoneCelular().replaceAll(
+				"\\)|\\(|\\-|\\ ", ""));
+		cadastro.setTelefoneFixo(cadastro.getTelefoneFixo().replaceAll(
+				"\\)|\\(|\\-|\\ ", ""));
 		
-		
+
 		this.repositorioCadastro.cadastrar(cadastro);
 	}
-	
-	public void atualizar(Cadastro cadastro){
+
+	public void atualizar(Cadastro cadastro) {
 		this.repositorioCadastro.atualizar(cadastro);
 	}
-	
-	public void remover(Cadastro cadastro){
+
+	public void remover(Cadastro cadastro) {
 		this.repositorioCadastro.remover(cadastro);
 	}
-	
-	public Cadastro procurar(int id){
+
+	public Cadastro procurar(int id) {
 		return this.repositorioCadastro.procurar(id);
 	}
-	
+
 	public Cadastro procurarPorCliente(String cpf) {
 		// TODO Auto-generated method stub
 		return this.repositorioCadastro.procurarPorCliente(cpf);
 	}
-	
+
 	public Cadastro procurarPorFornecedor(String cnpj) {
 		// TODO Auto-generated method stub
 		return this.repositorioCadastro.procurarPorFornecedor(cnpj);
 	}
-	
-	public Cadastro retornaCadastro(String login, String senha){		
-		Cadastro cadastroProcurado = this.repositorioCadastro.retornaCadastro(login, senha);			
-		return cadastroProcurado;		
+
+	public Cadastro retornaCadastro(String login, String senha) {
+		Cadastro cadastroProcurado = this.repositorioCadastro.retornaCadastro(
+				login, senha);
+		return cadastroProcurado;
 	}
-	
-	public ArrayList<Cadastro> listar(){
+
+	public ArrayList<Cadastro> listar() {
 		return this.repositorioCadastro.listar();
 	}
-	
-	
 
-	
 }

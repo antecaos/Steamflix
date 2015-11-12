@@ -95,7 +95,7 @@ public class Cadastro {
 	}
 
 	public void setTelefoneFixo(String telefone) {
-		this.telefone[0] = telefone;
+		this.telefone[0] = telefone.replaceAll("\\)|\\(|\\-|\\ ", "");
 	}
 
 	public String getTelefoneFixo() {
@@ -103,7 +103,7 @@ public class Cadastro {
 	}
 
 	public void setTelefoneCelular(String telefone) {
-		this.telefone[1] = telefone;
+		this.telefone[1] = telefone.replaceAll("\\)|\\(|\\-|\\ ", "");
 	}
 
 	public String getTelefoneCelular() {
