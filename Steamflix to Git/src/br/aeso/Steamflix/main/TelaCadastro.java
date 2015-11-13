@@ -856,8 +856,8 @@ public class TelaCadastro extends JFrame {
 			e.printStackTrace();
 		}
 		
-		TelaCliente tela = new TelaCliente();
-		tela.setVisible(true);
+		//TelaCliente tela = new TelaCliente();
+		//tela.setVisible(true);
 		
 	}
 
