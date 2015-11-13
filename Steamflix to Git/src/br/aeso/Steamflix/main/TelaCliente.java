@@ -21,6 +21,8 @@ import javax.swing.JTextField;
 import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaCliente extends JFrame {
 
@@ -116,15 +118,15 @@ public class TelaCliente extends JFrame {
 				FormFactory.RELATED_GAP_ROWSPEC,
 				FormFactory.DEFAULT_ROWSPEC,}));
 		
-		JLabel lblNewLabel = new JLabel("Nome");
-		panel.add(lblNewLabel, "2, 4, right, default");
+		JLabel nomeLabel = new JLabel("Nome");
+		panel.add(nomeLabel, "2, 4, right, default");
 		
 		textField = new JTextField();
 		panel.add(textField, "4, 4, 7, 1, fill, default");
 		textField.setColumns(10);
 		
-		JLabel lblCpf = new JLabel("CPF");
-		panel.add(lblCpf, "2, 6, right, default");
+		JLabel cpfLabel = new JLabel("CPF");
+		panel.add(cpfLabel, "2, 6, right, default");
 		
 		textField_3 = new JTextField();
 		panel.add(textField_3, "4, 6, fill, default");
@@ -137,111 +139,115 @@ public class TelaCliente extends JFrame {
 		panel.add(textField_4, "8, 6, left, default");
 		textField_4.setColumns(10);
 		
-		JLabel lblEndereo = new JLabel("Endereço");
-		panel.add(lblEndereo, "2, 8, right, default");
+		JLabel enderecoLabel = new JLabel("Endereço");
+		panel.add(enderecoLabel, "2, 8, right, default");
 		
-		JLabel lblLogradouro = new JLabel("Logradouro");
-		panel.add(lblLogradouro, "2, 10, right, default");
+		JLabel logradouroLabel = new JLabel("Logradouro");
+		panel.add(logradouroLabel, "2, 10, right, default");
 		
 		textField_1 = new JTextField();
 		panel.add(textField_1, "4, 10, 7, 1");
 		textField_1.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nº");
-		panel.add(lblNewLabel_1, "12, 10, right, default");
+		JLabel numeroLabel = new JLabel("Nº");
+		panel.add(numeroLabel, "12, 10, right, default");
 		
 		textField_2 = new JTextField();
 		panel.add(textField_2, "14, 10, left, default");
 		textField_2.setColumns(5);
 		
-		JLabel lblBairro = new JLabel("Complemento");
-		panel.add(lblBairro, "2, 12, right, default");
+		JLabel complementoLabel = new JLabel("Complemento");
+		panel.add(complementoLabel, "2, 12, right, default");
 		
 		textField_5 = new JTextField();
 		panel.add(textField_5, "4, 12, fill, default");
 		textField_5.setColumns(10);
 		
-		JLabel lblNewLabel_3 = new JLabel("Bairro");
-		panel.add(lblNewLabel_3, "6, 12, right, default");
+		JLabel bairroLabel = new JLabel("Bairro");
+		panel.add(bairroLabel, "6, 12, right, default");
 		
 		textField_7 = new JTextField();
 		panel.add(textField_7, "8, 12, fill, default");
 		textField_7.setColumns(10);
 		
-		JLabel lblCidade = new JLabel("Cidade");
-		panel.add(lblCidade, "10, 12, right, default");
+		JLabel cidadeLabel = new JLabel("Cidade");
+		panel.add(cidadeLabel, "10, 12, right, default");
 		
 		textField_6 = new JTextField();
 		panel.add(textField_6, "12, 12, fill, default");
 		textField_6.setColumns(10);
 		
-		JLabel lblNewLabel_4 = new JLabel("Estado");
-		panel.add(lblNewLabel_4, "14, 12, right, default");
+		JLabel estadoLabel = new JLabel("Estado");
+		panel.add(estadoLabel, "14, 12, right, default");
 		
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox, "16, 12, left, default");
 		
-		JLabel lblNewLabel_5 = new JLabel("País");
-		panel.add(lblNewLabel_5, "2, 14, right, default");
+		JLabel paisLabel = new JLabel("País");
+		panel.add(paisLabel, "2, 14, right, default");
 		
 		textField_8 = new JTextField();
 		panel.add(textField_8, "4, 14, fill, default");
 		textField_8.setColumns(10);
 		
-		JLabel lblNewLabel_6 = new JLabel("CEP");
-		panel.add(lblNewLabel_6, "6, 14, right, default");
+		JLabel cepLabel = new JLabel("CEP");
+		panel.add(cepLabel, "6, 14, right, default");
 		
 		textField_9 = new JTextField();
 		panel.add(textField_9, "8, 14, fill, default");
 		textField_9.setColumns(10);
 		
-		JLabel lblNewLabel_7 = new JLabel("Cadastro");
-		panel.add(lblNewLabel_7, "2, 16, right, default");
+		JLabel cadastroLabel = new JLabel("Cadastro");
+		panel.add(cadastroLabel, "2, 16, right, default");
 		
-		JLabel lblNewLabel_8 = new JLabel("Login");
-		panel.add(lblNewLabel_8, "2, 18, right, default");
+		JLabel loginLabel = new JLabel("Login");
+		panel.add(loginLabel, "2, 18, right, default");
 		
 		textField_10 = new JTextField();
 		panel.add(textField_10, "4, 18, fill, default");
 		textField_10.setColumns(10);
 		
-		JLabel lblNewLabel_9 = new JLabel("Senha");
-		panel.add(lblNewLabel_9, "2, 20, right, default");
+		JLabel senhaLabel = new JLabel("Senha");
+		panel.add(senhaLabel, "2, 20, right, default");
 		
 		textField_11 = new JTextField();
 		panel.add(textField_11, "4, 20, fill, default");
 		textField_11.setColumns(10);
 		
-		JLabel lblNewLabel_10 = new JLabel("Email");
-		panel.add(lblNewLabel_10, "2, 22, right, default");
+		JLabel emailLabel = new JLabel("Email");
+		panel.add(emailLabel, "2, 22, right, default");
 		
 		textField_12 = new JTextField();
 		panel.add(textField_12, "4, 22, fill, default");
 		textField_12.setColumns(10);
 		
-		JLabel lblNewLabel_11 = new JLabel("Email Secundário");
-		panel.add(lblNewLabel_11, "6, 22, right, default");
+		JLabel emailSecundarioLabel = new JLabel("Email Secundário");
+		panel.add(emailSecundarioLabel, "6, 22, right, default");
 		
 		textField_13 = new JTextField();
 		panel.add(textField_13, "8, 22, fill, default");
 		textField_13.setColumns(10);
 		
-		JLabel lblNewLabel_12 = new JLabel("Telefone");
-		panel.add(lblNewLabel_12, "2, 24, right, default");
+		JLabel telefoneLabel = new JLabel("Telefone");
+		panel.add(telefoneLabel, "2, 24, right, default");
 		
 		textField_14 = new JTextField();
 		panel.add(textField_14, "4, 24, fill, default");
 		textField_14.setColumns(10);
 		
-		JLabel lblCelular = new JLabel("Celular");
-		panel.add(lblCelular, "6, 24, right, default");
+		JLabel celularLabel = new JLabel("Celular");
+		panel.add(celularLabel, "6, 24, right, default");
 		
 		textField_16 = new JTextField();
 		panel.add(textField_16, "8, 24, fill, default");
 		textField_16.setColumns(10);
 		
-		JButton btnAtualizar = new JButton("Atualizar");
-		panel.add(btnAtualizar, "14, 26");
+		JButton botaoAtualizar = new JButton("Atualizar");
+		botaoAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		panel.add(botaoAtualizar, "14, 26");
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Compras", null, panel_1, null);
