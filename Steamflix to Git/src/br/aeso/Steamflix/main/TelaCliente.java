@@ -23,31 +23,33 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 public class TelaCliente extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-	private JTextField textField_11;
-	private JTextField textField_12;
-	private JTextField textField_13;
-	private JTextField textField_14;
-	private JTextField textField_16;
+	private JTextField nomeField;
+	private JTextField logradouroField;
+	private JTextField numeroField;
+	private JTextField cpfield;
+	private JTextField dataField;
+	private JTextField complementoField;
+	private JTextField cidadeField;
+	private JTextField bairroField;
+	private JTextField paisField;
+	private JTextField cepField;
+	private JTextField loginField;
+	private JTextField senhaField;
+	private JTextField emailField;
+	private JTextField emailSecundarioField;
+	private JTextField telefoneField;
+	private JTextField celularField;
+	private JTable table;
 
 	public TelaCliente() {
 		start();
 	}
-	
+
 	public void start(){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 953, 508);
@@ -56,13 +58,13 @@ public class TelaCliente extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel_13 = new JLabel("Cliente");
-		lblNewLabel_13.setBounds(414, 0, 50, 15);
-		contentPane.add(lblNewLabel_13);
+		JLabel tituloLabel = new JLabel("Cliente");
+		tituloLabel.setBounds(414, 0, 50, 15);
+		contentPane.add(tituloLabel);
 		
-		JButton btnLoja = new JButton("Loja");
-		btnLoja.setBounds(818, 439, 117, 25);
-		contentPane.add(btnLoja);
+		JButton botaoLoja = new JButton("Loja");
+		botaoLoja.setBounds(818, 439, 117, 25);
+		contentPane.add(botaoLoja);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 24, 923, 390);
@@ -121,23 +123,23 @@ public class TelaCliente extends JFrame {
 		JLabel nomeLabel = new JLabel("Nome");
 		panel.add(nomeLabel, "2, 4, right, default");
 		
-		textField = new JTextField();
-		panel.add(textField, "4, 4, 7, 1, fill, default");
-		textField.setColumns(10);
+		nomeField = new JTextField();
+		panel.add(nomeField, "4, 4, 7, 1, fill, default");
+		nomeField.setColumns(10);
 		
 		JLabel cpfLabel = new JLabel("CPF");
 		panel.add(cpfLabel, "2, 6, right, default");
 		
-		textField_3 = new JTextField();
-		panel.add(textField_3, "4, 6, fill, default");
-		textField_3.setColumns(10);
+		cpfield = new JTextField();
+		panel.add(cpfield, "4, 6, fill, default");
+		cpfield.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
-		panel.add(lblNewLabel_2, "6, 6, right, default");
+		JLabel dataLabel = new JLabel("Data de Nascimento");
+		panel.add(dataLabel, "6, 6, right, default");
 		
-		textField_4 = new JTextField();
-		panel.add(textField_4, "8, 6, left, default");
-		textField_4.setColumns(10);
+		dataField = new JTextField();
+		panel.add(dataField, "8, 6, left, default");
+		dataField.setColumns(10);
 		
 		JLabel enderecoLabel = new JLabel("Endereço");
 		panel.add(enderecoLabel, "2, 8, right, default");
@@ -145,57 +147,57 @@ public class TelaCliente extends JFrame {
 		JLabel logradouroLabel = new JLabel("Logradouro");
 		panel.add(logradouroLabel, "2, 10, right, default");
 		
-		textField_1 = new JTextField();
-		panel.add(textField_1, "4, 10, 7, 1");
-		textField_1.setColumns(10);
+		logradouroField = new JTextField();
+		panel.add(logradouroField, "4, 10, 7, 1");
+		logradouroField.setColumns(10);
 		
 		JLabel numeroLabel = new JLabel("Nº");
 		panel.add(numeroLabel, "12, 10, right, default");
 		
-		textField_2 = new JTextField();
-		panel.add(textField_2, "14, 10, left, default");
-		textField_2.setColumns(5);
+		numeroField = new JTextField();
+		panel.add(numeroField, "14, 10, left, default");
+		numeroField.setColumns(5);
 		
 		JLabel complementoLabel = new JLabel("Complemento");
 		panel.add(complementoLabel, "2, 12, right, default");
 		
-		textField_5 = new JTextField();
-		panel.add(textField_5, "4, 12, fill, default");
-		textField_5.setColumns(10);
+		complementoField = new JTextField();
+		panel.add(complementoField, "4, 12, fill, default");
+		complementoField.setColumns(10);
 		
 		JLabel bairroLabel = new JLabel("Bairro");
 		panel.add(bairroLabel, "6, 12, right, default");
 		
-		textField_7 = new JTextField();
-		panel.add(textField_7, "8, 12, fill, default");
-		textField_7.setColumns(10);
+		bairroField = new JTextField();
+		panel.add(bairroField, "8, 12, fill, default");
+		bairroField.setColumns(10);
 		
 		JLabel cidadeLabel = new JLabel("Cidade");
 		panel.add(cidadeLabel, "10, 12, right, default");
 		
-		textField_6 = new JTextField();
-		panel.add(textField_6, "12, 12, fill, default");
-		textField_6.setColumns(10);
+		cidadeField = new JTextField();
+		panel.add(cidadeField, "12, 12, fill, default");
+		cidadeField.setColumns(10);
 		
 		JLabel estadoLabel = new JLabel("Estado");
 		panel.add(estadoLabel, "14, 12, right, default");
 		
-		JComboBox comboBox = new JComboBox();
-		panel.add(comboBox, "16, 12, left, default");
+		JComboBox estadoComboBox = new JComboBox();
+		panel.add(estadoComboBox, "16, 12, left, default");
 		
 		JLabel paisLabel = new JLabel("País");
 		panel.add(paisLabel, "2, 14, right, default");
 		
-		textField_8 = new JTextField();
-		panel.add(textField_8, "4, 14, fill, default");
-		textField_8.setColumns(10);
+		paisField = new JTextField();
+		panel.add(paisField, "4, 14, fill, default");
+		paisField.setColumns(10);
 		
 		JLabel cepLabel = new JLabel("CEP");
 		panel.add(cepLabel, "6, 14, right, default");
 		
-		textField_9 = new JTextField();
-		panel.add(textField_9, "8, 14, fill, default");
-		textField_9.setColumns(10);
+		cepField = new JTextField();
+		panel.add(cepField, "8, 14, center, default");
+		cepField.setColumns(10);
 		
 		JLabel cadastroLabel = new JLabel("Cadastro");
 		panel.add(cadastroLabel, "2, 16, right, default");
@@ -203,49 +205,49 @@ public class TelaCliente extends JFrame {
 		JLabel loginLabel = new JLabel("Login");
 		panel.add(loginLabel, "2, 18, right, default");
 		
-		textField_10 = new JTextField();
-		panel.add(textField_10, "4, 18, fill, default");
-		textField_10.setColumns(10);
+		loginField = new JTextField();
+		panel.add(loginField, "4, 18, fill, default");
+		loginField.setColumns(10);
 		
 		JLabel senhaLabel = new JLabel("Senha");
 		panel.add(senhaLabel, "2, 20, right, default");
 		
-		textField_11 = new JTextField();
-		panel.add(textField_11, "4, 20, fill, default");
-		textField_11.setColumns(10);
+		senhaField = new JTextField();
+		panel.add(senhaField, "4, 20, fill, default");
+		senhaField.setColumns(10);
 		
 		JLabel emailLabel = new JLabel("Email");
 		panel.add(emailLabel, "2, 22, right, default");
 		
-		textField_12 = new JTextField();
-		panel.add(textField_12, "4, 22, fill, default");
-		textField_12.setColumns(10);
+		emailField = new JTextField();
+		panel.add(emailField, "4, 22, fill, default");
+		emailField.setColumns(10);
 		
 		JLabel emailSecundarioLabel = new JLabel("Email Secundário");
 		panel.add(emailSecundarioLabel, "6, 22, right, default");
 		
-		textField_13 = new JTextField();
-		panel.add(textField_13, "8, 22, fill, default");
-		textField_13.setColumns(10);
+		emailSecundarioField = new JTextField();
+		panel.add(emailSecundarioField, "8, 22, fill, default");
+		emailSecundarioField.setColumns(10);
 		
 		JLabel telefoneLabel = new JLabel("Telefone");
 		panel.add(telefoneLabel, "2, 24, right, default");
 		
-		textField_14 = new JTextField();
-		panel.add(textField_14, "4, 24, fill, default");
-		textField_14.setColumns(10);
+		telefoneField = new JTextField();
+		panel.add(telefoneField, "4, 24, fill, default");
+		telefoneField.setColumns(10);
 		
 		JLabel celularLabel = new JLabel("Celular");
 		panel.add(celularLabel, "6, 24, right, default");
 		
-		textField_16 = new JTextField();
-		panel.add(textField_16, "8, 24, fill, default");
-		textField_16.setColumns(10);
+		celularField = new JTextField();
+		panel.add(celularField, "8, 24, fill, default");
+		celularField.setColumns(10);
 		
 		JButton botaoAtualizar = new JButton("Atualizar");
 		botaoAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				atualizarCliente();
 			}
 		});
 		panel.add(botaoAtualizar, "14, 26");
@@ -254,8 +256,20 @@ public class TelaCliente extends JFrame {
 		tabbedPane.addTab("Compras", null, panel_1, null);
 		panel_1.setLayout(null);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(12, 12, 903, 321);
+		panel_1.add(scrollPane_1);
+		
+			
+		table = new JTable();
+		scrollPane_1.setViewportView(table);
+		
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Alugueis", null, panel_2, null);
 		panel_2.setLayout(null);
+	}
+
+	public void atualizarCliente() {
+
 	}
 }
