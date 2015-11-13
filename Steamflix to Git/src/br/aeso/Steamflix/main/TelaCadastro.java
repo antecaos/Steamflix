@@ -3,6 +3,8 @@ package br.aeso.Steamflix.main;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,8 +29,7 @@ import br.aeso.Steamflix.Cadastro.CampoVazioException;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import br.aeso.Steamflix.Fornecedor.Fornecedor;
 
 public class TelaCadastro extends JFrame {
 
@@ -41,7 +42,7 @@ public class TelaCadastro extends JFrame {
 	private JTextField numeroClienteField;
 	private JTextField complementoClienteField;
 	private JTextField bairroClienteField;
-	private JTextField cidadClienteField;
+	private JTextField cidadeClienteField;
 	private JTextField paisClienteField;
 	private JFormattedTextField cepClienteField;
 	private JTextField loginClienteField;
@@ -65,8 +66,9 @@ public class TelaCadastro extends JFrame {
 	private JFormattedTextField cnpjFornecedorField;
 	private JFormattedTextField cepFornecedorField;
 	private JFormattedTextField telefoneFornecedorField;
-	private JFormattedTextField celulcarFornecedorField;
+	private JFormattedTextField celularFornecedorField;
 	private JComboBox estadoClienteComboBox;
+	private JComboBox estadoFornecedorComboBox;
 
 	public TelaCadastro() {
 		start();
@@ -305,13 +307,13 @@ public class TelaCadastro extends JFrame {
 		gbc_cidadeClienteLabel.gridy = 3;
 		painelCadastroCliente.add(cidadeClienteLabel, gbc_cidadeClienteLabel);
 
-		cidadClienteField = new JTextField();
-		GridBagConstraints gbc_cidadClienteField = new GridBagConstraints();
-		gbc_cidadClienteField.insets = new Insets(0, 0, 5, 5);
-		gbc_cidadClienteField.gridx = 5;
-		gbc_cidadClienteField.gridy = 3;
-		painelCadastroCliente.add(cidadClienteField, gbc_cidadClienteField);
-		cidadClienteField.setColumns(10);
+		cidadeClienteField = new JTextField();
+		GridBagConstraints gbc_cidadeClienteField = new GridBagConstraints();
+		gbc_cidadeClienteField.insets = new Insets(0, 0, 5, 5);
+		gbc_cidadeClienteField.gridx = 5;
+		gbc_cidadeClienteField.gridy = 3;
+		painelCadastroCliente.add(cidadeClienteField, gbc_cidadeClienteField);
+		cidadeClienteField.setColumns(10);
 
 		JLabel paisClienteLabel = new JLabel("País");
 		GridBagConstraints gbc_paisClienteLabel = new GridBagConstraints();
@@ -635,7 +637,7 @@ public class TelaCadastro extends JFrame {
 		gbc_estadoFornecedorLabel.gridy = 3;
 		painelFornecedor.add(estadoFornecedorLabel, gbc_estadoFornecedorLabel);
 
-		JComboBox estadoFornecedorComboBox = new JComboBox(estados);
+		estadoFornecedorComboBox = new JComboBox(estados);
 		GridBagConstraints gbc_estadoFornecedorComboBox = new GridBagConstraints();
 		gbc_estadoFornecedorComboBox.anchor = GridBagConstraints.WEST;
 		gbc_estadoFornecedorComboBox.insets = new Insets(0, 0, 5, 5);
@@ -778,19 +780,19 @@ public class TelaCadastro extends JFrame {
 
 		JFormattedTextField formattedTextField_6 = null;
 		try {
-			celulcarFornecedorField = new JFormattedTextField(
+			celularFornecedorField = new JFormattedTextField(
 					new MaskFormatter("(##)#####-####"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		celulcarFornecedorField.setColumns(10);
-		GridBagConstraints gbc_celulcarFornecedorField = new GridBagConstraints();
-		gbc_celulcarFornecedorField.insets = new Insets(0, 0, 5, 0);
-		gbc_celulcarFornecedorField.gridx = 7;
-		gbc_celulcarFornecedorField.gridy = 5;
-		painelFornecedor.add(celulcarFornecedorField,
-				gbc_celulcarFornecedorField);
+		celularFornecedorField.setColumns(10);
+		GridBagConstraints gbc_celularFornecedorField = new GridBagConstraints();
+		gbc_celularFornecedorField.insets = new Insets(0, 0, 5, 0);
+		gbc_celularFornecedorField.gridx = 7;
+		gbc_celularFornecedorField.gridy = 5;
+		painelFornecedor.add(celularFornecedorField,
+				gbc_celularFornecedorField);
 
 		JButton cadastrarFornecedorButton = new JButton("Cadastrar");
 		GridBagConstraints gbc_cadastrarFornecedorButton = new GridBagConstraints();
@@ -821,7 +823,7 @@ public class TelaCadastro extends JFrame {
 
 		endereco.setBairro(this.bairroClienteField.getText());
 		endereco.setCEP(this.cepClienteField.getText());
-		endereco.setCidade(this.cidadClienteField.getText());
+		endereco.setCidade(this.cidadeClienteField.getText());
 		endereco.setComplemento(this.complementoClienteField.getText());
 		endereco.setEstado(this.estadoClienteComboBox.getSelectedItem()
 				.toString());
@@ -839,19 +841,57 @@ public class TelaCadastro extends JFrame {
 		cliente.setEndereco(endereco);
 		endereco.setCliente(cliente);
 		cadastro.setCliente(cliente);
-		
-		//JOptionPane.showMessageDialog(this,
-			//	cliente);
-		
+
 		try {
 			fachada.cadastrarCliente(cliente);
-			JOptionPane.showMessageDialog(this,
-					cliente.getNome() + "Usuário cadastrado com Sucesso!");
+			JOptionPane.showMessageDialog(this, cliente.getNome()
+					+ "Usuário cadastrado com Sucesso!");
 		} catch (CampoVazioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void cadastrarFornecedor(){
+		fachada = Fachada.getInstance();
+		Fornecedor fornecedor = new Fornecedor();
+		Cadastro cadastro = new Cadastro();
+		Endereco endereco = new Endereco();
+				
+		fornecedor.setNomeFantasia(this.nomeFantasiaFornecedorField.getText());
+		fornecedor.setRazaoSocial(this.razaoFornecedorField.getText());
+		fornecedor.setCNPJ(this.cnpjFornecedorField.getText());
 		
+		endereco.setBairro(this.bairroFornecedorField.getText());
+		endereco.setCEP(this.cepFornecedorField.getText());
+		endereco.setCidade(this.cidadeFornecedorField.getText());
+		endereco.setComplemento(this.complementoFornecedorField.getText());
+		endereco.setEstado(this.estadoFornecedorComboBox.getSelectedItem()
+				.toString());
+		endereco.setLogradouro(this.ruaFornecedorField.getText());
+		endereco.setNumero(this.numeroFornecedorField.getText());
+		endereco.setPais(this.paisFornecedorField.getText());
+
+		cadastro.setEmailPrincipal(this.emailFornecedorField.getText());
+		cadastro.setEmailSecundario(this.emailSecundarioFornecedorField.getText());
+		cadastro.setLogin(this.loginFornecedorField.getText());
+		cadastro.setSenha(new String(this.senhaFornecedorPasswordField.getPassword()));
+		cadastro.setTelefoneCelular(this.celularFornecedorField.getText());
+		cadastro.setTelefoneFixo(this.telefoneFornecedorField.getText());
+		fornecedor.setCadastro(cadastro);
+		fornecedor.setEndereco(endereco);
+		endereco.setFornecedor(fornecedor);
+		cadastro.setFornecedor(fornecedor);
+
+		JOptionPane.showMessageDialog(this, fornecedor);
 		
+		/*try {
+			fachada.cadastrarFornecedor(fornecedor);
+			JOptionPane.showMessageDialog(this, fornecedor.getNomeFantasia()
+					+ "Usuário cadastrado com Sucesso!");
+		} catch (CampoVazioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 }

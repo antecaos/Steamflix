@@ -21,11 +21,11 @@ public class Fornecedor {
 	}
 
 	public String getCNPJ() {
-		return CNPJ;
+		return this.CNPJ;
 	}
 
-	public void setCNPJ(String cNPJ) {
-		CNPJ = cNPJ;
+	public void setCNPJ(String CNPJ) {
+		this.CNPJ = CNPJ.replaceAll("\\.|\\-|\\ ", "");
 	}
 
 	public String getRazaoSocial() {

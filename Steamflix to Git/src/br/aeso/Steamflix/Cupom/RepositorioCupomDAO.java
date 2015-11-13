@@ -20,14 +20,15 @@ public class RepositorioCupomDAO implements IRepositorioCupom {
 	public void cadastrar(Cupom cupom) {
 		// TODO Auto-generated method stub
 		int codigo = 0;
-		String sql = "insert into Steamflix.Cupom " + "(nomeCupom,valorCupom)"
-				+ "values (?,?)";
+		String sql = "insert into Steamflix.Cupom " + "(nomeCupom,valorCupom,flagCupom)"
+				+ "values (?,?,?)";
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql,
 					Statement.RETURN_GENERATED_KEYS);
 
 			stmt.setString(1, cupom.getNome());
 			stmt.setDouble(2, cupom.getValor());
+			stmt.setInt(3, 1);
 
 			stmt.executeUpdate();
 			ResultSet rs = stmt.getGeneratedKeys();

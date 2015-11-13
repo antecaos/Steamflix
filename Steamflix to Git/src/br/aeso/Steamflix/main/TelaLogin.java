@@ -120,7 +120,7 @@ public class TelaLogin extends JFrame {
 		} else if(cadastro.getFornecedor().getCNPJ() == null){
 			telaCliente = new TelaCliente();
 			telaCliente.setVisible(true);
-			telaCliente.setTitle("SteamFlix - Cliente");
+			telaCliente.setTitle("SteamFlix - Cliente");	
 		}
 	}
 	
