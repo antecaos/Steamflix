@@ -780,8 +780,8 @@ public class TelaCadastro extends JFrame {
 
 		JFormattedTextField formattedTextField_6 = null;
 		try {
-			celularFornecedorField = new JFormattedTextField(
-					new MaskFormatter("(##)#####-####"));
+			celularFornecedorField = new JFormattedTextField(new MaskFormatter(
+					"(##)#####-####"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -791,10 +791,15 @@ public class TelaCadastro extends JFrame {
 		gbc_celularFornecedorField.insets = new Insets(0, 0, 5, 0);
 		gbc_celularFornecedorField.gridx = 7;
 		gbc_celularFornecedorField.gridy = 5;
-		painelFornecedor.add(celularFornecedorField,
-				gbc_celularFornecedorField);
+		painelFornecedor
+				.add(celularFornecedorField, gbc_celularFornecedorField);
 
 		JButton cadastrarFornecedorButton = new JButton("Cadastrar");
+		cadastrarFornecedorButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cadastrarFornecedor();
+			}
+		});
 		GridBagConstraints gbc_cadastrarFornecedorButton = new GridBagConstraints();
 		gbc_cadastrarFornecedorButton.fill = GridBagConstraints.HORIZONTAL;
 		gbc_cadastrarFornecedorButton.gridx = 7;
@@ -850,18 +855,22 @@ public class TelaCadastro extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		TelaCliente tela = new TelaCliente();
+		tela.setVisible(true);
+		
 	}
-	
-	public void cadastrarFornecedor(){
+
+	public void cadastrarFornecedor() {
 		fachada = Fachada.getInstance();
 		Fornecedor fornecedor = new Fornecedor();
 		Cadastro cadastro = new Cadastro();
 		Endereco endereco = new Endereco();
-				
+
 		fornecedor.setNomeFantasia(this.nomeFantasiaFornecedorField.getText());
 		fornecedor.setRazaoSocial(this.razaoFornecedorField.getText());
 		fornecedor.setCNPJ(this.cnpjFornecedorField.getText());
-		
+
 		endereco.setBairro(this.bairroFornecedorField.getText());
 		endereco.setCEP(this.cepFornecedorField.getText());
 		endereco.setCidade(this.cidadeFornecedorField.getText());
@@ -873,9 +882,11 @@ public class TelaCadastro extends JFrame {
 		endereco.setPais(this.paisFornecedorField.getText());
 
 		cadastro.setEmailPrincipal(this.emailFornecedorField.getText());
-		cadastro.setEmailSecundario(this.emailSecundarioFornecedorField.getText());
+		cadastro.setEmailSecundario(this.emailSecundarioFornecedorField
+				.getText());
 		cadastro.setLogin(this.loginFornecedorField.getText());
-		cadastro.setSenha(new String(this.senhaFornecedorPasswordField.getPassword()));
+		cadastro.setSenha(new String(this.senhaFornecedorPasswordField
+				.getPassword()));
 		cadastro.setTelefoneCelular(this.celularFornecedorField.getText());
 		cadastro.setTelefoneFixo(this.telefoneFornecedorField.getText());
 		fornecedor.setCadastro(cadastro);
@@ -883,15 +894,15 @@ public class TelaCadastro extends JFrame {
 		endereco.setFornecedor(fornecedor);
 		cadastro.setFornecedor(fornecedor);
 
-		JOptionPane.showMessageDialog(this, fornecedor);
-		
-		/*try {
+		//JOptionPane.showMessageDialog(this, fornecedor);
+
+		try {
 			fachada.cadastrarFornecedor(fornecedor);
 			JOptionPane.showMessageDialog(this, fornecedor.getNomeFantasia()
 					+ "Usuário cadastrado com Sucesso!");
 		} catch (CampoVazioException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
+			JOptionPane.showMessageDialog(this, "Algum campo está vazio!");
+		}		
 	}
 }
