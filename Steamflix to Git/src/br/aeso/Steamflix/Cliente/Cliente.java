@@ -36,7 +36,11 @@ public class Cliente {
 	}
 
 	public void setCPF(String CPF) {
-		this.CPF = CPF.replaceAll("\\.|\\-|\\ ", "");
+		if (CPF == null) {
+			this.CPF = CPF;
+		} else {
+			this.CPF = CPF.replaceAll("\\.|\\-|\\ ", "");
+		}
 	}
 
 	public Calendar getDataDeNascimento() {
@@ -66,8 +70,8 @@ public class Cliente {
 	public String dataFormatada() {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 		return df.format(this.dataDeNascimento.getTime());
-	}	
-	
+	}
+
 	public int getFlag() {
 		return flag;
 	}

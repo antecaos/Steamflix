@@ -69,6 +69,7 @@ public class TelaCadastro extends JFrame {
 	private JFormattedTextField celularFornecedorField;
 	private JComboBox estadoClienteComboBox;
 	private JComboBox estadoFornecedorComboBox;
+	private TelaCliente telaCliente;
 
 	public TelaCadastro() {
 		start();
@@ -851,14 +852,15 @@ public class TelaCadastro extends JFrame {
 			fachada.cadastrarCliente(cliente);
 			JOptionPane.showMessageDialog(this, cliente.getNome()
 					+ "Usuário cadastrado com Sucesso!");
+			entrarCliente(cliente);
 		} catch (CampoVazioException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//TelaCliente tela = new TelaCliente();
-		//tela.setVisible(true);
-		
+
+		// TelaCliente tela = new TelaCliente();
+		// tela.setVisible(true);
+
 	}
 
 	public void cadastrarFornecedor() {
@@ -894,15 +896,27 @@ public class TelaCadastro extends JFrame {
 		endereco.setFornecedor(fornecedor);
 		cadastro.setFornecedor(fornecedor);
 
-		//JOptionPane.showMessageDialog(this, fornecedor);
+		// JOptionPane.showMessageDialog(this, fornecedor);
 
 		try {
 			fachada.cadastrarFornecedor(fornecedor);
 			JOptionPane.showMessageDialog(this, fornecedor.getNomeFantasia()
 					+ "Usuário cadastrado com Sucesso!");
+			entrarFornecedor(fornecedor);
 		} catch (CampoVazioException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(this, "Algum campo está vazio!");
-		}		
+		}
+	}
+
+	public void entrarCliente(Cliente cliente) {
+		telaCliente = new TelaCliente();
+		telaCliente.setCliente(cliente);
+		telaCliente.setVisible(true);
+		telaCliente.setTitle("SteamFlix - Cliente");
+	}
+
+	public void entrarFornecedor(Fornecedor fornecedor) {
+		// Terminar de implementar
 	}
 }

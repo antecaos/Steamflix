@@ -25,7 +25,12 @@ public class Fornecedor {
 	}
 
 	public void setCNPJ(String CNPJ) {
-		this.CNPJ = CNPJ.replaceAll("\\/|\\.|\\-|\\ ", "");
+		if (CNPJ == null) {
+			this.CNPJ = CNPJ;
+		}else{
+			this.CNPJ = CNPJ.replaceAll("\\/|\\.|\\-|\\ ", "");
+		}
+		
 	}
 
 	public String getRazaoSocial() {
