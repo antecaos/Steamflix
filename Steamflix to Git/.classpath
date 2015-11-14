@@ -5,5 +5,6 @@
 	<classpathentry exported="true" kind="lib" path="mysql-connector-java-5.1.36-bin.jar"/>
 	<classpathentry kind="lib" path="src/mysql-connector-java-5.1.36-bin.jar"/>
 	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
+	<classpathentry kind="lib" path="Steamflix.sql"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
