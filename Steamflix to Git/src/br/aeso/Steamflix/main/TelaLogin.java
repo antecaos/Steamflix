@@ -114,8 +114,7 @@ public class TelaLogin extends JFrame {
 		String login = this.loginField.getText();
 		String senha = new String(this.senhaField.getPassword());
 		Cadastro cadastro = fachada.retornaCadastro(login, senha);
-		//System.out.println(cadastro);		
-		
+				
 		if(cadastro.getCliente().getCPF() != null){
 			Cliente cliente = fachada.procuraCliente(cadastro.getCliente().getCPF());
 			entrarCliente(cliente);
