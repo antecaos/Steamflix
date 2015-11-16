@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.aeso.Steamflix.Jogo.Jogo;
 import br.aeso.Steamflix.Jogo.IRepositorioJogo;
 import br.aeso.Steamflix.Jogo.RepositorioJogoDAO;
+import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Fornecedor.ControladorFornecedor;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.Genero.ControladorGenero;
@@ -14,14 +15,20 @@ public class ControladorJogo {
 	private IRepositorioJogo repositorioJogo;
 	private ControladorFornecedor controladorFornecedor;
 	private ControladorGenero controladorGenero;
+	private CamposNulosJogo camposNulos;
 
 	public ControladorJogo() {
 		this.repositorioJogo = new RepositorioJogoDAO();
 		this.controladorFornecedor = new ControladorFornecedor();
 		this.controladorGenero = new ControladorGenero();
+		this.camposNulos = new CamposNulosJogo();
 	}
 
-	public void cadastrar(Jogo jogo) {
+	public void cadastrar(Jogo jogo) throws CampoVazioException {
+		if (jogo == null)
+			throw new IllegalArgumentException("Cadastro Inválido.");
+		if (camposNulos.estaVazio(jogo))
+			throw new CampoVazioException();
 		this.repositorioJogo.cadastrar(jogo);
 
 	}

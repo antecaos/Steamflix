@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Aluguel.ControladorAluguel;
 import br.aeso.Steamflix.Cadastro.Cadastro;
-import br.aeso.Steamflix.Cadastro.CampoVazioException;
+import br.aeso.Steamflix.Util.CPFInvalidoException;
+import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Cliente.ControladorCliente;
@@ -93,7 +94,7 @@ public class Fachada {
 		return this.controladorCupom.listar();
 	}
 
-	public void cadastrarCliente(Cliente cliente) throws CampoVazioException {
+	public void cadastrarCliente(Cliente cliente) throws CampoVazioException, CPFInvalidoException {
 		this.controladorCliente.cadastrar(cliente);
 	}
 
@@ -133,7 +134,7 @@ public class Fachada {
 		return this.controladorFornecedor.listar();
 	}
 	
-	public void cadastrarFilme(Filme filme){
+	public void cadastrarFilme(Filme filme) throws CampoVazioException{
 		this.controladorFilme.cadastrar(filme);		
 	}
 	
@@ -153,7 +154,7 @@ public class Fachada {
 		return this.controladorFilme.listar();
 	}
 	
-	public void cadastrarJogo(Jogo jogo){
+	public void cadastrarJogo(Jogo jogo) throws CampoVazioException{
 		this.controladorJogo.cadastrar(jogo);		
 	}
 	

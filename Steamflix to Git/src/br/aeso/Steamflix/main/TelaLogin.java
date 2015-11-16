@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
-import br.aeso.Steamflix.Cadastro.CampoVazioException;
+import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Cadastro.CamposNulosCadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Fachada.Fachada;
@@ -31,8 +31,8 @@ public class TelaLogin extends JFrame {
 	private JLabel lblLogo;
 	private TelaCadastro telaCadastro;
 	private TelaCliente telaCliente;
+	private CamposNulosCadastro camposNulos;
 	Fachada fachada = Fachada.getInstance();
-	
 
 	/**
 	 * Launch the application.
@@ -93,8 +93,9 @@ public class TelaLogin extends JFrame {
 					entrar();
 				} catch (CampoVazioException e) {
 					// TODO Auto-generated catch block
-					System.out.println(e.getMessage());
-				}				
+					JOptionPane.showMessageDialog(null, e.getMessage(),
+							"Mensagem erro!", EXIT_ON_CLOSE);
+				}
 			}
 		});
 		entrarBotao.setBounds(122, 259, 117, 25);
@@ -118,13 +119,11 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblLogo);
 	}
 
-	private void entrar() throws CampoVazioException{
-		//camposNulos = new CamposNulosCadastro();
+	private void entrar() throws CampoVazioException {
+		// camposNulos = new CamposNulosCadastro();
 		String senha = new String(senhaField.getPassword());
 		String login = loginField.getText();
 		Cadastro cadastro = fachada.retornaCadastro(login, senha);
-		
-		
 
 		if (cadastro.getCliente().getCPF() != null) {
 			Cliente cliente = fachada.procuraCliente(cadastro.getCliente()

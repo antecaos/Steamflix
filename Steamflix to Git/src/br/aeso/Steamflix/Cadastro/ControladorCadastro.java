@@ -2,6 +2,8 @@ package br.aeso.Steamflix.Cadastro;
 
 import java.util.ArrayList;
 
+import br.aeso.Steamflix.Util.CampoVazioException;
+
 public class ControladorCadastro {
 	private IRepositorioCadastro repositorioCadastro;
 	private CamposNulosCadastro camposNulos;
@@ -50,8 +52,6 @@ public class ControladorCadastro {
 	}
 
 	public Cadastro retornaCadastro(String login, String senha) throws CampoVazioException {
-		if()
-		
 		if(camposNulos.validaLogin(login,senha))
 			throw new CampoVazioException();		
 		

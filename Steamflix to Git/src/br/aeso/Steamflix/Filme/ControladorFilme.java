@@ -9,19 +9,26 @@ import br.aeso.Steamflix.Filme.IRepositorioFilme;
 import br.aeso.Steamflix.Filme.RepositorioFilmeDAO;
 import br.aeso.Steamflix.Genero.ControladorGenero;
 import br.aeso.Steamflix.Genero.Genero;
+import br.aeso.Steamflix.Util.CampoVazioException;
 
 public class ControladorFilme {
 	private IRepositorioFilme repositorioFilme;
 	private ControladorFornecedor controladorFornecedor;
 	private ControladorGenero controladorGenero;
+	private CamposNulosFilme camposNulos;
 
 	public ControladorFilme() {
 		this.repositorioFilme = new RepositorioFilmeDAO();
 		this.controladorFornecedor = new ControladorFornecedor();
 		this.controladorGenero = new ControladorGenero();
+		camposNulos = new CamposNulosFilme();
 	}
 
-	public void cadastrar(Filme filme) {
+	public void cadastrar(Filme filme) throws CampoVazioException {
+		if (filme == null)
+			throw new IllegalArgumentException("Cadastro Inválido.");
+		if (camposNulos.estaVazio(filme))
+			throw new CampoVazioException();
 		this.repositorioFilme.cadastrar(filme);
 
 	}

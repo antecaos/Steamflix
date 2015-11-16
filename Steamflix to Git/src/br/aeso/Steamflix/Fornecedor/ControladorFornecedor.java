@@ -3,7 +3,7 @@ package br.aeso.Steamflix.Fornecedor;
 import java.util.ArrayList;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
-import br.aeso.Steamflix.Cadastro.CampoVazioException;
+import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.Endereco.ControladorEndereco;
@@ -14,14 +14,20 @@ public class ControladorFornecedor {
 	private IRepositorioFornecedor repositorioFornecedor;
 	private ControladorEndereco controladorEndereco;
 	private ControladorCadastro controladorCadastro;
+	private CamposNulosFornecedor camposNulos;
 	
 	public ControladorFornecedor(){
 		this.repositorioFornecedor = new RepositorioFornecedorDAO();
 		this.controladorCadastro = new ControladorCadastro();
 		this.controladorEndereco = new ControladorEndereco();
+		this.camposNulos = new CamposNulosFornecedor();
 	}
 	
 	public void cadastrar(Fornecedor fornecedor) throws CampoVazioException{
+		if (fornecedor == null)
+			throw new IllegalArgumentException("Cadastro Inválido.");
+		if (camposNulos.estaVazio(fornecedor))
+			throw new CampoVazioException();
 		this.repositorioFornecedor.cadastrar(fornecedor);
 		this.controladorCadastro.cadastrar(fornecedor.getCadastro());
 		this.controladorEndereco.cadastrar(fornecedor.getEndereco());

@@ -3,7 +3,10 @@ package br.aeso.Steamflix.Cliente;
 import java.util.ArrayList;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
-import br.aeso.Steamflix.Cadastro.CampoVazioException;
+import br.aeso.Steamflix.Cadastro.CamposNulosCadastro;
+import br.aeso.Steamflix.Util.CPFInvalidoException;
+import br.aeso.Steamflix.Util.CampoVazioException;
+import br.aeso.Steamflix.Util.ValidarCPF;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
 import br.aeso.Steamflix.Endereco.ControladorEndereco;
 import br.aeso.Steamflix.Endereco.Endereco;
@@ -12,14 +15,23 @@ public class ControladorCliente {
 	private IRepositorioCliente repositorioCliente;
 	private ControladorEndereco controladorEndereco;
 	private ControladorCadastro controladorCadastro;
+	private CamposNulosCliente camposNulos;
 
 	public ControladorCliente() {
 		this.repositorioCliente = new RepositorioClienteDAO();
 		this.controladorEndereco = new ControladorEndereco();
 		this.controladorCadastro = new ControladorCadastro();
+		this.camposNulos = new CamposNulosCliente();
 	}
 
-	public void cadastrar(Cliente cliente) throws CampoVazioException {
+	public void cadastrar(Cliente cliente) throws CampoVazioException, CPFInvalidoException {
+		if (cliente == null)
+			throw new IllegalArgumentException("Cliente Inválido.");
+		if (camposNulos.estaVazio(cliente))
+			throw new CampoVazioException();
+		
+		if(!ValidarCPF.validaCPF(cliente.getCPF()))
+			throw new CPFInvalidoException(cliente.getCPF());
 		this.repositorioCliente.cadastrar(cliente);
 		controladorCadastro.cadastrar(cliente.getCadastro());
 		controladorEndereco.cadastrar(cliente.getEndereco());

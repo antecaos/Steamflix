@@ -3,7 +3,7 @@ package br.aeso.Steamflix.main;
 import java.util.ArrayList;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
-import br.aeso.Steamflix.Cadastro.CampoVazioException;
+import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
