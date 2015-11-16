@@ -213,7 +213,7 @@ public class Fachada {
 		return this.controladorCompra.listar();
 	}
 	
-	public Cadastro retornaCadastro(String login,String senha){
+	public Cadastro retornaCadastro(String login,String senha) throws CampoVazioException{
 		return this.controladorCadastro.retornaCadastro(login, senha);		
 	}
 }

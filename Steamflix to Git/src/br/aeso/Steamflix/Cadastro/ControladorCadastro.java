@@ -2,16 +2,11 @@ package br.aeso.Steamflix.Cadastro;
 
 import java.util.ArrayList;
 
-import br.aeso.Steamflix.Cliente.Cliente;
-import br.aeso.Steamflix.Cliente.ControladorCliente;
-import br.aeso.Steamflix.Fornecedor.ControladorFornecedor;
-import br.aeso.Steamflix.Fornecedor.Fornecedor;
-
 public class ControladorCadastro {
 	private IRepositorioCadastro repositorioCadastro;
 	private CamposNulosCadastro camposNulos;
-	private ControladorCliente controladorCliente;
-	private ControladorFornecedor controladorFornecedor;
+	//private ControladorCliente controladorCliente;
+	//private ControladorFornecedor controladorFornecedor;
 
 	public ControladorCadastro() {
 		repositorioCadastro = new RepositorioCadastroDAO();
@@ -54,7 +49,12 @@ public class ControladorCadastro {
 		return this.repositorioCadastro.procurarPorFornecedor(cnpj);
 	}
 
-	public Cadastro retornaCadastro(String login, String senha) {
+	public Cadastro retornaCadastro(String login, String senha) throws CampoVazioException {
+		if()
+		
+		if(camposNulos.validaLogin(login,senha))
+			throw new CampoVazioException();		
+		
 		Cadastro cadastroProcurado = this.repositorioCadastro.retornaCadastro(
 				login, senha);
 		return cadastroProcurado;

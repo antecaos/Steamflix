@@ -905,7 +905,7 @@ public class TelaCadastro extends JFrame {
 			entrarFornecedor(fornecedor);
 		} catch (CampoVazioException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(this, "Algum campo está vazio!");
+			JOptionPane.showMessageDialog(this, e.getMessage());
 		}
 	}
 

@@ -9,15 +9,17 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cadastro.CampoVazioException;
+import br.aeso.Steamflix.Cadastro.CamposNulosCadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Fachada.Fachada;
-import br.aeso.Steamflix.Fornecedor.Fornecedor;
 
 public class TelaLogin extends JFrame {
 
@@ -30,6 +32,7 @@ public class TelaLogin extends JFrame {
 	private TelaCadastro telaCadastro;
 	private TelaCliente telaCliente;
 	Fachada fachada = Fachada.getInstance();
+	
 
 	/**
 	 * Launch the application.
@@ -86,7 +89,12 @@ public class TelaLogin extends JFrame {
 		entrarBotao = new JButton("Entrar");
 		entrarBotao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				entrar();
+				try {
+					entrar();
+				} catch (CampoVazioException e) {
+					// TODO Auto-generated catch block
+					System.out.println(e.getMessage());
+				}				
 			}
 		});
 		entrarBotao.setBounds(122, 259, 117, 25);
@@ -99,7 +107,7 @@ public class TelaLogin extends JFrame {
 				telaCadastro = new TelaCadastro();
 				telaCadastro.setVisible(true);
 				telaCadastro
-						.setTitle("SteamFlix - Cadastro Cliente/Fornecedor");				
+						.setTitle("SteamFlix - Cadastro Cliente/Fornecedor");
 			}
 		});
 		lblNoCadastrado.setBounds(69, 313, 224, 15);
@@ -110,24 +118,26 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblLogo);
 	}
 
-	private void entrar() {
-		String login = this.loginField.getText();
-		String senha = new String(this.senhaField.getPassword());
+	private void entrar() throws CampoVazioException{
+		//camposNulos = new CamposNulosCadastro();
+		String senha = new String(senhaField.getPassword());
+		String login = loginField.getText();
 		Cadastro cadastro = fachada.retornaCadastro(login, senha);
-				
-		if(cadastro.getCliente().getCPF() != null){
-			Cliente cliente = fachada.procuraCliente(cadastro.getCliente().getCPF());
+		
+		
+
+		if (cadastro.getCliente().getCPF() != null) {
+			Cliente cliente = fachada.procuraCliente(cadastro.getCliente()
+					.getCPF());
 			entrarCliente(cliente);
-		}			
+		}
 	}
-	
-	public void entrarCliente(Cliente cliente){
+
+	public void entrarCliente(Cliente cliente) {
 		telaCliente = new TelaCliente();
 		telaCliente.setCliente(cliente);
 		telaCliente.setVisible(true);
-		telaCliente.setTitle("SteamFlix - Cliente");		
+		telaCliente.setTitle("SteamFlix - Cliente");
 	}
-	
-	
 
 }
