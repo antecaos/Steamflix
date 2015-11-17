@@ -24,14 +24,18 @@ public class ControladorCliente {
 		this.camposNulos = new CamposNulosCliente();
 	}
 
-	public void cadastrar(Cliente cliente) throws CampoVazioException, CPFInvalidoException {
+	public void cadastrar(Cliente cliente) throws CampoVazioException,
+			CPFInvalidoException {
+	
 		if (cliente == null)
 			throw new IllegalArgumentException("Cliente Inválido.");
+
 		if (camposNulos.estaVazio(cliente))
 			throw new CampoVazioException();
-		
-		if(!ValidarCPF.validaCPF(cliente.getCPF()))
+
+		if (!ValidarCPF.validaCPF(cliente.getCPF()))
 			throw new CPFInvalidoException(cliente.getCPF());
+
 		this.repositorioCliente.cadastrar(cliente);
 		controladorCadastro.cadastrar(cliente.getCadastro());
 		controladorEndereco.cadastrar(cliente.getEndereco());

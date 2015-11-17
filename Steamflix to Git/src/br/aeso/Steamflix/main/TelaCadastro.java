@@ -29,6 +29,7 @@ import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
+import br.aeso.Steamflix.Util.CNPJInvalidoException;
 import br.aeso.Steamflix.Util.CPFInvalidoException;
 import br.aeso.Steamflix.Util.CampoVazioException;
 
@@ -861,7 +862,8 @@ public class TelaCadastro extends JFrame {
 		} catch (CPFInvalidoException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(),
-					"Mensagem erro!", EXIT_ON_CLOSE);;
+					"Mensagem erro!", EXIT_ON_CLOSE);
+			;
 		}
 
 		// TelaCliente tela = new TelaCliente();
@@ -902,14 +904,16 @@ public class TelaCadastro extends JFrame {
 		endereco.setFornecedor(fornecedor);
 		cadastro.setFornecedor(fornecedor);
 
-		// JOptionPane.showMessageDialog(this, fornecedor);
-
 		try {
 			fachada.cadastrarFornecedor(fornecedor);
 			JOptionPane.showMessageDialog(this, fornecedor.getNomeFantasia()
 					+ "Usuário cadastrado com Sucesso!");
 			entrarFornecedor(fornecedor);
 		} catch (br.aeso.Steamflix.Util.CampoVazioException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(),
+					"Mensagem erro!", EXIT_ON_CLOSE);
+		} catch (CNPJInvalidoException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(),
 					"Mensagem erro!", EXIT_ON_CLOSE);

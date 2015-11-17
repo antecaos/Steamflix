@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Aluguel.ControladorAluguel;
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Util.CNPJInvalidoException;
 import br.aeso.Steamflix.Util.CPFInvalidoException;
 import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
@@ -34,7 +35,7 @@ public class Fachada {
 	private ControladorAluguel controladorAluguel;
 	private ControladorCompra controladorCompra;
 	private ControladorCadastro controladorCadastro;
-	
+
 	private Fachada() {
 		this.controladorGenero = new ControladorGenero();
 		this.controladorCupom = new ControladorCupom();
@@ -94,7 +95,8 @@ public class Fachada {
 		return this.controladorCupom.listar();
 	}
 
-	public void cadastrarCliente(Cliente cliente) throws CampoVazioException, CPFInvalidoException {
+	public void cadastrarCliente(Cliente cliente) throws CampoVazioException,
+			CPFInvalidoException {
 		this.controladorCliente.cadastrar(cliente);
 	}
 
@@ -114,14 +116,15 @@ public class Fachada {
 		return this.controladorCliente.listar();
 	}
 
-	public void cadastrarFornecedor(Fornecedor fornecedor) throws CampoVazioException{
-		this.controladorFornecedor.cadastrar(fornecedor);		
+	public void cadastrarFornecedor(Fornecedor fornecedor)
+			throws CampoVazioException, CNPJInvalidoException {
+		this.controladorFornecedor.cadastrar(fornecedor);
 	}
-	
-	public void atualizarFornecedor(Fornecedor fornecedor){
+
+	public void atualizarFornecedor(Fornecedor fornecedor) {
 		this.controladorFornecedor.atualizar(fornecedor);
-	}  
-	
+	}
+
 	public void removerFornecedor(String cnpj) {
 		this.controladorFornecedor.remover(cnpj);
 	}
@@ -133,15 +136,15 @@ public class Fachada {
 	public ArrayList<Fornecedor> listaFornecedor() {
 		return this.controladorFornecedor.listar();
 	}
-	
-	public void cadastrarFilme(Filme filme) throws CampoVazioException{
-		this.controladorFilme.cadastrar(filme);		
+
+	public void cadastrarFilme(Filme filme) throws CampoVazioException {
+		this.controladorFilme.cadastrar(filme);
 	}
-	
-	public void atualizarFilme(Filme filme){
+
+	public void atualizarFilme(Filme filme) {
 		this.controladorFilme.atualizar(filme);
-	}  
-	
+	}
+
 	public void removerFilme(int id) {
 		this.controladorFilme.remover(id);
 	}
@@ -153,15 +156,15 @@ public class Fachada {
 	public ArrayList<Filme> listaFilme() {
 		return this.controladorFilme.listar();
 	}
-	
-	public void cadastrarJogo(Jogo jogo) throws CampoVazioException{
-		this.controladorJogo.cadastrar(jogo);		
+
+	public void cadastrarJogo(Jogo jogo) throws CampoVazioException {
+		this.controladorJogo.cadastrar(jogo);
 	}
-	
-	public void atualizarJogo(Jogo jogo){
+
+	public void atualizarJogo(Jogo jogo) {
 		this.controladorJogo.atualizar(jogo);
-	}  
-	
+	}
+
 	public void removerJogo(int id) {
 		this.controladorJogo.remover(id);
 	}
@@ -173,15 +176,15 @@ public class Fachada {
 	public ArrayList<Jogo> listaJogo() {
 		return this.controladorJogo.listar();
 	}
-	
-	public void cadastrarAluguel(Aluguel aluguel){
-		this.controladorAluguel.cadastrar(aluguel);		
+
+	public void cadastrarAluguel(Aluguel aluguel) {
+		this.controladorAluguel.cadastrar(aluguel);
 	}
-	
-	public void atualizarAluguel(Aluguel aluguel){
+
+	public void atualizarAluguel(Aluguel aluguel) {
 		this.controladorAluguel.atualizar(aluguel);
-	}  
-	
+	}
+
 	public void removerAluguel(int id) {
 		this.controladorAluguel.remover(id);
 	}
@@ -193,15 +196,15 @@ public class Fachada {
 	public ArrayList<Aluguel> listaAluguel() {
 		return this.controladorAluguel.listar();
 	}
-	
-	public void cadastrarCompra(Compra aluguel){
-		this.controladorCompra.cadastrar(aluguel);		
+
+	public void cadastrarCompra(Compra aluguel) {
+		this.controladorCompra.cadastrar(aluguel);
 	}
-	
-	public void atualizarCompra(Compra aluguel){
+
+	public void atualizarCompra(Compra aluguel) {
 		this.controladorCompra.atualizar(aluguel);
-	}  
-	
+	}
+
 	public void removerCompra(int id) {
 		this.controladorCompra.remover(id);
 	}
@@ -213,8 +216,9 @@ public class Fachada {
 	public ArrayList<Compra> listaCompra() {
 		return this.controladorCompra.listar();
 	}
-	
-	public Cadastro retornaCadastro(String login,String senha) throws CampoVazioException{
-		return this.controladorCadastro.retornaCadastro(login, senha);		
+
+	public Cadastro retornaCadastro(String login, String senha)
+			throws CampoVazioException {
+		return this.controladorCadastro.retornaCadastro(login, senha);
 	}
 }
