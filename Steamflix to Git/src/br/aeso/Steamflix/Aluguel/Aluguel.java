@@ -106,6 +106,10 @@ public class Aluguel {
 	public double getPreco() {
 		return this.preco;
 	}
+	
+	public String getPrecoFormatado(){
+		return "R$ " + this.preco;
+	}
 
 	public void setPreco(double preco) {
 		this.preco = preco - (preco * this.cupom.getValor());

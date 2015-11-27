@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Aluguel.ControladorAluguel;
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cadastro.CadastroNaoEncontradoException;
 import br.aeso.Steamflix.Util.CNPJInvalidoException;
 import br.aeso.Steamflix.Util.CPFInvalidoException;
 import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cliente.ClienteJaExisteException;
 import br.aeso.Steamflix.Cliente.ControladorCliente;
+import br.aeso.Steamflix.Cliente.IdadeInvalidaException;
 import br.aeso.Steamflix.Compra.Compra;
 import br.aeso.Steamflix.Compra.ControladorCompra;
 import br.aeso.Steamflix.Cupom.ControladorCupom;
@@ -19,6 +22,7 @@ import br.aeso.Steamflix.Filme.ControladorFilme;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.Fornecedor.ControladorFornecedor;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
+import br.aeso.Steamflix.Fornecedor.FornecedorJaCadastradoException;
 import br.aeso.Steamflix.Genero.ControladorGenero;
 import br.aeso.Steamflix.Genero.Genero;
 import br.aeso.Steamflix.Jogo.ControladorJogo;
@@ -96,7 +100,8 @@ public class Fachada {
 	}
 
 	public void cadastrarCliente(Cliente cliente) throws CampoVazioException,
-			CPFInvalidoException {
+			CPFInvalidoException, ClienteJaExisteException,
+			IdadeInvalidaException {
 		this.controladorCliente.cadastrar(cliente);
 	}
 
@@ -117,7 +122,8 @@ public class Fachada {
 	}
 
 	public void cadastrarFornecedor(Fornecedor fornecedor)
-			throws CampoVazioException, CNPJInvalidoException {
+			throws CampoVazioException, CNPJInvalidoException,
+			FornecedorJaCadastradoException {
 		this.controladorFornecedor.cadastrar(fornecedor);
 	}
 
@@ -157,6 +163,10 @@ public class Fachada {
 		return this.controladorFilme.listar();
 	}
 
+	public ArrayList<Filme> listaFilmePorFornecedor(String cnpj) {
+		return this.controladorFilme.listarPorFornecedor(cnpj);
+	}
+
 	public void cadastrarJogo(Jogo jogo) throws CampoVazioException {
 		this.controladorJogo.cadastrar(jogo);
 	}
@@ -175,6 +185,10 @@ public class Fachada {
 
 	public ArrayList<Jogo> listaJogo() {
 		return this.controladorJogo.listar();
+	}
+
+	public ArrayList<Jogo> listaJogoPorFornecedor(String cnpj) {
+		return this.controladorJogo.listarPorFornecedor(cnpj);
 	}
 
 	public void cadastrarAluguel(Aluguel aluguel) {
@@ -197,6 +211,10 @@ public class Fachada {
 		return this.controladorAluguel.listar();
 	}
 
+	public ArrayList<Aluguel> listaAluguelPorCliente(String cpf) {
+		return this.controladorAluguel.listarPorCliente(cpf);
+	}
+
 	public void cadastrarCompra(Compra aluguel) {
 		this.controladorCompra.cadastrar(aluguel);
 	}
@@ -217,8 +235,12 @@ public class Fachada {
 		return this.controladorCompra.listar();
 	}
 
+	public ArrayList<Compra> listaCompraPorCliente(String cpf) {
+		return this.controladorCompra.listarPorCliente(cpf);
+	}
+
 	public Cadastro retornaCadastro(String login, String senha)
-			throws CampoVazioException {
+			throws CampoVazioException, CadastroNaoEncontradoException {
 		return this.controladorCadastro.retornaCadastro(login, senha);
 	}
 }

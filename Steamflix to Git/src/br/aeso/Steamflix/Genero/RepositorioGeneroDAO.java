@@ -41,6 +41,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 			System.out.println();
 
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.err.println("Erro de SQL");
@@ -60,6 +61,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			System.err.println("Erro de SQL");
@@ -78,6 +80,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			System.err.println("Erro de SQL");
 		}
@@ -97,6 +100,8 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 				generoProcurado.setNome(rs.getString("nomeGenero"));
 				generoProcurado.setId(rs.getInt("idGenero"));
 			}
+			stmt.close();
+			rs.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -134,6 +139,7 @@ public class RepositorioGeneroDAO implements IRepositorioGenero {
 			}
 			rs.close();
 			stmt.close();
+
 			return generos;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

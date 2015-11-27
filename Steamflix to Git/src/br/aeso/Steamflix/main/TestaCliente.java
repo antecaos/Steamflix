@@ -7,8 +7,12 @@ import java.util.Date;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cliente.ClienteJaExisteException;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
+import br.aeso.Steamflix.Util.CPFInvalidoException;
+import br.aeso.Steamflix.Util.CampoVazioException;
+import br.aeso.Steamflix.Util.RetornaIdade;
 
 public class TestaCliente {
 
@@ -22,10 +26,10 @@ public class TestaCliente {
 		Endereco e = new Endereco();
 		Fachada fachada = Fachada.getInstance();
 		c.setNome("Gobinho");
-		//Calendar d1 = Calendar.getInstance();
+		// Calendar d1 = Calendar.getInstance();
 		Calendar d1 = null;
 		String dataEmTexto = "05/01/2005";
-		
+
 		try {
 			Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
 			d1 = Calendar.getInstance();
@@ -33,11 +37,11 @@ public class TestaCliente {
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}		
-		
-		//d1.set(2005, 00, 05);
+		}
+
+		// d1.set(2005, 00, 05);
 		c.setDataDeNascimento(d1);
-		c.setCPF("01223665987");
+		c.setCPF("33392965022");
 
 		cad.setCliente(c);
 		cad.setEmailPrincipal("gobinho@gmail.com");
@@ -62,21 +66,34 @@ public class TestaCliente {
 		c.setEndereco(e);
 
 		System.out.println(c);
-		//fachada.cadastrarCliente(c);
 
-		//c.setNome("Leonardo Heitor Alves");
+		RetornaIdade retorna = new RetornaIdade();
+
+		System.out
+				.println(retorna.calculaIdade(c.dataFormatada(), "dd/MM/yyyy"));
+
+		/*
+		 * try { fachada.cadastrarCliente(c); } catch (CampoVazioException e1) {
+		 * // TODO Auto-generated catch block
+		 * System.out.println(e1.getMessage()); } catch (CPFInvalidoException
+		 * e1) { // TODO Auto-generated catch block
+		 * System.out.println(e1.getMessage()); } catch
+		 * (ClienteJaExisteException e1) { // TODO Auto-generated catch block
+		 * System.out.println(e1.getMessage()); }
+		 */
+
+		// c.setNome("Leonardo Heitor Alves");
 		// fachada.atualizarCliente(c);
 
 		// fachada.removerCliente(c);
-		
-		//System.out.println(fachada.procuraCliente("01223665987"));
-		
-		//ArrayList<Cliente> lista = fachada.listaCliente();
+
+		// System.out.println(fachada.procuraCliente("01223665987"));
+
+		// ArrayList<Cliente> lista = fachada.listaCliente();
 		/*
-		for (Cliente cliente : lista) {
-			System.out.println(cliente);
-			System.out.println("\n");
-		}*/
+		 * for (Cliente cliente : lista) { System.out.println(cliente);
+		 * System.out.println("\n"); }
+		 */
 	}
 
 }

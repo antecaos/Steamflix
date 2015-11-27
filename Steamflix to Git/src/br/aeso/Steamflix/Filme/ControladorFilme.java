@@ -60,15 +60,27 @@ public class ControladorFilme {
 
 	public ArrayList<Filme> listar() {
 		ArrayList<Filme> filmes = null;
-		//Genero genero = null;
-		//Fornecedor fornecedor = null;
+		// Genero genero = null;
+		// Fornecedor fornecedor = null;
 
 		filmes = this.repositorioFilme.listar();
 
 		for (Filme filme : filmes) {
-			filmes.set(filmes.lastIndexOf(filme), this.procurar(filme.getId()));									
+			filmes.set(filmes.lastIndexOf(filme), this.procurar(filme.getId()));
 		}
-		
+
+		return filmes;
+	}
+
+	public ArrayList<Filme> listarPorFornecedor(String cnpj) {
+		ArrayList<Filme> filmes = null;
+
+		filmes = this.repositorioFilme.listarPorFornecedor(cnpj);
+
+		for (Filme filme : filmes) {
+			filmes.set(filmes.lastIndexOf(filme), this.procurar(filme.getId()));
+		}
+
 		return filmes;
 	}
 }

@@ -6,6 +6,7 @@ import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cadastro.CamposNulosCadastro;
 import br.aeso.Steamflix.Util.CPFInvalidoException;
 import br.aeso.Steamflix.Util.CampoVazioException;
+import br.aeso.Steamflix.Util.RetornaIdade;
 import br.aeso.Steamflix.Util.ValidarCPF;
 import br.aeso.Steamflix.Cadastro.ControladorCadastro;
 import br.aeso.Steamflix.Endereco.ControladorEndereco;
@@ -16,6 +17,7 @@ public class ControladorCliente {
 	private ControladorEndereco controladorEndereco;
 	private ControladorCadastro controladorCadastro;
 	private CamposNulosCliente camposNulos;
+	private RetornaIdade validadorDeIdade;
 
 	public ControladorCliente() {
 		this.repositorioCliente = new RepositorioClienteDAO();
@@ -25,8 +27,10 @@ public class ControladorCliente {
 	}
 
 	public void cadastrar(Cliente cliente) throws CampoVazioException,
-			CPFInvalidoException {
-	
+			CPFInvalidoException, ClienteJaExisteException,
+			IdadeInvalidaException {
+		validadorDeIdade = new RetornaIdade();
+
 		if (cliente == null)
 			throw new IllegalArgumentException("Cliente Inválido.");
 
@@ -35,6 +39,10 @@ public class ControladorCliente {
 
 		if (!ValidarCPF.validaCPF(cliente.getCPF()))
 			throw new CPFInvalidoException(cliente.getCPF());
+
+		if ((validadorDeIdade.calculaIdade(cliente.dataFormatada(),
+				"dd/MM/yyyy")) < 16)
+			throw new IdadeInvalidaException();
 
 		this.repositorioCliente.cadastrar(cliente);
 		controladorCadastro.cadastrar(cliente.getCadastro());

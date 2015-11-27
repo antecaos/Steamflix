@@ -26,9 +26,12 @@ import javax.swing.text.MaskFormatter;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cliente.ClienteJaExisteException;
+import br.aeso.Steamflix.Cliente.IdadeInvalidaException;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
+import br.aeso.Steamflix.Fornecedor.FornecedorJaCadastradoException;
 import br.aeso.Steamflix.Util.CNPJInvalidoException;
 import br.aeso.Steamflix.Util.CPFInvalidoException;
 import br.aeso.Steamflix.Util.CampoVazioException;
@@ -72,13 +75,15 @@ public class TelaCadastro extends JFrame {
 	private JComboBox estadoClienteComboBox;
 	private JComboBox estadoFornecedorComboBox;
 	private TelaCliente telaCliente;
+	private TelaFornecedor telaFornecedor;
 
 	public TelaCadastro() {
 		start();
 	}
 
 	public void start() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("SteamFlix - Cadastro");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 851, 275);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -853,17 +858,24 @@ public class TelaCadastro extends JFrame {
 		try {
 			fachada.cadastrarCliente(cliente);
 			JOptionPane.showMessageDialog(this, cliente.getNome()
-					+ "Usuário cadastrado com Sucesso!");
+					+ " Usuário cadastrado com Sucesso!");
 			entrarCliente(cliente);
 		} catch (CampoVazioException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(),
-					"Mensagem erro!", EXIT_ON_CLOSE);
+					"Mensagem erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (CPFInvalidoException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(),
-					"Mensagem erro!", EXIT_ON_CLOSE);
-			;
+					"Mensagem erro!", JOptionPane.ERROR_MESSAGE);
+		} catch (ClienteJaExisteException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(),
+					"Mensagem erro!", JOptionPane.ERROR_MESSAGE);
+		} catch (IdadeInvalidaException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(),
+					"Mensagem erro!", JOptionPane.ERROR_MESSAGE);
 		}
 
 		// TelaCliente tela = new TelaCliente();
@@ -907,13 +919,17 @@ public class TelaCadastro extends JFrame {
 		try {
 			fachada.cadastrarFornecedor(fornecedor);
 			JOptionPane.showMessageDialog(this, fornecedor.getNomeFantasia()
-					+ "Usuário cadastrado com Sucesso!");
+					+ " cadastrado com Sucesso!");
 			entrarFornecedor(fornecedor);
 		} catch (br.aeso.Steamflix.Util.CampoVazioException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(),
 					"Mensagem erro!", EXIT_ON_CLOSE);
 		} catch (CNPJInvalidoException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(),
+					"Mensagem erro!", EXIT_ON_CLOSE);
+		} catch (FornecedorJaCadastradoException e) {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, e.getMessage(),
 					"Mensagem erro!", EXIT_ON_CLOSE);
@@ -924,10 +940,13 @@ public class TelaCadastro extends JFrame {
 		telaCliente = new TelaCliente();
 		telaCliente.setCliente(cliente);
 		telaCliente.setVisible(true);
-		telaCliente.setTitle("SteamFlix - Cliente");
+		setVisible(false);
 	}
 
 	public void entrarFornecedor(Fornecedor fornecedor) {
-		// Terminar de implementar
+		telaFornecedor = new TelaFornecedor();
+		telaFornecedor.setFornecedor(fornecedor);
+		telaFornecedor.setVisible(true);
+		setVisible(false);
 	}
 }

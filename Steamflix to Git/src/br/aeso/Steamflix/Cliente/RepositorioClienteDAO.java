@@ -19,8 +19,12 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 	}
 
 	@Override
-	public void cadastrar(Cliente cliente) {
+	public void cadastrar(Cliente cliente) throws ClienteJaExisteException {
 		// TODO Auto-generated method stub
+		if (this.existe(cliente.getCPF())) {
+			throw new ClienteJaExisteException();
+		}
+
 		String sql = "insert into Steamflix.Cliente "
 				+ "(cpfCliente,nomeCliente,dataNascimentoCliente,flagCliente)"
 				+ " values (?,?,?,?)";
@@ -39,6 +43,7 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 			// executa
 			stmt.execute();
 			stmt.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -56,6 +61,7 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -73,6 +79,7 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -99,6 +106,8 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 				clienteProcurado.setDataDeNascimento(data);
 			}
 			stmt.close();
+			rs.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -109,7 +118,31 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 	@Override
 	public boolean existe(String cpf) {
 		// TODO Auto-generated method stub
-		return false;
+		Cliente clienteProcurado = new Cliente();
+		boolean flag = false;
+		String sql = "select cpfCliente from Steamflix.Cliente where cpfCliente = ? and flagCliente = 1";
+
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, cpf);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				clienteProcurado.setCPF(rs.getString(1));
+			}
+
+			if (clienteProcurado.getCPF() != null)
+				flag = true;
+
+			stmt.close();
+			rs.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+
+		return flag;
 	}
 
 	@Override
@@ -134,6 +167,7 @@ public class RepositorioClienteDAO implements IRepositorioCliente {
 			}
 			rs.close();
 			stmt.close();
+
 			return clientes;
 		} catch (Exception e) {
 			// TODO: handle exception

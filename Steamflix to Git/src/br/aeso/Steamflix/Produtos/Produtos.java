@@ -30,7 +30,7 @@ public abstract class Produtos {
 		this.precoVenda = precoVenda;
 		this.precoAluguel = precoAluguel;
 		this.nota = nota;
-		this.classificacao = classificacao;		
+		this.classificacao = classificacao;
 		this.dataLancamento = dataLancamento;
 	}
 
@@ -104,8 +104,8 @@ public abstract class Produtos {
 
 	public void setDataLancamento(Calendar dataLancamento) {
 		this.dataLancamento = dataLancamento;
-	}	
-	
+	}
+
 	public int getQuantidade() {
 		return quantidade;
 	}
@@ -114,11 +114,17 @@ public abstract class Produtos {
 		this.quantidade = quantidade;
 	}
 
-	public String dataFormatada(){
+	public String dataFormatada() {
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		String dataFormatada = df.format(this.dataLancamento.getTime());
+		return dataFormatada.replaceAll("\\/|\\-|\\ ", "");
+	}
+	
+	public String getDataFormatada(){
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 		return df.format(this.dataLancamento.getTime());
 	}
-	
+
 	public int getFlag() {
 		return flag;
 	}
@@ -132,8 +138,8 @@ public abstract class Produtos {
 		return "Produtos [id=" + id + ", nome=" + nome + ", precoVenda="
 				+ precoVenda + ", precoAluguel=" + precoAluguel + ", nota="
 				+ nota + ", classificacao=" + classificacao + ", genero="
-				+ genero + ", fornecedor=" + fornecedor
-				+ ", dataLancamento=" + dataLancamento + "]";
+				+ genero + ", fornecedor=" + fornecedor + ", dataLancamento="
+				+ dataLancamento + "]";
 	}
 
 }

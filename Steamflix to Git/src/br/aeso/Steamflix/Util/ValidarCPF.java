@@ -2,6 +2,19 @@ package br.aeso.Steamflix.Util;
 
 public class ValidarCPF {
 	public static boolean validaCPF(String strCpf) {
+		if (strCpf.equals("00000000000") || strCpf.equals("11111111111")
+				|| strCpf.equals("22222222222")
+				|| strCpf.equals("33333333333")
+				|| strCpf.equals("44444444444")
+				|| strCpf.equals("55555555555")
+				|| strCpf.equals("66666666666")
+				|| strCpf.equals("77777777777")
+				|| strCpf.equals("88888888888")
+				|| strCpf.equals("99999999999") || (strCpf.length() != 11)){
+			return (false);
+		}
+			
+		
 		int iDigito1Aux = 0, iDigito2Aux = 0, iDigitoCPF;
 		int iDigito1 = 0, iDigito2 = 0, iRestoDivisao = 0;
 		String strDigitoVerificador, strDigitoResultado;

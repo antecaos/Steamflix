@@ -56,6 +56,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 
 			this.cadastraProdutos(aluguel);
 			stmt.close();
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -78,6 +79,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 
 			stmt.executeUpdate();
 			stmt.close();
+			
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -96,6 +98,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 
 			stmt.executeUpdate();
 			stmt.close();
+			
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -139,7 +142,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 			
 			aluguelProcurado = this.procuraProdutos(aluguelProcurado);
 			stmt.close();
-
+			
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -192,6 +195,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 			}
 			rs.close();
 			stmt.close();
+			
 			return alugueis;
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -222,6 +226,7 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 
 			stmt1.close();
 			stmt2.close();
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -252,6 +257,10 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 				jogo.setId(rs2.getInt("idJogo"));
 				aluguel.setJogo(jogo);
 			}
+			stmt1.close();
+			stmt2.close();
+			rs1.close();
+			rs2.close();
 			
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -260,5 +269,50 @@ public class RepositorioAluguelDAO implements IRepositorioAluguel {
 		
 		return aluguel;
 	}
+	@Override
+	public ArrayList<Aluguel> listarPorCliente(String cpf) {
+		// TODO Auto-generated method stub
+		Cliente cliente = new Cliente();
+		Cupom cupom = new Cupom();
+		String sql = "select * from Steamflix.Aluguel where idClienteAluguel = ? and flagAluguel = 1";
+		ArrayList<Aluguel> alugueis = new ArrayList<Aluguel>();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, cpf);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Aluguel aluguel = new Aluguel();
 
+				aluguel.setId(rs.getInt(1));
+
+				Calendar data = Calendar.getInstance();
+				Calendar dataDevolucao = Calendar.getInstance();
+				data.setTime(rs.getDate(2));
+				aluguel.setData(data);
+				dataDevolucao.setTime(rs.getDate(3));
+				aluguel.setDataDevolucao(dataDevolucao);
+				
+				cliente.setCPF(rs.getString(4));
+				aluguel.setCliente(cliente);
+								
+				aluguel.setPreco(rs.getDouble(5));
+						
+				cupom.setId(rs.getInt(6));
+				aluguel.setCupom(cupom);
+				
+				aluguel.setFlag(rs.getInt(7));
+				
+				aluguel = this.procuraProdutos(aluguel);
+
+				alugueis.add(aluguel);
+			}
+			rs.close();
+			stmt.close();
+			
+			return alugueis;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+	}
 }

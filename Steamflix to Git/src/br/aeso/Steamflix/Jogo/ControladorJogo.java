@@ -59,14 +59,27 @@ public class ControladorJogo {
 	}
 
 	public ArrayList<Jogo> listar() {
-		ArrayList<Jogo> jogos = null;		
+		ArrayList<Jogo> jogos = null;
 
 		jogos = this.repositorioJogo.listar();
 
 		for (Jogo jogo : jogos) {
-			jogos.set(jogos.lastIndexOf(jogo), this.procurar(jogo.getId()));									
+			jogos.set(jogos.lastIndexOf(jogo), this.procurar(jogo.getId()));
 		}
-		
+
 		return jogos;
 	}
+
+	public ArrayList<Jogo> listarPorFornecedor(String cnpj) {
+		ArrayList<Jogo> jogos = null;
+
+		jogos = this.repositorioJogo.listarPorFornecedor(cnpj);
+
+		for (Jogo jogo : jogos) {
+			jogos.set(jogos.lastIndexOf(jogo), this.procurar(jogo.getId()));
+		}
+
+		return jogos;
+	}
+
 }

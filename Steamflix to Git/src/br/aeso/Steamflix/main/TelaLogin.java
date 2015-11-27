@@ -16,10 +16,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Cadastro.CadastroNaoEncontradoException;
 import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Cadastro.CamposNulosCadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Fachada.Fachada;
+import br.aeso.Steamflix.Fornecedor.Fornecedor;
 
 public class TelaLogin extends JFrame {
 
@@ -31,8 +33,10 @@ public class TelaLogin extends JFrame {
 	private JLabel lblLogo;
 	private TelaCadastro telaCadastro;
 	private TelaCliente telaCliente;
+	private TelaFornecedor telaFornecedor;
+	private static TelaLogin frame;
 	private CamposNulosCadastro camposNulos;
-	Fachada fachada = Fachada.getInstance();
+	Fachada fachada = null;
 
 	/**
 	 * Launch the application.
@@ -41,10 +45,10 @@ public class TelaLogin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaLogin frame = new TelaLogin();
+					frame = new TelaLogin();
 					frame.setVisible(true);
 					frame.setResizable(false);
-					frame.setTitle("SteamFlix - Login");
+					// frame.setTitle("SteamFlix - Login");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -56,11 +60,12 @@ public class TelaLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaLogin() {
-
 		start();
+		fachada = Fachada.getInstance();
 	}
 
 	public void start() {
+		setTitle("SteamFlix - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 368, 435);
 		contentPane = new JPanel();
@@ -94,7 +99,11 @@ public class TelaLogin extends JFrame {
 				} catch (CampoVazioException e) {
 					// TODO Auto-generated catch block
 					JOptionPane.showMessageDialog(null, e.getMessage(),
-							"Mensagem erro!", EXIT_ON_CLOSE);
+							"Mensagem erro!", JOptionPane.ERROR_MESSAGE);
+				} catch (CadastroNaoEncontradoException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(null, e.getMessage(),
+							"Mensagem erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -105,10 +114,7 @@ public class TelaLogin extends JFrame {
 		lblNoCadastrado.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				telaCadastro = new TelaCadastro();
-				telaCadastro.setVisible(true);
-				telaCadastro
-						.setTitle("SteamFlix - Cadastro Cliente/Fornecedor");
+				cadastrar();
 			}
 		});
 		lblNoCadastrado.setBounds(69, 313, 224, 15);
@@ -119,7 +125,14 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblLogo);
 	}
 
-	private void entrar() throws CampoVazioException {
+	private void cadastrar() {
+		telaCadastro = new TelaCadastro();
+		telaCadastro.setVisible(true);
+		setVisible(false);
+	}
+
+	private void entrar() throws CampoVazioException,
+			CadastroNaoEncontradoException {
 		// camposNulos = new CamposNulosCadastro();
 		String senha = new String(senhaField.getPassword());
 		String login = loginField.getText();
@@ -129,14 +142,31 @@ public class TelaLogin extends JFrame {
 			Cliente cliente = fachada.procuraCliente(cadastro.getCliente()
 					.getCPF());
 			entrarCliente(cliente);
+		} else if (cadastro.getFornecedor().getCNPJ() != null) {
+			Fornecedor fornecedor = fachada.procuraFornecedor(cadastro
+					.getFornecedor().getCNPJ());
+			entrarFornecedor(fornecedor);
 		}
 	}
 
 	public void entrarCliente(Cliente cliente) {
 		telaCliente = new TelaCliente();
 		telaCliente.setCliente(cliente);
+		telaCliente.listarCompras(cliente.getCPF());
+		telaCliente.listarAluguel(cliente.getCPF());		
+		telaCliente.listarFilmes(cliente.getCPF());
+		telaCliente.listarJogos(cliente.getCPF());
 		telaCliente.setVisible(true);
-		telaCliente.setTitle("SteamFlix - Cliente");
+		setVisible(false);
+	}
+
+	public void entrarFornecedor(Fornecedor fornecedor) {
+		telaFornecedor = new TelaFornecedor();
+		telaFornecedor.setFornecedor(fornecedor);
+		telaFornecedor.listarFilmes(fornecedor.getCNPJ());
+		telaFornecedor.listarJogos(fornecedor.getCNPJ());
+		telaFornecedor.setVisible(true);
+		setVisible(false);
 	}
 
 }

@@ -51,6 +51,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -80,6 +81,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -120,6 +122,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -149,6 +152,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -175,6 +179,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 			stmt.setString(2, endereco.getFornecedor().getCNPJ());
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -191,6 +196,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 			stmt.setString(2, endereco.getCliente().getCPF());
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -219,6 +225,8 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 				enderecoProcurado.setCEP(rs.getString(9));
 			}
 			stmt.close();
+			rs.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -259,6 +267,7 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 			}
 			rs.close();
 			stmt.close();
+
 			return enderecos;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -287,6 +296,8 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 				enderecoProcurado.setCEP(rs.getString(9));
 			}
 			stmt.close();
+			rs.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -316,6 +327,8 @@ public class RepositorioEnderecoDAO implements IRepositorioEndereco {
 				enderecoProcurado.setCEP(rs.getString(9));
 			}
 			stmt.close();
+			rs.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);

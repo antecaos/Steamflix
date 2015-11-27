@@ -27,7 +27,9 @@ public class TestaGenero {
 		
 		listar = fachada.listarGenero();
 		
-		System.out.println(listar);
+		for (Genero genero : listar) {
+			System.out.println(genero);
+		}
 	}
 
 }

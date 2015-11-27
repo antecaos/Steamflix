@@ -82,4 +82,17 @@ public class ControladorAluguel {
 
 		return alugueis;
 	}
+	
+	public ArrayList<Aluguel> listarPorCliente(String cpf) {
+		ArrayList<Aluguel> alugueis = null;
+
+		alugueis = this.repositorioAluguel.listarPorCliente(cpf);
+
+		for (Aluguel aluguel : alugueis) {
+			alugueis.set(alugueis.lastIndexOf(aluguel),
+					this.procurar(aluguel.getId()));
+		}
+
+		return alugueis;
+	}
 }

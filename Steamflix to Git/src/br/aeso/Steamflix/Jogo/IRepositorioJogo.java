@@ -16,4 +16,6 @@ public interface IRepositorioJogo {
 	public boolean existe(int id);
 
 	public ArrayList<Jogo> listar();
+
+	public ArrayList<Jogo> listarPorFornecedor(String cnpj);
 }

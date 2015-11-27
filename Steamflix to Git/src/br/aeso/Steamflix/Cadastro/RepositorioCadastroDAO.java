@@ -12,7 +12,6 @@ import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 
 public class RepositorioCadastroDAO implements IRepositorioCadastro {
-
 	private Connection connection;
 
 	public RepositorioCadastroDAO() {
@@ -62,6 +61,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException();
 		}
@@ -77,6 +77,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			stmt.setString(2, cadastro.getCliente().getCPF());
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -101,6 +102,8 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 				cadastroProcurado.setTelefoneFixo(rs.getString(6));
 				cadastroProcurado.setTelefoneCelular(rs.getString(7));
 			}
+			rs.close();
+			stmt.close();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -144,6 +147,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			}
 			rs.close();
 			stmt.close();
+
 			return cadastros;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -180,6 +184,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			System.out.println();
 
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
@@ -216,6 +221,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 			System.out.println();
 
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException(e);
@@ -241,6 +247,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -266,6 +273,7 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -291,7 +299,9 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 				cadastroProcurado.setTelefoneFixo(rs.getString(6));
 				cadastroProcurado.setTelefoneCelular(rs.getString(7));
 			}
+			rs.close();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException();
@@ -318,20 +328,23 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 				cadastroProcurado.setTelefoneFixo(rs.getString(6));
 				cadastroProcurado.setTelefoneCelular(rs.getString(7));
 			}
+			rs.close();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException();
 		}
 		return cadastroProcurado;
 	}
-	
-	
-	public Cadastro retornaCadastro(String login, String senha) {
+
+	public Cadastro retornaCadastro(String login, String senha)
+			throws CadastroNaoEncontradoException {
 		Cadastro cadastroProcurado = null;
 		Cliente cliente = new Cliente();
 		Fornecedor fornecedor = new Fornecedor();
-		String sql = "select * from Steamflix.Cadastro where loginCadastro = ? and senhaCadastro = ? and flagCadastro = 1";
+		String sql = "select * from Steamflix.Cadastro "
+				+ "where loginCadastro = ? and senhaCadastro = ? and flagCadastro = 1";
 		try {
 			// prepared statement para inserção
 			PreparedStatement stmt = connection.prepareStatement(sql);
@@ -349,17 +362,20 @@ public class RepositorioCadastroDAO implements IRepositorioCadastro {
 				cadastroProcurado.setTelefoneFixo(rs.getString(6));
 				cadastroProcurado.setTelefoneCelular(rs.getString(7));
 				cliente.setCPF(rs.getString(8));
-				fornecedor.setCNPJ(rs.getString(9));		
+				fornecedor.setCNPJ(rs.getString(9));
 				cadastroProcurado.setCliente(cliente);
 				cadastroProcurado.setFornecedor(fornecedor);
-				
+			}
+			if (cadastroProcurado == null) {
+				throw new CadastroNaoEncontradoException();
 			}
 			stmt.close();
-			rs.close();			
+			rs.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
-			throw new RuntimeException(e);
+			System.out.println(e.getErrorCode());
 		}
-		return cadastroProcurado;		
+		return cadastroProcurado;
 	}
 }

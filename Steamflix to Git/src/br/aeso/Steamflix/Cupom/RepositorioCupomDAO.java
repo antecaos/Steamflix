@@ -39,7 +39,7 @@ public class RepositorioCupomDAO implements IRepositorioCupom {
 
 			cupom.setId(codigo);
 			System.out.println();
-
+			rs.close();
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -98,6 +98,8 @@ public class RepositorioCupomDAO implements IRepositorioCupom {
 				cupomProcurado.setValor(rs.getDouble("valorCupom"));
 			}
 
+			stmt.close();
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new RuntimeException();
@@ -132,6 +134,7 @@ public class RepositorioCupomDAO implements IRepositorioCupom {
 
 				// adicionando o objeto à lista
 				cupoms.add(cupom);
+				
 			}
 			rs.close();
 			stmt.close();

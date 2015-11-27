@@ -1,13 +1,16 @@
 package br.aeso.Steamflix.main;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import br.aeso.Steamflix.Aluguel.Aluguel;
 import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Compra.Compra;
 //import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Fachada.Fachada;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.Jogo.Jogo;
+import br.aeso.Steamflix.Produtos.Produtos;
 
 public class TestaAluguel {
 
@@ -42,13 +45,55 @@ public class TestaAluguel {
 		
 		//System.out.println(fachada.procuraAluguel(13));
 		
-		ArrayList<Aluguel> lista = fachada.listaAluguel();
-		
+		ArrayList<Aluguel> lista = fachada.listaAluguelPorCliente("09750906403");
+		ArrayList<Produtos> produtos = new ArrayList<Produtos>();
 		for (Aluguel aluguel : lista) {
-			System.out.println(aluguel);	
-			System.out.println("\n##############################");
-		}
+			for (Jogo jogo : aluguel.getJogo()) {
+				produtos.add(jogo);
+			}
+			for (Filme filme : aluguel.getFilme()) {
+				produtos.add(filme);
+			}
+		}	
 		
+		for(Produtos produto : produtos){
+			System.out.println(produto);
+		}
+	
+		
+		/*for (Compra compra : listaCompra) {
+				Vector vector = new Vector();
+				for (Filme filme : compra.getFilmes()) {
+					vector.add(filme.getId());
+					vector.add(filme.getNome());
+					vector.add(filme.getFornecedor().getNomeFantasia());
+					vector.add(filme.getDiretor());
+					vector.add(filme.getNota());
+					vector.add(filme.getClassificacao());
+					vector.add(filme.getGenero().getNome());
+					vector.add("-");
+					vector.add(filme.dataFormatada());
+
+				}
+				produtosDefaultTable.addRow(vector);
+			}*/
+		
+		/*for (Aluguel aluguel : listaAluguel) {
+				Vector vector = new Vector();
+				for (Filme filme : aluguel.getFilme()) {
+					vector.add(filme.getId());
+					vector.add(filme.getNome());
+					vector.add(filme.getFornecedor().getNomeFantasia());
+					vector.add(filme.getDiretor());
+					vector.add(filme.getNota());
+					vector.add(filme.getClassificacao());
+					vector.add(filme.getGenero().getNome());
+					vector.add(aluguel.dataDevolucaoFormatada());
+					vector.add(filme.dataFormatada());
+
+				}
+				produtosDefaultTable.addRow(vector);
+			}*/
 	}
 
 }

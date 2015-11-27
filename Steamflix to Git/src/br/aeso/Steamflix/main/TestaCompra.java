@@ -1,5 +1,7 @@
 package br.aeso.Steamflix.main;
 
+import java.util.ArrayList;
+
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Compra.Compra;
 import br.aeso.Steamflix.Cupom.Cupom;
@@ -31,18 +33,18 @@ public class TestaCompra {
 		//compra.setJogos(j1);
 		
 		
-		System.out.println(compra);
+		//System.out.println(compra);
 		
-		fachada.cadastrarCompra(compra);
+		//fachada.cadastrarCompra(compra);
 		//fachada.removerCompra(3);
 		//System.out.println(fachada.procuraCompra(4));
 		
-		/*ArrayList<Compra> lista = fachada.listaCompra();
+		ArrayList<Compra> lista = fachada.listaCompraPorCliente("09750906403");
 		
 		for (Compra compras : lista) {
 			System.out.println(compras);
 			System.out.println("\n");
-		}*/
+		}
 	}
 
 }

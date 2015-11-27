@@ -85,4 +85,17 @@ public class ControladorCompra {
 
 		return alugueis;
 	}
+	
+	public ArrayList<Compra> listarPorCliente(String cpf) {
+		ArrayList<Compra> alugueis = null;
+
+		alugueis = this.repositorioCompra.listarPorCliente(cpf);
+
+		for (Compra compra : alugueis) {
+			alugueis.set(alugueis.lastIndexOf(compra),
+					this.procurar(compra.getId()));
+		}
+
+		return alugueis;
+	}
 }

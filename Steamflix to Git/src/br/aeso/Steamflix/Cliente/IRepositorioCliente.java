@@ -3,7 +3,7 @@ package br.aeso.Steamflix.Cliente;
 import java.util.ArrayList;
 
 public interface IRepositorioCliente {
-	public void cadastrar(Cliente cliente);
+	public void cadastrar(Cliente cliente) throws ClienteJaExisteException;
 
 	public void atualizar(Cliente cliente);
 

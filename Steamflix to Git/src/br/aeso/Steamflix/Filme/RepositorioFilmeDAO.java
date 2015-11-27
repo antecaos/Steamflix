@@ -48,6 +48,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 
 			stmt.execute();
 			stmt.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -77,6 +78,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 			System.out.println("Filme Atualizado");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -95,6 +97,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -135,7 +138,9 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 				filmeProcurado.setDiretor(rs.getString(10));
 				filmeProcurado.setQuantidade(rs.getInt(11));
 			}
+			rs.close();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -152,7 +157,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 	@Override
 	public ArrayList<Filme> listar() {
 		// TODO Auto-generated method stub
-		
+
 		String sql = "select * from Steamflix.Filme where flagFilme = 1";
 		ArrayList<Filme> filmes = new ArrayList<Filme>();
 		try {
@@ -167,7 +172,7 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 				filme.setPrecoAluguel(rs.getDouble(4));
 				filme.setNota(rs.getString(5));
 				filme.setClassificacao(rs.getString(6));
-								
+
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(9));
 				filme.setDataLancamento(data);
@@ -179,6 +184,45 @@ public class RepositorioFilmeDAO implements IRepositorioFilme {
 			}
 			rs.close();
 			stmt.close();
+
+			return filmes;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+	}
+	@Override
+	public ArrayList<Filme> listarPorFornecedor(String cnpj) {
+		// TODO Auto-generated method stub
+
+		String sql = "select * from Steamflix.Filme where idFornecedorFilme = ? and flagFilme = 1";
+		ArrayList<Filme> filmes = new ArrayList<Filme>();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, cnpj);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Filme filme = new Filme();
+
+				filme.setId(rs.getInt(1));
+				filme.setNome(rs.getString(2));
+				filme.setPrecoVenda(rs.getDouble(3));
+				filme.setPrecoAluguel(rs.getDouble(4));
+				filme.setNota(rs.getString(5));
+				filme.setClassificacao(rs.getString(6));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate(9));
+				filme.setDataLancamento(data);
+
+				filme.setDiretor(rs.getString(10));
+				filme.setQuantidade(rs.getInt(11));
+
+				filmes.add(filme);
+			}
+			rs.close();
+			stmt.close();
+
 			return filmes;
 		} catch (Exception e) {
 			// TODO: handle exception

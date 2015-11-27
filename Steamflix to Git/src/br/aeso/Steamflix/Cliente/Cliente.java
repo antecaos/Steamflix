@@ -69,6 +69,12 @@ public class Cliente {
 
 	public String dataFormatada() {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+		String dataFormatada = df.format(this.dataDeNascimento.getTime());
+		return dataFormatada.replaceAll("\\/|\\-|\\ ", "");
+	}
+	
+	public String getDataFormatada(){
+		DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
 		return df.format(this.dataDeNascimento.getTime());
 	}
 

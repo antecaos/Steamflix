@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Cliente.ClienteJaExisteException;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 
@@ -18,8 +20,13 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	}
 
 	@Override
-	public void cadastrar(Fornecedor fornecedor) {
+	public void cadastrar(Fornecedor fornecedor)
+			throws FornecedorJaCadastradoException {
 		// TODO Auto-generated method stub
+		if (this.existe(fornecedor.getCNPJ())) {
+			throw new FornecedorJaCadastradoException();
+		}
+
 		String sql = "insert into Steamflix.Fornecedor(cnpjFornecedor, "
 				+ "razaoSocialFornecedor, nomeFantasiaFornecedor,flagFornecedor) values(?,?,?,?)";
 		try {
@@ -35,6 +42,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 			// executa
 			stmt.execute();
 			stmt.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -54,6 +62,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -71,6 +80,7 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -93,7 +103,9 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 				fornecedorProcurado.setRazaoSocial(rs.getString(2));
 				fornecedorProcurado.setNomeFantasia(rs.getString(3));
 			}
+			rs.close();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -104,7 +116,31 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 	@Override
 	public boolean existe(String cnpj) {
 		// TODO Auto-generated method stub
-		return false;
+		Fornecedor fornecedorProcurado = new Fornecedor();
+		boolean flag = false;
+		String sql = "select cnpjFornecedor from Steamflix.Fornecedor where cnpjFornecedor = ? and flagFornecedor = 1";
+
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, cnpj);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				fornecedorProcurado.setCNPJ(rs.getString(1));
+			}
+
+			if (fornecedorProcurado.getCNPJ() != null)
+				flag = true;
+
+			stmt.close();
+			rs.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+
+		return flag;
 	}
 
 	@Override
@@ -121,12 +157,12 @@ public class RepositorioFornecedorDAO implements IRepositorioFornecedor {
 				fornecedor.setCNPJ(rs.getString(1));
 				fornecedor.setRazaoSocial(rs.getString(2));
 				fornecedor.setNomeFantasia(rs.getString(3));
-				
 
 				fornecedores.add(fornecedor);
 			}
 			rs.close();
 			stmt.close();
+
 			return fornecedores;
 		} catch (Exception e) {
 			// TODO: handle exception

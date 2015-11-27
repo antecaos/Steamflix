@@ -9,6 +9,7 @@ import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Cupom.Cupom;
 import br.aeso.Steamflix.Filme.Filme;
 import br.aeso.Steamflix.Jogo.Jogo;
+import br.aeso.Steamflix.Produtos.Produtos;
 
 public class Compra {
 	private int id;
@@ -29,6 +30,7 @@ public class Compra {
 		this.filmes = new ArrayList<Filme>();
 		this.date = new Date();
 		this.cupom = new Cupom();
+
 	}
 
 	public Compra() {
@@ -90,6 +92,10 @@ public class Compra {
 		return this.preco;
 	}
 
+	public String getPrecoFormatado() {
+		return "R$ " + this.preco;
+	}
+
 	public void setPreco(double preco) {
 		this.preco = preco - (preco * this.cupom.getValor());
 	}
@@ -126,7 +132,7 @@ public class Compra {
 					+ "\tR$ " + jogo.getPrecoVenda() + "\n";
 		}
 		return listaJogos;
-	}
+	}	
 
 	public Cupom getCupom() {
 		return cupom;

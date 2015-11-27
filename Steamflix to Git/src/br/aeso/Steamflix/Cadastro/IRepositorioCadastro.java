@@ -19,5 +19,6 @@ public interface IRepositorioCadastro {
 
 	public ArrayList<Cadastro> listar();
 	
-	public Cadastro retornaCadastro(String login,String senha);
+	public Cadastro retornaCadastro(String login, String senha)
+			throws CadastroNaoEncontradoException;
 }

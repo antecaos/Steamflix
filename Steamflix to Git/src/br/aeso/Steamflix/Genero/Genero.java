@@ -9,6 +9,10 @@ public class Genero {
 		this.id = id;
 		this.nome = nome;
 	}
+	
+	public Genero(String nome){
+		this.nome = nome;
+	}
 
 	public Genero() {
 	}
@@ -39,7 +43,7 @@ public class Genero {
 
 	@Override
 	public String toString() {
-		return "Genero: " + id + "\nNome: " + nome + "\n";
+		return getNome();
 	}
 
 }

@@ -56,6 +56,8 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 
 			this.cadastraProdutos(compra);
 			stmt.close();
+			rs.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -85,6 +87,7 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 
 			stmt1.close();
 			stmt2.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -98,13 +101,14 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
 
-			stmt.setDate(1, new Date(compra.getData().getTimeInMillis()));			
+			stmt.setDate(1, new Date(compra.getData().getTimeInMillis()));
 			stmt.setDouble(2, compra.getPreco());
 			stmt.setInt(3, compra.getCupom().getId());
 			stmt.setInt(4, compra.getId());
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -123,6 +127,7 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -146,24 +151,25 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 				compraProcurado.setId(rs.getInt(1));
 
 				Calendar data = Calendar.getInstance();
-				
+
 				data.setTime(rs.getDate(2));
 				compraProcurado.setData(data);
-				
+
 				cliente.setCPF(rs.getString(3));
 				compraProcurado.setCliente(cliente);
-								
+
 				compraProcurado.setPreco(rs.getDouble(4));
-						
+
 				cupom.setId(rs.getInt(5));
 				compraProcurado.setCupom(cupom);
-				
+
 				compraProcurado.setFlag(rs.getInt(6));
 
 			}
-			
+
 			compraProcurado = this.procuraProdutos(compraProcurado);
 			stmt.close();
+			rs.close();
 
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -197,25 +203,26 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(2));
 				compra.setData(data);
-				
+
 				cliente.setCPF(rs.getString(3));
 				compra.setCliente(cliente);
-								
+
 				compra.setPreco(rs.getDouble(4));
-						
+
 				cupom.setId(rs.getInt(5));
 				compra.setCupom(cupom);
-				
+
 				compra.setFlag(rs.getInt(6));
-				
+
 				compra = this.procuraProdutos(compra);
 
 				alugueis.add(compra);
 			}
 			rs.close();
 			stmt.close();
+
 			return alugueis;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}
@@ -225,35 +232,82 @@ public class RepositorioCompraDAO implements IRepositorioCompra {
 		// TODO Auto-generated method stub
 		String sql1 = "select idFilme from Steamflix.CompraFilme where idCompra = ?";
 		String sql2 = "select idJogo from Steamflix.CompraJogo where idCompra = ?";
-		
+
 		try {
 			PreparedStatement stmt1 = connection.prepareStatement(sql1);
 			PreparedStatement stmt2 = connection.prepareStatement(sql2);
-			
+
 			stmt1.setInt(1, compra.getId());
 			stmt2.setInt(1, compra.getId());
-			
+
 			ResultSet rs1 = stmt1.executeQuery();
 			ResultSet rs2 = stmt2.executeQuery();
-			
-			while(rs1.next()){
+
+			while (rs1.next()) {
 				Filme filme = new Filme();
 				filme.setId(rs1.getInt("idFilme"));
 				compra.setFilmes(filme);
 			}
-			
-			while(rs2.next()){
+
+			while (rs2.next()) {
 				Jogo jogo = new Jogo();
 				jogo.setId(rs2.getInt("idJogo"));
 				compra.setJogos(jogo);
 			}
-			
+			stmt1.close();
+			stmt2.close();
+			rs1.close();
+			rs2.close();
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
 		}
-		
+
 		return compra;
 	}
 
+	@Override
+	public ArrayList<Compra> listarPorCliente(String cpf) {
+		// TODO Auto-generated method stub
+		Cliente cliente = new Cliente();
+		Cupom cupom = new Cupom();
+		String sql = "select * from Steamflix.Compra where idClienteCompra = ? and flagCompra = 1";
+		ArrayList<Compra> alugueis = new ArrayList<Compra>();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, cpf);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Compra compra = new Compra();
+
+				compra.setId(rs.getInt(1));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate(2));
+				compra.setData(data);
+
+				cliente.setCPF(rs.getString(3));
+				compra.setCliente(cliente);
+
+				compra.setPreco(rs.getDouble(4));
+
+				cupom.setId(rs.getInt(5));
+				compra.setCupom(cupom);
+
+				compra.setFlag(rs.getInt(6));
+
+				compra = this.procuraProdutos(compra);
+
+				alugueis.add(compra);
+			}
+			rs.close();
+			stmt.close();
+
+			return alugueis;
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+	}
 }

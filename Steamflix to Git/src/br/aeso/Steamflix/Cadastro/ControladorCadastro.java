@@ -7,8 +7,9 @@ import br.aeso.Steamflix.Util.CampoVazioException;
 public class ControladorCadastro {
 	private IRepositorioCadastro repositorioCadastro;
 	private CamposNulosCadastro camposNulos;
-	//private ControladorCliente controladorCliente;
-	//private ControladorFornecedor controladorFornecedor;
+
+	// private ControladorCliente controladorCliente;
+	// private ControladorFornecedor controladorFornecedor;
 
 	public ControladorCadastro() {
 		repositorioCadastro = new RepositorioCadastroDAO();
@@ -24,7 +25,6 @@ public class ControladorCadastro {
 				"\\)|\\(|\\-|\\ ", ""));
 		cadastro.setTelefoneFixo(cadastro.getTelefoneFixo().replaceAll(
 				"\\)|\\(|\\-|\\ ", ""));
-		
 
 		this.repositorioCadastro.cadastrar(cadastro);
 	}
@@ -51,10 +51,11 @@ public class ControladorCadastro {
 		return this.repositorioCadastro.procurarPorFornecedor(cnpj);
 	}
 
-	public Cadastro retornaCadastro(String login, String senha) throws CampoVazioException {
-		if(camposNulos.validaLogin(login,senha))
-			throw new CampoVazioException();		
-		
+	public Cadastro retornaCadastro(String login, String senha)
+			throws CampoVazioException, CadastroNaoEncontradoException {
+		if (camposNulos.validaLogin(login, senha))
+			throw new CampoVazioException();
+
 		Cadastro cadastroProcurado = this.repositorioCadastro.retornaCadastro(
 				login, senha);
 		return cadastroProcurado;

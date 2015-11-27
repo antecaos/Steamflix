@@ -14,4 +14,6 @@ public interface IRepositorioFilme {
 	public boolean existe(int id);
 
 	public ArrayList<Filme> listar();
+
+	public ArrayList<Filme> listarPorFornecedor(String cnpj);
 }

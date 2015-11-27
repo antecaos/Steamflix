@@ -79,7 +79,12 @@ public class Cadastro {
 	}
 
 	public void setEmailPrincipal(String email) {
-		this.email[0] = email;
+		if (email == null) {
+			this.email[0] = "";
+		} else {
+			this.email[0] = email;
+		}
+
 	}
 
 	public String getEmailPrincipal() {
@@ -87,7 +92,12 @@ public class Cadastro {
 	}
 
 	public void setEmailSecundario(String email) {
-		this.email[1] = email;
+		if (email == null) {
+			this.email[1] = "";
+		} else {
+			this.email[1] = email;
+		}
+		
 	}
 
 	public String getEmailSecundario() {
@@ -95,7 +105,12 @@ public class Cadastro {
 	}
 
 	public void setTelefoneFixo(String telefone) {
-		this.telefone[0] = telefone.replaceAll("\\)|\\(|\\-|\\ ", "");
+		if (telefone == null) {
+			this.telefone[0] = "";
+		} else {
+			this.telefone[0] = telefone.replaceAll("\\)|\\(|\\-|\\ ", "");
+		}
+
 	}
 
 	public String getTelefoneFixo() {
@@ -103,12 +118,17 @@ public class Cadastro {
 	}
 
 	public void setTelefoneCelular(String telefone) {
-		this.telefone[1] = telefone.replaceAll("\\)|\\(|\\-|\\ ", "");
+		if (telefone == null) {
+			this.telefone[1] = "";
+		} else {
+			this.telefone[1] = telefone.replaceAll("\\)|\\(|\\-|\\ ", "");
+		}
+
 	}
 
 	public String getTelefoneCelular() {
 		return this.telefone[1];
-	}	
+	}
 
 	public int getFlag() {
 		return flag;
@@ -123,7 +143,7 @@ public class Cadastro {
 		return "\nlogin: " + login + "\nsenha: " + senha
 				+ "\nemail principal: " + this.getEmailPrincipal()
 				+ "\nemail secundário:" + this.getEmailSecundario()
-				+ "\ntelefone celular:" + this.getTelefoneCelular() 
+				+ "\ntelefone celular:" + this.getTelefoneCelular()
 				+ "\ntelefone fixo:" + this.getTelefoneFixo();
 	}
 }

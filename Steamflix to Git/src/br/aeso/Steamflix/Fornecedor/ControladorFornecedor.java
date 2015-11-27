@@ -19,7 +19,7 @@ public class ControladorFornecedor {
 	private ControladorEndereco controladorEndereco;
 	private ControladorCadastro controladorCadastro;
 	private CamposNulosFornecedor camposNulos;
-	
+
 	public ControladorFornecedor() {
 		this.repositorioFornecedor = new RepositorioFornecedorDAO();
 		this.controladorCadastro = new ControladorCadastro();
@@ -28,17 +28,17 @@ public class ControladorFornecedor {
 	}
 
 	public void cadastrar(Fornecedor fornecedor) throws CampoVazioException,
-			CNPJInvalidoException {
-		
+			CNPJInvalidoException, FornecedorJaCadastradoException {
+
 		if (fornecedor == null)
 			throw new IllegalArgumentException("Cadastro Inválido.");
-		
+
 		if (camposNulos.estaVazio(fornecedor))
 			throw new CampoVazioException();
-		
+
 		if (!ValidarCNPJ.isCNPJ(fornecedor.getCNPJ()))
 			throw new CNPJInvalidoException(fornecedor.getCNPJ());
-		
+
 		this.repositorioFornecedor.cadastrar(fornecedor);
 		this.controladorCadastro.cadastrar(fornecedor.getCadastro());
 		this.controladorEndereco.cadastrar(fornecedor.getEndereco());

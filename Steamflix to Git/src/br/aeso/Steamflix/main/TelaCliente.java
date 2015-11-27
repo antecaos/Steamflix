@@ -2,29 +2,47 @@ package br.aeso.Steamflix.main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
+import br.aeso.Steamflix.Aluguel.Aluguel;
+import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cliente.Cliente;
+import br.aeso.Steamflix.Compra.Compra;
+import br.aeso.Steamflix.Endereco.Endereco;
+import br.aeso.Steamflix.Fachada.Fachada;
+import br.aeso.Steamflix.Filme.Filme;
+import br.aeso.Steamflix.Jogo.Jogo;
+import br.aeso.Steamflix.Produtos.Produtos;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
-import javax.swing.JToggleButton;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JFormattedTextField;
 
 public class TelaCliente extends JFrame {
 
@@ -32,40 +50,53 @@ public class TelaCliente extends JFrame {
 	private JTextField nomeField;
 	private JTextField logradouroField;
 	private JTextField numeroField;
-	private JTextField cpfield;
-	private JTextField dataField;
+	private JFormattedTextField cpfield;
+	private JFormattedTextField dataField;
 	private JTextField complementoField;
 	private JTextField cidadeField;
 	private JTextField bairroField;
 	private JTextField paisField;
-	private JTextField cepField;
+	private JFormattedTextField cepField;
 	private JTextField loginField;
 	private JTextField senhaField;
 	private JTextField emailField;
 	private JTextField emailSecundarioField;
-	private JTextField telefoneField;
-	private JTextField celularField;
+	private JFormattedTextField telefoneField;
+	private JFormattedTextField celularField;
 	private JTable tabelaCompras;
 	private Cliente cliente;
 	private JLabel tituloLabel;
+	private TelaLogin telaLogin;
+	private JComboBox estadoComboBox;
+	private boolean enabled;
+	Fachada fachada;
+	private JTable tabelaAluguel;
+	private DefaultTableModel comprasDefaultTableModel;
+	private DefaultTableModel aluguelDefaultTableModel;
+	private JTable tabelaJogos;
+	private DefaultTableModel jogosDefaultTable;
+	private DefaultTableModel filmesDefaultTable;
+	private JTable tabelaFilmes;
 
 	public TelaCliente() {
 		start();
+		fachada = Fachada.getInstance();
 	}
 
 	public void start() {
+		setTitle("SteamFlix - Cliente");
 		String[] estados = { "AC", "AL", "AP", "BA", "CE", "DF", "ES", "GO",
 				"MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ",
 				"RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" };
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1014, 470);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 866, 470);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JScrollPane scrollPainelGeral = new JScrollPane();
-		scrollPainelGeral.setBounds(12, 0, 985, 431);
+		scrollPainelGeral.setBounds(12, 0, 840, 431);
 		contentPane.add(scrollPainelGeral);
 
 		JPanel painelGeral = new JPanel();
@@ -77,7 +108,7 @@ public class TelaCliente extends JFrame {
 		painelGeral.add(tituloLabel);
 
 		JScrollPane scrollPainelTabs = new JScrollPane();
-		scrollPainelTabs.setBounds(12, 5, 964, 377);
+		scrollPainelTabs.setBounds(12, 5, 820, 377);
 		painelGeral.add(scrollPainelTabs);
 
 		JTabbedPane painelTabs = new JTabbedPane(JTabbedPane.TOP);
@@ -98,9 +129,9 @@ public class TelaCliente extends JFrame {
 						FormFactory.RELATED_GAP_COLSPEC,
 						ColumnSpec.decode("max(36dlu;default)"),
 						FormFactory.RELATED_GAP_COLSPEC,
-						ColumnSpec.decode("max(14dlu;default)"),
+						ColumnSpec.decode("21dlu"),
 						FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC,
+						ColumnSpec.decode("max(48dlu;default)"),
 						FormFactory.RELATED_GAP_COLSPEC,
 						ColumnSpec.decode("max(26dlu;default)"), },
 						new RowSpec[] { FormFactory.RELATED_GAP_ROWSPEC,
@@ -136,7 +167,7 @@ public class TelaCliente extends JFrame {
 				if (mudarDados.isSelected()) {
 					autorizaMudanca();
 				} else {
-					nomeField.setEnabled(false);
+					proibeMudancas();
 				}
 
 			}
@@ -154,15 +185,28 @@ public class TelaCliente extends JFrame {
 		JLabel cpfLabel = new JLabel("CPF");
 		painelDados.add(cpfLabel, "2, 6, right, default");
 
-		cpfield = new JTextField();
+		try {
+			cpfield = new JFormattedTextField(new MaskFormatter(
+					"###.###.###-##"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		cpfield.setEnabled(false);
 		painelDados.add(cpfield, "4, 6, fill, default");
 		cpfield.setColumns(10);
 
-		JLabel dataLabel = new JLabel("Data de Nascimento");
+		JLabel dataLabel = new JLabel("Data");
 		painelDados.add(dataLabel, "6, 6, right, default");
 
-		dataField = new JTextField();
+		try {
+			dataField = new JFormattedTextField(new MaskFormatter(
+					"##/##/####"));
+		} catch (ParseException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+
 		dataField.setEnabled(false);
 		painelDados.add(dataField, "8, 6, left, default");
 		dataField.setColumns(10);
@@ -213,7 +257,8 @@ public class TelaCliente extends JFrame {
 		JLabel estadoLabel = new JLabel("Estado");
 		painelDados.add(estadoLabel, "14, 12, right, default");
 
-		JComboBox estadoComboBox = new JComboBox(estados);
+		estadoComboBox = new JComboBox(estados);
+		estadoComboBox.setEnabled(false);
 		painelDados.add(estadoComboBox, "16, 12, left, default");
 
 		JLabel paisLabel = new JLabel("País");
@@ -227,7 +272,12 @@ public class TelaCliente extends JFrame {
 		JLabel cepLabel = new JLabel("CEP");
 		painelDados.add(cepLabel, "6, 14, right, default");
 
-		cepField = new JTextField();
+		try {
+			cepField = new JFormattedTextField(new MaskFormatter("##.###-###"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		cepField.setEnabled(false);
 		painelDados.add(cepField, "8, 14, center, default");
 		cepField.setColumns(10);
@@ -259,7 +309,7 @@ public class TelaCliente extends JFrame {
 		painelDados.add(emailField, "4, 22, fill, default");
 		emailField.setColumns(10);
 
-		JLabel emailSecundarioLabel = new JLabel("Email Secundário");
+		JLabel emailSecundarioLabel = new JLabel("Email Sec");
 		painelDados.add(emailSecundarioLabel, "6, 22, right, default");
 
 		emailSecundarioField = new JTextField();
@@ -270,7 +320,13 @@ public class TelaCliente extends JFrame {
 		JLabel telefoneLabel = new JLabel("Telefone");
 		painelDados.add(telefoneLabel, "2, 24, right, default");
 
-		telefoneField = new JTextField();
+		try {
+			telefoneField = new JFormattedTextField(new MaskFormatter(
+					"(##)####-####"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		telefoneField.setEnabled(false);
 		painelDados.add(telefoneField, "4, 24, fill, default");
 		telefoneField.setColumns(10);
@@ -278,7 +334,13 @@ public class TelaCliente extends JFrame {
 		JLabel celularLabel = new JLabel("Celular");
 		painelDados.add(celularLabel, "6, 24, right, default");
 
-		celularField = new JTextField();
+		try {
+			celularField = new JFormattedTextField(new MaskFormatter(
+					"(##)#####-####"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		celularField.setEnabled(false);
 		painelDados.add(celularField, "8, 24, fill, default");
 		celularField.setColumns(10);
@@ -296,39 +358,159 @@ public class TelaCliente extends JFrame {
 		painelCompra.setLayout(null);
 
 		JScrollPane scrollTabelaCompras = new JScrollPane();
-		scrollTabelaCompras.setBounds(12, 12, 903, 321);
+		scrollTabelaCompras.setBounds(12, 12, 788, 321);
 		painelCompra.add(scrollTabelaCompras);
 
 		tabelaCompras = new JTable();
-		tabelaCompras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tabelaCompras.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-			},
-			new String[] {
-				"ID", "Data", "Pre\u00E7o"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
+		tabelaCompras.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaAluguelCompra telaAluguelCompra = new TelaAluguelCompra();
+				telaAluguelCompra.setVisible(true);
+				telaAluguelCompra.setCompra((int) tabelaCompras.getValueAt(
+						tabelaCompras.getSelectedRow(), 0));
+				//System.out.println();
 			}
 		});
-		tabelaCompras.getColumnModel().getColumn(0).setResizable(false);
-		tabelaCompras.getColumnModel().getColumn(0).setMinWidth(10);
-		tabelaCompras.setBackground(Color.WHITE);
-		tabelaCompras.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		tabelaCompras.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		comprasDefaultTableModel = new DefaultTableModel(new Object[][] {},
+				new String[] { "ID", "Data", "Pre\u00E7o" });
+		tabelaCompras.setModel(comprasDefaultTableModel);
 		scrollTabelaCompras.setViewportView(tabelaCompras);
 
 		JPanel painelAluguel = new JPanel();
 		painelTabs.addTab("Alugueis", null, painelAluguel, null);
 		painelAluguel.setLayout(null);
 
+		JScrollPane scrollTabelaAluguel = new JScrollPane();
+		scrollTabelaAluguel.setBounds(12, 12, 788, 323);
+		painelAluguel.add(scrollTabelaAluguel);
+
+		tabelaAluguel = new JTable();
+		tabelaAluguel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaAluguelCompra telaAluguelCompra = new TelaAluguelCompra();
+				telaAluguelCompra.setVisible(true);
+				telaAluguelCompra.setAluguel((int) tabelaAluguel.getValueAt(
+						tabelaAluguel.getSelectedRow(), 0));
+				//System.out.println();
+			}
+		});
+		aluguelDefaultTableModel = new DefaultTableModel(new Object[][] { {
+				null, null, null }, }, new String[] { "Id", "Data de alguel",
+				"Data de devolu\u00E7\u00E3o", "Preço" });
+		tabelaAluguel.setModel(aluguelDefaultTableModel);
+		tabelaAluguel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		scrollTabelaAluguel.setViewportView(tabelaAluguel);
+
+		JPanel painelJogos = new JPanel();
+		painelTabs.addTab("Jogos", null, painelJogos, null);
+		painelJogos.setLayout(null);
+
+		JScrollPane scrollTabelaJogos = new JScrollPane();
+		scrollTabelaJogos.setBounds(12, 12, 788, 323);
+		painelJogos.add(scrollTabelaJogos);
+
+		tabelaJogos = new JTable();
+		tabelaJogos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaProdutoCliente telaProduto = new TelaProdutoCliente();
+				telaProduto.setFilme((Integer) tabelaJogos.getValueAt(
+						tabelaJogos.getSelectedRow(), 0));
+				telaProduto.setVisible(true);
+			}
+		});
+		jogosDefaultTable = new DefaultTableModel(new Object[][] {},
+				new String[] { "Id", "Nome", "Fornecedor", "Desenvolvedor",
+						"Nota", "Classifica\u00E7\u00E3o", "G\u00EAnero",
+						"Devolu\u00E7\u00E3o", "Data de lan\u00E7amento" });
+		tabelaJogos.setModel(jogosDefaultTable);
+		tabelaJogos.getColumnModel().getColumn(0).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(0).setPreferredWidth(25);
+		tabelaJogos.getColumnModel().getColumn(1).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(1).setPreferredWidth(86);
+		tabelaJogos.getColumnModel().getColumn(2).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(2).setPreferredWidth(115);
+		tabelaJogos.getColumnModel().getColumn(3).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(3).setPreferredWidth(107);
+		tabelaJogos.getColumnModel().getColumn(4).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(4).setPreferredWidth(35);
+		tabelaJogos.getColumnModel().getColumn(5).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(5).setPreferredWidth(85);
+		tabelaJogos.getColumnModel().getColumn(6).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(6).setPreferredWidth(57);
+		tabelaJogos.getColumnModel().getColumn(7).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(7).setPreferredWidth(72);
+		tabelaJogos.getColumnModel().getColumn(8).setResizable(false);
+		tabelaJogos.getColumnModel().getColumn(8).setPreferredWidth(113);
+		scrollTabelaJogos.setViewportView(tabelaJogos);
+
+		JPanel painelFilmes = new JPanel();
+		painelTabs.addTab("Filmes", null, painelFilmes, null);
+		painelFilmes.setLayout(null);
+
+		JScrollPane scrollPaneFilmes = new JScrollPane();
+		scrollPaneFilmes.setBounds(12, 12, 788, 323);
+		painelFilmes.add(scrollPaneFilmes);
+
+		tabelaFilmes = new JTable();
+		tabelaFilmes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				TelaProdutoCliente telaProduto = new TelaProdutoCliente();
+				telaProduto.setFilme((Integer) tabelaFilmes.getValueAt(
+						tabelaFilmes.getSelectedRow(), 0));
+				telaProduto.setVisible(true);
+			}
+		});
+
+		filmesDefaultTable = new DefaultTableModel(new Object[][] {},
+				new String[] { "Id", "Nome", "Fornecedor", "Diretor", "Nota",
+						"Classifica\u00E7\u00E3o", "G\u00EAnero",
+						"Devolu\u00E7\u00E3o", "Data de lan\u00E7amento" });
+		tabelaFilmes.setModel(filmesDefaultTable);
+		tabelaFilmes.getColumnModel().getColumn(0).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(0).setPreferredWidth(25);
+		tabelaFilmes.getColumnModel().getColumn(1).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(1).setPreferredWidth(86);
+		tabelaFilmes.getColumnModel().getColumn(2).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(2).setPreferredWidth(115);
+		tabelaFilmes.getColumnModel().getColumn(3).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(3).setPreferredWidth(107);
+		tabelaFilmes.getColumnModel().getColumn(4).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(4).setPreferredWidth(35);
+		tabelaFilmes.getColumnModel().getColumn(5).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(5).setPreferredWidth(85);
+		tabelaFilmes.getColumnModel().getColumn(6).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(6).setPreferredWidth(57);
+		tabelaFilmes.getColumnModel().getColumn(7).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(7).setPreferredWidth(72);
+		tabelaFilmes.getColumnModel().getColumn(8).setResizable(false);
+		tabelaFilmes.getColumnModel().getColumn(8).setPreferredWidth(113);
+		scrollPaneFilmes.setViewportView(tabelaFilmes);
+
 		JButton button = new JButton("Loja");
-		button.setBounds(844, 394, 64, 25);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaLoja telaLoja = new TelaLoja();
+				telaLoja.setVisible(true);
+			}
+		});
+		button.setBounds(677, 394, 64, 25);
 		painelGeral.add(button);
+
+		JButton btnSair = new JButton("Sair");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				telaLogin = new TelaLogin();
+				telaLogin.setVisible(true);
+				setVisible(false);
+			}
+		});
+		btnSair.setBounds(746, 394, 79, 25);
+		painelGeral.add(btnSair);
 	}
 
 	public void setCliente(Cliente cliente) {
@@ -337,20 +519,230 @@ public class TelaCliente extends JFrame {
 		this.nomeField.setText(cliente.getNome());
 		this.cpfield.setText(cliente.getCPF());
 		this.dataField.setText(cliente.dataFormatada());
-		// Terminar de setar os dados para o cliente;
+		this.bairroField.setText(cliente.getEndereco().getBairro());
+		this.celularField.setText(cliente.getCadastro().getTelefoneCelular());
+		this.cepField.setText(cliente.getEndereco().getCEP());
+		this.cidadeField.setText(cliente.getEndereco().getCidade());
+		this.complementoField.setText(cliente.getEndereco().getComplemento());
+		this.emailField.setText(cliente.getCadastro().getEmailPrincipal());
+		this.emailSecundarioField.setText(cliente.getCadastro()
+				.getEmailSecundario());
+		this.loginField.setText(cliente.getCadastro().getLogin());
+		this.logradouroField.setText(cliente.getEndereco().getLogradouro());
+		this.numeroField.setText(cliente.getEndereco().getNumero());
+		this.paisField.setText(cliente.getEndereco().getPais());
+		this.senhaField.setText(cliente.getCadastro().getSenha());
+		this.telefoneField.setText(cliente.getCadastro().getTelefoneFixo());
+		this.estadoComboBox.setSelectedItem(cliente.getEndereco().getEstado());
 	}
 
 	public void autorizaMudanca() {
-		nomeField.setEnabled(true);
-		// Terminar de autorizar os dados para mudanças;
+		this.nomeField.setEnabled(true);
+		this.cpfield.setEnabled(true);
+		this.dataField.setEnabled(true);
+		this.bairroField.setEnabled(true);
+		this.celularField.setEnabled(true);
+		this.cepField.setEnabled(true);
+		this.cidadeField.setEnabled(true);
+		this.complementoField.setEnabled(true);
+		this.emailField.setEnabled(true);
+		this.emailSecundarioField.setEnabled(true);
+		this.loginField.setEnabled(true);
+		this.logradouroField.setEnabled(true);
+		this.numeroField.setEnabled(true);
+		this.paisField.setEnabled(true);
+		this.senhaField.setEnabled(true);
+		this.telefoneField.setEnabled(true);
+		this.estadoComboBox.setEnabled(true);
+		this.enabled = true;
 	}
 
 	public void proibeMudancas() {
-		nomeField.setEnabled(false);
-		// Terminar de proibir as mudanças;
+		this.nomeField.setEnabled(false);
+		this.cpfield.setEnabled(false);
+		this.dataField.setEnabled(false);
+		this.bairroField.setEnabled(false);
+		this.celularField.setEnabled(false);
+		this.cepField.setEnabled(false);
+		this.cidadeField.setEnabled(false);
+		this.complementoField.setEnabled(false);
+		this.emailField.setEnabled(false);
+		this.emailSecundarioField.setEnabled(false);
+		this.loginField.setEnabled(false);
+		this.logradouroField.setEnabled(false);
+		this.numeroField.setEnabled(false);
+		this.paisField.setEnabled(false);
+		this.senhaField.setEnabled(false);
+		this.telefoneField.setEnabled(false);
+		this.estadoComboBox.setEnabled(false);
+		this.enabled = false;
 	}
 
 	public void atualizarCliente() {
 
+		Cliente cliente = new Cliente();
+		Cadastro cadastro = new Cadastro();
+		Endereco endereco = new Endereco();
+		Calendar dataNascimento = Calendar.getInstance();
+		String dataEmTexto = this.dataField.getText();
+		try {
+			Date data = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
+			dataNascimento.setTime(data);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		cliente.setCPF(this.cpfield.getText());
+		cliente.setNome(this.nomeField.getText());
+		cliente.setDataDeNascimento(dataNascimento);
+
+		endereco.setBairro(this.bairroField.getText());
+		endereco.setCEP(this.cepField.getText());
+		endereco.setCidade(this.cidadeField.getText());
+		endereco.setComplemento(this.complementoField.getText());
+		endereco.setEstado(this.estadoComboBox.getSelectedItem().toString());
+		endereco.setLogradouro(this.logradouroField.getText());
+		endereco.setNumero(this.numeroField.getText());
+		endereco.setPais(this.paisField.getText());
+
+		cadastro.setEmailPrincipal(this.emailField.getText());
+		cadastro.setEmailSecundario(this.emailSecundarioField.getText());
+		cadastro.setLogin(this.loginField.getText());
+		cadastro.setSenha(new String(this.senhaField.getText()));
+		cadastro.setTelefoneCelular(this.celularField.getText());
+		cadastro.setTelefoneFixo(this.telefoneField.getText());
+		cliente.setCadastro(cadastro);
+		cliente.setEndereco(endereco);
+		endereco.setCliente(cliente);
+		cadastro.setCliente(cliente);
+
+		fachada.atualizarCliente(cliente);
+		JOptionPane.showMessageDialog(this, cliente.getNome()
+				+ " Usuário atualizado com Sucesso!");
+	}
+
+	public void listarCompras(String cpf) {
+		comprasDefaultTableModel.setNumRows(0);
+
+		ArrayList<Compra> lista = fachada.listaCompraPorCliente(cpf);
+		for (Compra compra : lista) {
+			Vector vector = new Vector();
+			vector.add(compra.getId());
+			vector.add(compra.dataFormatada());
+			vector.add(compra.getPrecoFormatado());
+			comprasDefaultTableModel.addRow(vector);
+		}
+	}
+
+	public void listarAluguel(String cpf) {
+		aluguelDefaultTableModel.setNumRows(0);
+
+		ArrayList<Aluguel> lista = fachada.listaAluguelPorCliente(cpf);
+		for (Aluguel aluguel : lista) {
+			Vector vector = new Vector();
+			vector.add(aluguel.getId());
+			vector.add(aluguel.dataFormatada());
+			vector.add(aluguel.dataDevolucaoFormatada());
+			vector.add(aluguel.getPrecoFormatado());
+			aluguelDefaultTableModel.addRow(vector);
+		}
+	}
+
+	public void listarJogos(String cpf) {
+		jogosDefaultTable.setNumRows(0);
+
+		ArrayList<Compra> listaCompra = fachada.listaCompraPorCliente(cpf);
+		ArrayList<Aluguel> listaAluguel = fachada.listaAluguelPorCliente(cpf);
+
+		if (!listaCompra.isEmpty()) {
+			for (Compra compra : listaCompra) {
+
+				if (!compra.getJogos().isEmpty()) {
+					for (Jogo jogo : compra.getJogos()) {
+						Vector vector = new Vector();
+						vector.add(jogo.getId());
+						vector.add(jogo.getNome());
+						vector.add(jogo.getFornecedor().getNomeFantasia());
+						vector.add(jogo.getDesenvolvedor());
+						vector.add(jogo.getNota());
+						vector.add(jogo.getClassificacao());
+						vector.add(jogo.getGenero().getNome());
+						vector.add("-");
+						vector.add(jogo.getDataFormatada());
+						jogosDefaultTable.addRow(vector);
+					}
+				}
+			}
+		}
+
+		if (!listaAluguel.isEmpty()) {
+
+			for (Aluguel aluguel : listaAluguel) {
+				if (!aluguel.getJogo().isEmpty()) {
+					for (Jogo jogo : aluguel.getJogo()) {
+						Vector vector = new Vector();
+						vector.add(jogo.getId());
+						vector.add(jogo.getNome());
+						vector.add(jogo.getFornecedor().getNomeFantasia());
+						vector.add(jogo.getDesenvolvedor());
+						vector.add(jogo.getNota());
+						vector.add(jogo.getClassificacao());
+						vector.add(jogo.getGenero().getNome());
+						vector.add(aluguel.dataDevolucaoFormatada());
+						vector.add(jogo.getDataFormatada());
+						jogosDefaultTable.addRow(vector);
+					}
+				}
+			}
+		}
+	}
+
+	public void listarFilmes(String cpf) {
+		jogosDefaultTable.setNumRows(0);
+
+		ArrayList<Compra> listaCompra = fachada.listaCompraPorCliente(cpf);
+		ArrayList<Aluguel> listaAluguel = fachada.listaAluguelPorCliente(cpf);
+
+		if (!listaCompra.isEmpty()) {
+			for (Compra compra : listaCompra) {
+
+				if (!compra.getFilmes().isEmpty()) {
+					for (Filme filme : compra.getFilmes()) {
+						Vector vector = new Vector();
+						vector.add(filme.getId());
+						vector.add(filme.getNome());
+						vector.add(filme.getFornecedor().getNomeFantasia());
+						vector.add(filme.getDiretor());
+						vector.add(filme.getNota());
+						vector.add(filme.getClassificacao());
+						vector.add(filme.getGenero().getNome());
+						vector.add("-");
+						vector.add(filme.getDataFormatada());
+						filmesDefaultTable.addRow(vector);
+					}
+				}
+			}
+		}
+
+		if (!listaAluguel.isEmpty()) {
+
+			for (Aluguel aluguel : listaAluguel) {
+				if (!aluguel.getFilme().isEmpty()) {
+					for (Filme filme : aluguel.getFilme()) {
+						Vector vector = new Vector();
+						vector.add(filme.getId());
+						vector.add(filme.getNome());
+						vector.add(filme.getFornecedor().getNomeFantasia());
+						vector.add(filme.getDiretor());
+						vector.add(filme.getNota());
+						vector.add(filme.getClassificacao());
+						vector.add(filme.getGenero().getNome());
+						vector.add(aluguel.dataDevolucaoFormatada());
+						vector.add(filme.getDataFormatada());
+						filmesDefaultTable.addRow(vector);
+					}
+				}
+			}
+		}
 	}
 }

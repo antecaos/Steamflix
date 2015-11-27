@@ -3,10 +3,12 @@ package br.aeso.Steamflix.main;
 import java.util.ArrayList;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
+import br.aeso.Steamflix.Util.CNPJInvalidoException;
 import br.aeso.Steamflix.Util.CampoVazioException;
 import br.aeso.Steamflix.Endereco.Endereco;
 import br.aeso.Steamflix.Fachada.Fachada;
 import br.aeso.Steamflix.Fornecedor.Fornecedor;
+import br.aeso.Steamflix.Fornecedor.FornecedorJaCadastradoException;
 
 public class TestaFornecedor {
 
@@ -36,8 +38,17 @@ public class TestaFornecedor {
 			fachada.cadastrarFornecedor(f1);
 		} catch (CampoVazioException e) {
 			// TODO Auto-generated catch block
-			e.getMessage();
+			System.err.println(e.getMessage());
+		} catch (CNPJInvalidoException e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+		} catch (FornecedorJaCadastradoException e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
 		}
+		
+		
+		
 		//fachada.atualizarFornecedor(f1);
 		//System.out.println(fachada.procuraFornecedor("20586463000194"));
 		

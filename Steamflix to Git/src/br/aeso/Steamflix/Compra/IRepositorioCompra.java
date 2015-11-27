@@ -16,4 +16,6 @@ public interface IRepositorioCompra {
 	public boolean existe(int id);
 
 	public ArrayList<Compra> listar();
+
+	ArrayList<Compra> listarPorCliente(String cpf);
 }

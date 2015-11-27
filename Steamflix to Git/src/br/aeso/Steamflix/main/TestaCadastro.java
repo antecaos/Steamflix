@@ -2,8 +2,10 @@ package br.aeso.Steamflix.main;
 
 import br.aeso.Steamflix.Cadastro.Cadastro;
 import br.aeso.Steamflix.Cadastro.CadastroBuilder;
+import br.aeso.Steamflix.Cadastro.CadastroNaoEncontradoException;
 import br.aeso.Steamflix.Cliente.Cliente;
 import br.aeso.Steamflix.Fachada.Fachada;
+import br.aeso.Steamflix.Util.CampoVazioException;
 
 public class TestaCadastro {
 
@@ -37,13 +39,24 @@ public class TestaCadastro {
 				"Costinha Games");
 		cadastro.setFornecedor(f1);*/
 		Fachada fachada = Fachada.getInstance();
+		Cadastro cadastro;
+		try {
+			cadastro = fachada.retornaCadastro("giulios", "giulio");
+			//System.out.println(cadastro);
+		} catch (CampoVazioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CadastroNaoEncontradoException e) {
+			// TODO Auto-generated catch block
+			System.err.println(e.getMessage());
+		}
 		
 		
-		Cliente cliente = fachada.procuraCliente("09750906403");
+		//Cliente cliente = fachada.procuraCliente("09750906403");
 		
-		CadastroBuilder cadastro = new CadastroBuilder();	
-		cadastro.comCliente(cliente).comEmail("giuliocaetano@yahoo.com.br").comLogin("antecaos").comSenha("123");
-		Cadastro cad = cadastro.construirCliente();
-		System.out.println(cad);
+		//CadastroBuilder cadastro = new CadastroBuilder();	
+		//cadastro.comCliente(cliente).comEmail("giuliocaetano@yahoo.com.br").comLogin("antecaos").comSenha("123");
+		//Cadastro cad = cadastro.construirCliente();
+		//System.out.println(cad);
 	}
 }

@@ -16,4 +16,6 @@ public interface IRepositorioAluguel {
 	public boolean existe(int id);
 
 	public ArrayList<Aluguel> listar();
+
+	ArrayList<Aluguel> listarPorCliente(String cpf);
 }

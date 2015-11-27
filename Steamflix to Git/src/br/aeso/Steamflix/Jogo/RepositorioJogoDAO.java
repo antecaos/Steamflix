@@ -13,12 +13,13 @@ import br.aeso.Steamflix.Fornecedor.Fornecedor;
 import br.aeso.Steamflix.Genero.Genero;
 import br.aeso.Steamflix.JDBC.ConnectionFactory;
 
-public class RepositorioJogoDAO implements IRepositorioJogo{
+public class RepositorioJogoDAO implements IRepositorioJogo {
 	private Connection connection;
 
 	public RepositorioJogoDAO() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
+
 	@Override
 	public void cadastrar(Jogo jogo) {
 		// TODO Auto-generated method stub
@@ -39,14 +40,15 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 			stmt.setString(5, jogo.getClassificacao());
 			stmt.setInt(6, jogo.getGenero().getId());
 			stmt.setString(7, jogo.getFornecedor().getCNPJ());
-			stmt.setDate(8, new Date(jogo.getDataLancamento()
-					.getTimeInMillis()));
+			stmt.setDate(8,
+					new Date(jogo.getDataLancamento().getTimeInMillis()));
 			stmt.setString(9, jogo.getDesenvolvedor());
 			stmt.setInt(10, jogo.getQuantidade());
 			stmt.setInt(11, 1);
 
 			stmt.execute();
 			stmt.close();
+
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -68,15 +70,15 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 			stmt.setString(5, jogo.getClassificacao());
 			stmt.setInt(6, jogo.getGenero().getId());
 			stmt.setString(7, jogo.getFornecedor().getCNPJ());
-			stmt.setDate(8, new Date(jogo.getDataLancamento()
-					.getTimeInMillis()));
+			stmt.setDate(8,
+					new Date(jogo.getDataLancamento().getTimeInMillis()));
 			stmt.setString(9, jogo.getDesenvolvedor());
 			stmt.setInt(10, jogo.getQuantidade());
 			stmt.setInt(11, jogo.getId());
 
 			stmt.executeUpdate();
 			stmt.close();
-			System.out.println("Jogo Atualizado");
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -94,6 +96,7 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 
 			stmt.executeUpdate();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -134,7 +137,9 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 				jogoProcurado.setDesenvolvedor(rs.getString(10));
 				jogoProcurado.setQuantidade(rs.getInt(11));
 			}
+			rs.close();
 			stmt.close();
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new RuntimeException(e);
@@ -165,7 +170,7 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 				jogo.setPrecoAluguel(rs.getDouble(4));
 				jogo.setNota(rs.getString(5));
 				jogo.setClassificacao(rs.getString(6));
-								
+
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate(9));
 				jogo.setDataLancamento(data);
@@ -177,6 +182,45 @@ public class RepositorioJogoDAO implements IRepositorioJogo{
 			}
 			rs.close();
 			stmt.close();
+
+			return jogos;
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public ArrayList<Jogo> listarPorFornecedor(String cnpj) {
+		// TODO Auto-generated method stub
+		String sql = "select * from Steamflix.Jogo where idFornecedorJogo = ? and flagJogo = 1";
+		ArrayList<Jogo> jogos = new ArrayList<Jogo>();
+		try {
+			PreparedStatement stmt = connection.prepareStatement(sql);
+			stmt.setString(1, cnpj);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Jogo jogo = new Jogo();
+
+				jogo.setId(rs.getInt(1));
+				jogo.setNome(rs.getString(2));
+				jogo.setPrecoVenda(rs.getDouble(3));
+				jogo.setPrecoAluguel(rs.getDouble(4));
+				jogo.setNota(rs.getString(5));
+				jogo.setClassificacao(rs.getString(6));
+
+				Calendar data = Calendar.getInstance();
+				data.setTime(rs.getDate(9));
+				jogo.setDataLancamento(data);
+
+				jogo.setDesenvolvedor(rs.getString(10));
+				jogo.setQuantidade(rs.getInt(11));
+
+				jogos.add(jogo);
+			}
+			rs.close();
+			stmt.close();
+
 			return jogos;
 		} catch (Exception e) {
 			// TODO: handle exception
